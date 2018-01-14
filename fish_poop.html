@@ -1,6 +1,10 @@
+<body onkeydown="keyboard_func(event)">
+
 <h1>
-  Poop Fish!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Poop Fish!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 </h1>
+
+
 
 <button onclick="make_fish()">
   make fish
@@ -14,11 +18,11 @@
   make rocket
 </button>
 
-<div style="background-color: white; width: 155px; padding-left:20px;">
+<div id="canvas" style="padding-left:20px;">
 
   <pre id="fish"></pre>
 
-  <pre>
+  <pre id="rocket">
   /\
   ||
   ||
@@ -33,9 +37,15 @@
 
 </div>
 
+<div>
+  <h5>Console</h5>
+  <pre id="console"></pre>
+</div>
 
 
 <script>
+
+rocket_x = 0
 
 poop_number = 0
 
@@ -82,10 +92,48 @@ function poop_function() {
 
   make_fish()
 }
+
+function keyboard_func(e) {
+  log(e.keyCode)
+
+  if (e.keyCode == 39) {
+    rocket_x = rocket_x + 40;
+
+    var rocket_pre_tag = document.getElementById("rocket")
+    log(rocket_pre_tag.style.left)
+    rocket_pre_tag.style.left = rocket_x
+  }
+
+  if (e.keyCode == 37) {
+    log("move left")
+  }
+
+}
+
+function log(txt) {
+  document.getElementById("console").innerHTML = txt
+}
 </script>
 
 
+
+<style>
+  #canvas {
+    position: relative;
+    height: 400px;
+    width: 800px;
+    background-color: white;
+    overflow: hidden;
+  }
+
+  #canvas pre {
+    position: absolute;
+  }
+
+</style>
+
 <div style="display:none;">
+
 
 
 
@@ -155,3 +203,5 @@ alert("poop")
 
 
 </div>
+
+</body>
