@@ -1,0 +1,88 @@
+<head>
+
+<style>
+
+#about-text {
+  display: none;
+  max-width: 400px;
+}
+
+</style>
+
+<script>
+// Variables
+var available_letters = [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';' ]
+var current_letter
+
+var gameStatus = 'stopped'
+
+function keyboard_func(e) {
+
+  if (gameStatus == 'started') {
+    var typed_letter = String.fromCharCode(e.keyCode).toLowerCase()
+
+    if (typed_letter == current_letter) {
+      //alert('you win')
+      clear_challenge()
+      setTimeout(challenge_player, 500)
+    }
+  }
+
+}
+
+
+function start_game() {
+  gameStatus = 'started'
+
+  setTimeout(challenge_player, 500)
+}
+
+function challenge_player() {
+  var challenge_tag = document.getElementById('challenge')
+
+  current_letter = pick_random_letter()
+  challenge_tag.innerHTML = current_letter
+}
+
+function clear_challenge() {
+  var challenge_tag = document.getElementById('challenge')
+  challenge_tag.innerHTML = ""
+}
+
+function pick_random_letter() {
+  var max = available_letters.length - 1
+  var min = 0
+  var rand = Math.floor(Math.random()*(max-min+1)+min);
+  return available_letters[rand]
+}
+
+
+var global_v;
+
+function toggle_about_text() {
+  var about_text_tag = document.getElementById("about-text")
+  global_v = about_text_tag
+  if (about_text_tag.style.display == "") {
+    about_text_tag.style.display = "block"
+  }
+  else {
+    about_text_tag.style.display = ""
+  }
+}
+
+</script>
+
+</head>
+
+
+<body onkeydown="keyboard_func(event)">
+
+<button onclick="start_game()">Start</button>
+<button onclick="toggle_about_text()">About</button>
+<div id="about-text">
+  Press the start button and a letter will appear on the screen.  Type that letter as fast as you can to make the letter dissapear.  The faster you are, the better your score!  Ghosts will chase mario for as long as a letter is on the screen.
+</div>
+
+<h1 id="challenge"></h1>
+
+</body>
