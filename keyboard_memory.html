@@ -28,16 +28,9 @@
   width: 20px;
 }
 
-#progress-bar {
+progress {
   height: 100px;
   width: 100%;
-  background-color: red;
-}
-
-#actual-progress {
-  height: 100%;
-  width: 100px;
-  background-color: orange;
 }
 
 </style>
@@ -48,16 +41,21 @@ var available_letters = [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';' ]
 var current_letter
 
 var gameStatus = 'stopped'
+var game_timer
+var global_v;
 
 function keyboard_func(e) {
 
-  if (gameStatus == 'started') {
+  if (gameStatus == 'started' && e.keyCode >= 32 && e.keyCode <= 126) {
     var typed_letter = String.fromCharCode(e.keyCode).toLowerCase()
 
     if (typed_letter == current_letter) {
-      //alert('you win')
+      register_a_hit(current_letter, e.keyCode)
       clear_challenge()
       setTimeout(challenge_player, 200)
+    }
+    else {
+      register_a_miss(current_letter, e.keyCode)
     }
   }
 
@@ -66,7 +64,11 @@ function keyboard_func(e) {
 
 function start_game() {
   gameStatus = 'started'
+  clear_stats()
+  reset_game()
   document.getElementById('game').style.display = "block"
+
+  game_timer = setInterval(game_timer_func, 16)
 
   setTimeout(challenge_player, 200)
 }
@@ -83,6 +85,19 @@ function clear_challenge() {
   challenge_tag.innerHTML = "&nbsp;"
 }
 
+
+function register_a_miss(current_letter, keyCode) {
+  var tag = document.getElementById("misses")
+  var misses_count =  parseInt(tag.innerHTML)
+  tag.innerHTML = misses_count + 1
+}
+
+function register_a_hit(current_letter, keyCode) {
+  var tag = document.getElementById("hits")
+  var misses_count =  parseInt(tag.innerHTML)
+  tag.innerHTML = misses_count + 1
+}
+
 function pick_random_letter() {
   var max = available_letters.length - 1
   var min = 0
@@ -90,8 +105,28 @@ function pick_random_letter() {
   return available_letters[rand]
 }
 
+function game_timer_func() {
+  var progress_bar = document.getElementById('progress')
+  progress_bar.value = progress_bar.value + 1
+  if (progress_bar.value >= progress_bar.max) {
+    reset_game()
+    gameStatus = 'stopped'
+    document.getElementById('game').style.display = "none"
+  }
+  global_v = progress_bar
+}
 
-var global_v;
+function reset_game() {
+  clearInterval(game_timer)
+  document.getElementById('progress').value = 0
+  clear_challenge()
+}
+
+function clear_stats() {
+  document.getElementById("hits").innerHTML = 0
+  document.getElementById("misses").innerHTML = 0
+}
+
 
 function toggle_about_text() {
   var about_text_tag = document.getElementById("about-text")
@@ -124,9 +159,12 @@ function toggle_about_text() {
   <div id="game">
     <h1 id="challenge">&nbsp;</h1>
 
-    <div id="progress-bar">
-      <div id="actual-progress"></div>
-    </div>
+    <progress id="progress" value="0" max="1000"></progress>
+  </div>
+
+  <div id="stats">
+    <div>Misses: <span id="misses">0</div>
+    <div>Hits: <span id="hits">0</div>
   </div>
 
 </div>
