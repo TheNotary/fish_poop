@@ -2,9 +2,42 @@
 
 <style>
 
+#page-wrap {
+  width: 400px;
+  margin: 0 auto;
+}
+
+#console {
+  margin: 0 auto;
+  width: 180px;
+}
+
 #about-text {
   display: none;
   max-width: 400px;
+}
+
+#game {
+  display: none;
+  max-width: 400px;
+}
+
+#challenge {
+  margin-left: auto;
+  margin-right: auto;
+  width: 20px;
+}
+
+#progress-bar {
+  height: 100px;
+  width: 100%;
+  background-color: red;
+}
+
+#actual-progress {
+  height: 100%;
+  width: 100px;
+  background-color: orange;
 }
 
 </style>
@@ -24,7 +57,7 @@ function keyboard_func(e) {
     if (typed_letter == current_letter) {
       //alert('you win')
       clear_challenge()
-      setTimeout(challenge_player, 500)
+      setTimeout(challenge_player, 200)
     }
   }
 
@@ -33,8 +66,9 @@ function keyboard_func(e) {
 
 function start_game() {
   gameStatus = 'started'
+  document.getElementById('game').style.display = "block"
 
-  setTimeout(challenge_player, 500)
+  setTimeout(challenge_player, 200)
 }
 
 function challenge_player() {
@@ -46,7 +80,7 @@ function challenge_player() {
 
 function clear_challenge() {
   var challenge_tag = document.getElementById('challenge')
-  challenge_tag.innerHTML = ""
+  challenge_tag.innerHTML = "&nbsp;"
 }
 
 function pick_random_letter() {
@@ -77,12 +111,23 @@ function toggle_about_text() {
 
 <body onkeydown="keyboard_func(event)">
 
-<button onclick="start_game()">Start</button>
-<button onclick="toggle_about_text()">About</button>
-<div id="about-text">
-  Press the start button and a letter will appear on the screen.  Type that letter as fast as you can to make the letter dissapear.  The faster you are, the better your score!  Ghosts will chase mario for as long as a letter is on the screen.
+<div id="page-wrap">
+
+  <div id="console">
+    <button onclick="start_game()">Start</button>
+    <button onclick="toggle_about_text()">About</button>
+  </div>
+  <div id="about-text">
+    Press the start button and a letter will appear on the screen.  Type that letter as fast as you can to make the letter dissapear.  The faster you are, the better your score!  Ghosts will chase mario for as long as a letter is on the screen.
+  </div>
+
+  <div id="game">
+    <h1 id="challenge">&nbsp;</h1>
+
+    <div id="progress-bar">
+      <div id="actual-progress"></div>
+    </div>
+  </div>
+
 </div>
-
-<h1 id="challenge"></h1>
-
 </body>
