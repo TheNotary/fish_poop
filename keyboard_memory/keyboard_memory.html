@@ -2,6 +2,14 @@
 
 <style>
 
+body {
+  background-color: grey;
+}
+
+#canvas {
+  background-color: blue;
+}
+
 #page-wrap {
   width: 400px;
   margin: 0 auto;
@@ -141,6 +149,8 @@ function toggle_about_text() {
 
 </script>
 
+
+
 </head>
 
 
@@ -167,5 +177,27 @@ function toggle_about_text() {
     <div>Hits: <span id="hits">0</div>
   </div>
 
+  <div id="sprite-controls">
+    <div>
+      <button onclick="sprite_left()">Left</button>
+      <button onclick="sprite_right()">Right</button>
+    </div>
+    <input type="text" id="inputa"></input>
+    <input type="text" id="inputb"></input>
+  </div>
+
+  <div>
+    <canvas id="canvas" width="300" height="300"></canvas>
+  </div>
+
+
+  <button onclick="init()">draw</button>
+
 </div>
 </body>
+
+<script src="assets/enemies.json"></script>
+<script src="debugging.js"></script>
+<script src="gameLoop.js"></script>
+
+<script src="animator.js"></script>
