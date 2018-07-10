@@ -5,8 +5,6 @@
 
 # Keyboard Memory
 
-- Smart Stats
-  > Build a smart stats feature that allows the recording
 
 
 - Win/ Loss thresholds?
@@ -15,9 +13,18 @@
 - Mario Graphics
 
   - (ghost) http://spritedatabase.net/file/8571/Enemies_2
+  - (ghost) https://www.spriters-resource.com/snes/smariorpg/sheet/12844/
   - (mario) http://spritedatabase.net/file/8551/Mario
-  - (coins)
+  - (coins) https://www.spriters-resource.com/snes/smariorpg/sheet/12860/
+  - (Coin Box) https://www.spriters-resource.com/snes/smariorpg/sheet/12839/
 
+
+
+- Lesson Modifications....
+
+
+- Smart Stats
+  > Build a smart stats feature that allows the recording
 
 
 
