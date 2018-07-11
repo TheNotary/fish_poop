@@ -1,3 +1,36 @@
+
+function sprite_left() {
+    var index_element = document.getElementById('inputa')
+
+    var val = parseInt(index_element.value);
+
+    var new_val = val - 1;
+    if (new_val < 0) {
+      new_val = enemies_data["frames"].length - 1;
+    }
+
+    index_element.value = new_val;
+}
+
+function sprite_right() {
+    var index_element = document.getElementById('inputa')
+
+    var val = parseInt(index_element.value);
+
+    var new_val = val + 1;
+    if (new_val > enemies_data["frames"].length - 1) {
+      new_val = 0;
+    }
+
+    index_element.value = new_val;
+}
+
+
+
+
+
+
+
 function useArrowKeysToMoveCanvasSprite() {
     myProc = document.onkeydown;
     document.onkeydown = function(evt) {
@@ -17,6 +50,8 @@ function useArrowKeysToMoveCanvasSprite() {
         }
     }
 }
+
+
 
 
 

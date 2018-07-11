@@ -178,6 +178,7 @@ function toggle_about_text() {
   </div>
 
   <div id="sprite-controls">
+    <div id="debug-int">0</div>
     <div>
       <button onclick="sprite_left()">Left</button>
       <button onclick="sprite_right()">Right</button>
@@ -197,8 +198,12 @@ function toggle_about_text() {
 </body>
 
 <script src="assets/enemies.json"></script>
-<script src="userInput.js"></script>
-<script src="debugging.js"></script>
+
 <script src="gameLoop.js"></script>
+<script src="userInput.js"></script>
+<script src="unit.js"></script>
+<script src="debugging.js"></script>
+
+<script src="keyboardMemory.js"></script>
 
 <script src="animator.js"></script>
