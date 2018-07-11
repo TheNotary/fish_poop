@@ -1,4 +1,3 @@
-
 // This mixin is applied to InitialFantasy to give it a game loop pipeline
 // pattern from within initialize_game.js
 var asGameLoop = function() {
@@ -8,7 +7,6 @@ var asGameLoop = function() {
     var gameFps = 0.0;
     var then = Date.now();
     var lastTick = 0; // the last time the game logic ticked was at...
-
 
     this.time = function() {
         return gameTime;

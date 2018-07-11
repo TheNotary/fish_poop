@@ -32,9 +32,38 @@ function sprite_right() {
 
 
 function spawnGhost() {
-  window.myGhost = new Unit("ghost", 0, "assets/enemies.png", [ 0, 70], "floating");
+  // load_sprite_data("assets/enemies.json")
+
+  var stances = {
+      "floating": {
+        "spriteIndecies": [4, 5]
+      }
+  };
+
+  window.myGhost = new Unit("ghost", 0, "assets/enemies.png", enemies_data,
+    [0, 70], stances, "floating");
   window.animationObjects.push(myGhost);
   myGhost.loadGraphics();
+}
+
+
+function spawnMario() {
+    // load_sprite_data("assets/mario.json")
+
+    var stances = {
+        "standing": {
+            "spriteIndecies": [0],
+            "finalPhaseTick": 100
+        },
+        "jumping": {
+            "spriteIndecies": [0, 1, 2, 3],
+            "finalPhaseTick": 100
+        }
+    };
+
+    window.myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [ 250, 70], stances, "jumping");
+    window.animationObjects.push(myMario);
+    myMario.loadGraphics();
 }
 
 

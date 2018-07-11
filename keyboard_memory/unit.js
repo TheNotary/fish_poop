@@ -1,5 +1,5 @@
 // new Unit("ghost", 0, "assets/enemies.png", [0, 0], "floating")
-function Unit(type, id, spriteSheet, position, stance) {
+function Unit(type, id, spriteSheet, spriteData, position, stances, stance) {
     if (arguments.length == 0) return;
     this.id = id;
     this.name =  "blah";   // Unit.getUnitName(type, id);
@@ -8,22 +8,31 @@ function Unit(type, id, spriteSheet, position, stance) {
     this.position = position; // position on the battle screen...
     this.x = position[0]; // these variables are for hovering/ flying effects and misc. toneberry shananagins
     this.y = position[1];
+    this.animation_x = 0;
+    this.animation_y = 0;
 
-    this.spriteSheet = "assets/enemies.png";
+
+    this.animationPhase = 0;
+    this.animationPhaseEnd = 0;
+
+    this.spriteSheet = spriteSheet;
+    this.spriteData = spriteData;
     this.image = new Image();
-    this.spriteSheetData = enemies_data["frames"];
+    this.spriteSheetData = spriteData["frames"];
 
-    this.stance = "floating";
+    if (stance == undefined)
+      this.stance = Object.keys(stances)[0]
+    else
+      this.stance = stance
+
+    // this.stance = stance;
+    // this.stance = (stance == undefined ? stances[0] : stances[stance]);
 
     this.spriteCurrentIndex = 4;
 
-    this.sprites = {
-        "floating": {
-          "spriteIndecies": [4, 5]
-        }
-    };
-
+    this.sprites = stances;
 }
+
 
 Unit.prototype.loadGraphics = function() {
   this.image.src = this.spriteSheet;
@@ -57,6 +66,6 @@ Unit.prototype.draw = function(ctx) {
     ctx.drawImage(this.image,
         frame['x'], frame['y'],   // src position
         frame['w'], frame['h'],   // src bounds (width/ height)
-        this.x, this.y,    // dst position
+        this.x + this.animation_x, this.y + this.animation_y,    // dst position
         2*frame['w'], 2*frame['h']);  // dst bounds
 };
