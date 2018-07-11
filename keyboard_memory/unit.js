@@ -30,6 +30,21 @@ Unit.prototype.loadGraphics = function() {
 }
 
 
+Unit.prototype.update = function() {
+    var tickCount = game.tickCount;
+    if (tickCount % 10 === 0) {
+        var properFrames = this.sprites[this.stance]["spriteIndecies"];
+        // if spriteCurrentIndex isn't within the properFrames possible, set it to the first of one
+        if ( !properFrames.includes(this.spriteCurrentIndex) ) {
+            this.spriteCurrentIndex = properFrames[0];
+        }
+        else {
+            this.spriteCurrentIndex = properFrames[ properFrames.indexOf(this.spriteCurrentIndex) + 1 % properFrames.length ];
+        }
+    }
+}
+
+
 Unit.prototype.draw = function(ctx) {
     var properFrames = this.sprites[this.stance]["spriteIndecies"];
     // if spriteCurrentIndex isn't within the properFrames possible, set it to the first of one
@@ -42,5 +57,5 @@ Unit.prototype.draw = function(ctx) {
         frame['x'], frame['y'],   // src position
         frame['w'], frame['h'],   // src bounds (width/ height)
         this.x, this.y,    // dst position
-        frame['w'], frame['h']);  // dst bounds
+        2*frame['w'], 2*frame['h']);  // dst bounds
 };

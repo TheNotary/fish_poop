@@ -59,7 +59,7 @@ function draw() {
 
 
 function battle_screen_update() {
-
+    myGhost.update();
 }
 
 
