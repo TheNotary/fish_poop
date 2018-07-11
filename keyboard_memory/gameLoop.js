@@ -1,3 +1,5 @@
+window.thisSpotWasRun = 0;
+
 // This mixin is applied to InitialFantasy to give it a game loop pipeline
 // pattern from within initialize_game.js
 var asGameLoop = function() {
@@ -97,7 +99,8 @@ var asGameLoop = function() {
     }
 
     function update(secondsPassed) {
-        eval(game.currentScreen + "_update()"); // call the update for the specific screen we're running
+        // eval(game.currentScreen + "_update()"); // call the update for the specific screen we're running
+        battle_screen_update();
         game.tickCount++;
     }
 

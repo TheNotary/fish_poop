@@ -1,7 +1,7 @@
 var mario_data = {
    "frames":[
       {
-         "filename":"jump1",
+         "filename":"jump0",
          "frame":{
             "x":148,
             "y":156,
@@ -22,7 +22,7 @@ var mario_data = {
          }
       },
       {
-         "filename":"jump2",
+         "filename":"jump1",
          "frame":{
             "x":169,
             "y":156,
@@ -43,7 +43,7 @@ var mario_data = {
          }
       },
       {
-         "filename":"jump3",
+         "filename":"jump2",
          "frame":{
             "x":188,
             "y":156,
@@ -64,10 +64,31 @@ var mario_data = {
          }
       },
       {
-         "filename":"jump4",
+         "filename":"jump3",
          "frame":{
             "x":211,
             "y":156,
+            "w":22,
+            "h":32
+         },
+         "rotated":false,
+         "trimmed":false,
+         "spriteSourceSize":{
+            "x":0,
+            "y":0,
+            "w":22,
+            "h":32
+         },
+         "sourceSize":{
+            "w":22,
+            "h":32
+         }
+      },
+      {
+         "filename":"standing0",
+         "frame":{
+            "x":30,
+            "y":18,
             "w":22,
             "h":32
          },

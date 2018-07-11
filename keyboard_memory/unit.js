@@ -11,14 +11,17 @@ function Unit(type, id, spriteSheet, spriteData, position, stances, stance) {
     this.animation_x = 0;
     this.animation_y = 0;
 
-
     this.animationPhase = 0;
     this.animationPhaseEnd = 0;
 
     this.spriteSheet = spriteSheet;
     this.spriteData = spriteData;
+    this.animationCycleSlowness = 10;
     this.image = new Image();
     this.spriteSheetData = spriteData["frames"];
+
+
+    this.stances = stances;
 
     if (stance == undefined)
       this.stance = Object.keys(stances)[0]
@@ -38,10 +41,14 @@ Unit.prototype.loadGraphics = function() {
   this.image.src = this.spriteSheet;
 }
 
+Unit.prototype.getStanceHash = function() {
+    return (this.stances[this.stance]);
+}
+
 
 Unit.prototype.update = function() {
     var tickCount = game.tickCount;
-    if (tickCount % 10 === 0) {
+    if (tickCount % this.getStanceHash()["animationCycleSlowness"] === 0) {
         var properFrames = this.sprites[this.stance]["spriteIndecies"];
         // if spriteCurrentIndex isn't within the properFrames possible, set it to the first of one
         if ( !properFrames.includes(this.spriteCurrentIndex) ) {

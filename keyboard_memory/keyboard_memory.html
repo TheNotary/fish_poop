@@ -7,11 +7,11 @@ body {
 }
 
 #canvas {
-  background-color: blue;
+  background-color: #ccc;
 }
 
 #page-wrap {
-  width: 400px;
+  width: 500px;
   margin: 0 auto;
 }
 
@@ -173,6 +173,7 @@ function toggle_about_text() {
   </div>
 
   <div id="stats">
+    <div>Coins Left: <span id="coins-left">10</span></div>
     <div>Misses: <span id="misses">0</div>
     <div>Hits: <span id="hits">0</div>
   </div>
@@ -180,21 +181,13 @@ function toggle_about_text() {
   <div id="sprite-controls">
     <div id="debug-int">0</div>
     <button onclick="spawnGhost()">Spawn Ghost</button>
-    <button onclick="spawnMario()">Spawn Mario</button>
-    <div>
-      <button onclick="sprite_left()">Left</button>
-      <button onclick="sprite_right()">Right</button>
-    </div>
-    <input type="text" id="inputa"></input>
-    <input type="text" id="inputb"></input>
+    <button onclick="interaction()">interaction</button>
+
   </div>
 
   <div>
-    <canvas id="canvas" width="300" height="300"></canvas>
+    <canvas id="canvas" width="500" height="150"></canvas>
   </div>
-
-
-  <button onclick="init()">draw</button>
 
 </div>
 </body>

@@ -36,12 +36,13 @@ function spawnGhost() {
 
   var stances = {
       "floating": {
-        "spriteIndecies": [4, 5]
+        "spriteIndecies": [4, 5],
+        "animationCycleSlowness": 10
       }
   };
 
   window.myGhost = new Unit("ghost", 0, "assets/enemies.png", enemies_data,
-    [0, 70], stances, "floating");
+    [0, 75], stances, "floating");
   window.animationObjects.push(myGhost);
   myGhost.loadGraphics();
 }
@@ -52,19 +53,26 @@ function spawnMario() {
 
     var stances = {
         "standing": {
-            "spriteIndecies": [0],
-            "finalPhaseTick": 100
+            "spriteIndecies": [4],
+            "animationCycleSlowness": 0
         },
         "jumping": {
-            "spriteIndecies": [0, 1, 2, 3],
-            "finalPhaseTick": 100
+            "spriteIndecies": [0, 1, 2, 3, 3],
+            "animationCycleSlowness": 5
         }
     };
 
-    window.myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [ 250, 70], stances, "jumping");
+    window.myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 85], stances, "standing");
     window.animationObjects.push(myMario);
     myMario.loadGraphics();
 }
+
+
+function interaction() {
+    // jump mario
+    window.myMario.stance = "jumping";
+}
+
 
 
 
