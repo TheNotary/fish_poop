@@ -39,6 +39,7 @@ Unit.prototype.update = function() {
             this.spriteCurrentIndex = properFrames[0];
         }
         else {
+            // oscilate between sprites in animation
             this.spriteCurrentIndex = properFrames[ properFrames.indexOf(this.spriteCurrentIndex) + 1 % properFrames.length ];
         }
     }

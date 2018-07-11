@@ -1,32 +1,41 @@
 
 function sprite_left() {
+    myGhost.x = myGhost.x - 1;
+
     var index_element = document.getElementById('inputa')
 
     var val = parseInt(index_element.value);
 
     var new_val = val - 1;
     if (new_val < 0) {
-      new_val = enemies_data["frames"].length - 1;
+        new_val = enemies_data["frames"].length - 1;
     }
 
     index_element.value = new_val;
 }
 
+
 function sprite_right() {
+    myGhost.x = myGhost.x + 1;
+
     var index_element = document.getElementById('inputa')
 
     var val = parseInt(index_element.value);
 
     var new_val = val + 1;
     if (new_val > enemies_data["frames"].length - 1) {
-      new_val = 0;
+        new_val = 0;
     }
 
     index_element.value = new_val;
 }
 
 
-
+function spawnGhost() {
+  window.myGhost = new Unit("ghost", 0, "assets/enemies.png", [ 0, 70], "floating");
+  window.animationObjects.push(myGhost);
+  myGhost.loadGraphics();
+}
 
 
 
@@ -35,7 +44,6 @@ function useArrowKeysToMoveCanvasSprite() {
     myProc = document.onkeydown;
     document.onkeydown = function(evt) {
         myProc.call(this, evt); // do the thing that onkeydown is meant to do in production mode too...
-
 
         if (game.currentScreen == "battle_screen") {
             switch (evt.keyCode) {
@@ -50,14 +58,6 @@ function useArrowKeysToMoveCanvasSprite() {
         }
     }
 }
-
-
-
-
-
-
-
-
 
 
 
