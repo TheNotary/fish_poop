@@ -87,24 +87,14 @@ function draw() {
 }
 
 
-// init();
-
-
-
 
 function updateGame() {
-
-
 }
 
 
 
 window.KeyboardMemory = function(debugMode) {
   this.debugMode = debugMode;
-
-  // this variable tracks the current UI being displayed...
-  // It's useful for the render loop to know what to render...
-  // We'll see how that turns out when I have more code down...
   this.currentScreen = "battle_screen";
 
   // this.titleScreen = new TitleScreen('title_screen', 'audTitleScreen',
@@ -118,7 +108,7 @@ window.KeyboardMemory = function(debugMode) {
 
   // Calling this method will initiate the game
   this.start = function() {
-      // addEventHandlersToDom();
+      addEventHandlersToDom();
 
       // queue up the game loop to itereate whenever the browser can
       window.onEachFrame(game.main);
