@@ -32,7 +32,6 @@ function addEventHandlersToDom() {
                         var val = spriteIndex - 1;
                         setSpriteIndex(val);
                         myCoinBox.spriteCurrentIndex = val;
-
                         break;
                 }
 

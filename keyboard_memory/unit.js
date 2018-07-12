@@ -21,7 +21,6 @@ function Unit(type, id, spriteSheet, spriteData, position, stances, stance, conf
     this.image = new Image();
     this.spriteSheetData = spriteData["frames"];
 
-
     this.stances = stances;
 
     if (stance == undefined)
@@ -32,7 +31,8 @@ function Unit(type, id, spriteSheet, spriteData, position, stances, stance, conf
     // this.stance = stance;
     // this.stance = (stance == undefined ? stances[0] : stances[stance]);
 
-    this.spriteCurrentIndex = 4;
+    this.spriteCurrentIndex = 0;
+    this.spriteIndex_i = 0;
 
     this.sprites = stances;
 }
@@ -53,11 +53,22 @@ Unit.prototype.update = function() {
         var properFrames = this.sprites[this.stance]["spriteIndecies"];
         // if spriteCurrentIndex isn't within the properFrames possible, set it to the first of one
         if ( !properFrames.includes(this.spriteCurrentIndex) ) {
+            console.log("wtf")
             this.spriteCurrentIndex = properFrames[0];
+            this.spriteIndex_i = 0;
         }
         else {
             // oscilate between sprites in animation
-            this.spriteCurrentIndex = properFrames[ properFrames.indexOf(this.spriteCurrentIndex) + 1 % properFrames.length ];
+            nextFrame = properFrames[ properFrames.indexOf(this.spriteCurrentIndex) + 1 % properFrames.length ];
+            this.spriteCurrentIndex = nextFrame;
+            this.spriteIndex_i = 1 + this.spriteIndex_i % (properFrames.length - 1);
+
+            console.log("UPDATE PHASE:")
+            console.log("properFrames:" + properFrames)
+            console.log("nextFrame: " + nextFrame)
+            console.log("")
+            console.log("")
+
         }
     }
 }
@@ -67,9 +78,20 @@ Unit.prototype.draw = function(ctx) {
     var properFrames = this.sprites[this.stance]["spriteIndecies"];
     // if spriteCurrentIndex isn't within the properFrames possible, set it to the first of one
     if ( !properFrames.includes(this.spriteCurrentIndex) ) {
+        console.log("DRAW PHASE:")
+        console.log("spriteIndex_i:" + this.spriteIndex_i)
+        console.log("spriteCurrentIndex:" + this.spriteCurrentIndex)
+        console.log("properFrames:" + properFrames)
+        console.log("")
+
+
         this.spriteCurrentIndex = properFrames[0];
+        this.spriteIndex_i = 0;
     }
-    var frame = this.spriteSheetData[this.spriteCurrentIndex]['frame'];
+    // console.log(this.spriteSheetData)
+
+    // var frame = this.spriteSheetData[this.spriteIndex_i]["frame"];
+    var frame = this.spriteSheetData[properFrames[this.spriteIndex_i]]["frame"];
 
     ctx.drawImage(this.image,
         frame['x'], frame['y'],   // src position

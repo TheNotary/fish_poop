@@ -21,7 +21,7 @@ function draw() {
 
 
 
-
+// TODO: refactor into jumpable.js
 window.jump = {
   "direction": "up",
   "jumpPower": 10
@@ -89,6 +89,6 @@ init();
 game.start();
 
 
-spawnMario();
+// spawnMario();
 
-spawnBlah();
+// spawnBlah();

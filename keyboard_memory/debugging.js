@@ -49,9 +49,9 @@ function spawnGhost() {
   };
 
   window.myGhost = new Unit("ghost", 0, "assets/enemies.png", enemies_data,
-    [0, 75], stances, "floating", { "sizeMultiplier": 1});
+    [0, 75], stances, "floating", { "sizeMultiplier": 2});
+    myGhost.loadGraphics();
   window.animationObjects.push(myGhost);
-  myGhost.loadGraphics();
 }
 
 
@@ -70,45 +70,61 @@ function spawnMario() {
     };
 
     window.myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 85], stances, "standing", { "sizeMultiplier": 2});
-    window.animationObjects.push(myMario);
     myMario.loadGraphics();
+    window.animationObjects.push(myMario);
 }
 
 
-function spawnCoinBox() {
+function spawnCoin() {
   var stances = {
-      "debug": {
+      "exploding": {
           "spriteIndecies": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
           "animationCycleSlowness": 4
       },
       "still": {
           "spriteIndecies": [4],
           "animationCycleSlowness": 0
-      },
-      "hit": {
-          "spriteIndecies": [0, 1, 2, 3, 3],
-          "animationCycleSlowness": 5
       }
   };
 
-
-  document.getElementById('debug-int').innerHTML = (stances["debug"]["spriteIndecies"].length - 1)
-
-  window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coins_data, [0, 50], stances, "debug", { "sizeMultiplier": 1});
-  window.animationObjects.push(myCoinBox);
-  myCoinBox.loadGraphics();
-
+  window.myCoin = new Unit("coin", 0, "assets/coins.png", coins_data, [0, 50], stances, "exploding", { "sizeMultiplier": 1});
+  myCoin.loadGraphics();
+  window.animationObjects.push(myCoin);
 }
+
+
+function spawnCoinBox() {
+    var stances = {
+        "struck": {
+            "spriteIndecies": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,  9, 8, 6, 4, 2],
+            "animationCycleSlowness": 4
+        },
+        "still": {
+            "spriteIndecies": [0],
+            "animationCycleSlowness": 1000
+        }
+    };
+
+
+    window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [0, 50], stances, "still", { "sizeMultiplier": 1 });
+    var last_i = (stances["struck"]["spriteIndecies"].length - 1)
+    document.getElementById('debug-int').innerHTML = last_i
+    window.myCoinBox.spriteCurrentIndex = last_i
+    myCoinBox.loadGraphics();
+    window.animationObjects.push(myCoinBox);
+}
+
 
 function spawnBlah() {
     spawnCoinBox();
+    spawnMario()
 }
-
 
 
 function interaction() {
     // jump mario
     window.myMario.stance = "jumping";
+    window.myCoinBox.stance = "struck";
 }
 
 
@@ -121,9 +137,6 @@ function useArrowKeysToMoveCanvasSprite() {
         myProc.call(this, evt); // do the thing that onkeydown is meant to do in production mode too...
 
         if (game.currentScreen == "battle_screen") {
-            alert()
-
-
             var index_element = document.getElementById('debug-int');
             var spriteIndex = parseInt(index_element.innerHTML);
 
@@ -135,7 +148,6 @@ function useArrowKeysToMoveCanvasSprite() {
                 case 37: // left arrow
                     var val = spriteIndex - 1;
                     setSpriteIndex(val);
-                    alert();
                     break;
             }
 
