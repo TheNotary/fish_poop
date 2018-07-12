@@ -99,6 +99,9 @@ function spawnCoin() {
 
   window.myCoin = new Unit("coin", 0, "assets/coins.png", coins_data, [0, 50], stances, "exploding", { "sizeMultiplier": 1});
   myCoin.loadGraphics();
+
+  setDebugTarget(myCoin);
+
   window.animationObjects.push(myCoin);
 }
 
@@ -118,7 +121,6 @@ function spawnCoinBox() {
 
     window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 0], stances, "struck", { "sizeMultiplier": 1 });
 
-    setDebugTarget(myCoinBox);
 
     myCoinBox.loadGraphics();
     window.animationObjects.push(myCoinBox);
@@ -129,6 +131,7 @@ function spawnCoinBox() {
 function spawnBlah() {
     spawnMario();
     spawnCoinBox();
+    spawnCoin();
 }
 
 

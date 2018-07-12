@@ -24,12 +24,14 @@ function addEventHandlersToDom() {
 
                 switch (evt.keyCode) {
                     case 39: // right arrow
-                        var val = spriteIndex + 1;
+                        var val = (spriteIndex + 1) % (window.debugTarget.getProperFrames().length);
                         setSpriteIndex(val);
                         window.debugTarget.spriteIndex_i = val;
                         break;
                     case 37: // left arrow
-                        var val = spriteIndex - 1;
+                        var val = (spriteIndex - 1) % (window.debugTarget.getProperFrames().length);
+                        if (val < 0)
+                          val = window.debugTarget.getProperFrames().length - 1;
                         setSpriteIndex(val);
                         window.debugTarget.spriteIndex_i = val;
                         break;

@@ -45,11 +45,16 @@ Unit.prototype.getStanceHash = function() {
     return (this.stances[this.stance]);
 }
 
+Unit.prototype.getProperFrames = function() {
+  return this.sprites[this.stance]["spriteIndecies"];
+}
+
+
 
 Unit.prototype.update = function() {
     var tickCount = game.tickCount;
     if (tickCount % this.getStanceHash()["animationCycleSlowness"] === 0) {
-        var properFrames = this.sprites[this.stance]["spriteIndecies"];
+        var properFrames = this.getProperFrames();
         this.spriteIndex_i = (1 + this.spriteIndex_i) % (properFrames.length);
 
         nextFrame = properFrames[this.spriteIndex_i];
@@ -67,14 +72,14 @@ Unit.prototype.update = function() {
 Unit.prototype.setStance = function(stance) {
     this.stance = stance;
 
-    var properFrames = this.sprites[this.stance]["spriteIndecies"];
+    var properFrames = this.getProperFrames();
     this.spriteIndex_i = 0;
 }
 
 
 
 Unit.prototype.draw = function(ctx) {
-    var properFrames = this.sprites[this.stance]["spriteIndecies"];
+    var properFrames = this.getProperFrames();
     var frame = this.spriteSheetData[properFrames[this.spriteIndex_i]]["frame"];
 
     ctx.drawImage(this.image,
