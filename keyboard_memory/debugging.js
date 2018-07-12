@@ -49,7 +49,7 @@ function spawnGhost() {
   };
 
   window.myGhost = new Unit("ghost", 0, "assets/enemies.png", enemies_data,
-    [0, 75], stances, "floating", { "sizeMultiplier": 2});
+    [0, 85], stances, "floating", { "sizeMultiplier": 1.5});
     myGhost.loadGraphics();
   window.animationObjects.push(myGhost);
 }
@@ -69,7 +69,7 @@ function spawnMario() {
         }
     };
 
-    window.myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 85], stances, "standing", { "sizeMultiplier": 2});
+    window.myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 95], stances, "standing", { "sizeMultiplier": 1.5});
     myMario.loadGraphics();
     window.animationObjects.push(myMario);
 }
@@ -106,18 +106,21 @@ function spawnCoinBox() {
     };
 
 
-    window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [0, 50], stances, "still", { "sizeMultiplier": 1 });
-    // var last_i = (stances["struck"]["spriteIndecies"].length - 1)
+    window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 0], stances, "still", { "sizeMultiplier": 1 });
+
+    // var myObj = window.myCoinBox
+    // var last_i = (stances[myObj["stance"]["spriteIndecies"].length - 1)
     // document.getElementById('debug-int').innerHTML = last_i
     // window.myCoinBox.spriteCurrentIndex = last_i
+
     myCoinBox.loadGraphics();
     window.animationObjects.push(myCoinBox);
 }
 
 
 function spawnBlah() {
+    spawnMario();
     spawnCoinBox();
-    spawnMario()
 }
 
 
