@@ -1,16 +1,22 @@
 var animationObjects = [];
 
-
-var ghost = new Image();  // deleteme
+var background = new Image();
 
 function init() {
-  ghost.src = 'assets/enemies.png';
+  background.src = 'assets/background.png'
 }
 
 var ctx = document.getElementById('canvas').getContext('2d');
 
 function draw() {
-  ctx.clearRect(0, 0, 500, 150); // clear entire canvas...
+  // ctx.clearRect(0, 0, 500, 150); // clear entire canvas...
+
+  // re-draw background
+  ctx.drawImage(background,
+    20, 40,   // src position
+    500, 150,   // src bounds (width/ height)
+    0, 0,    // dst position
+    1 * 500, 1 * 150);  // dst bounds
 
   // Draw all objects
   for (var i = 0; i < animationObjects.length; i++) {
