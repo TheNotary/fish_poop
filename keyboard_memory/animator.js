@@ -33,15 +33,7 @@ function battle_screen_update() {
   for (var i = 0; i < animationObjects.length; i++) {
     var obj = animationObjects[i];
 
-    // obj.update();
-
-
-    if (obj.type == "coinbox") {
-      // var i = parseInt( document.getElementById('debug-int').innerHTML );
-      // alert(i);
-      obj.update();
-    }
-    else {
+    if (!obj.isBeingDebugged) {
       obj.update();
     }
   }

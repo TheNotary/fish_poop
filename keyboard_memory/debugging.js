@@ -1,40 +1,50 @@
 
+// This method let's you debug sprite objects...
+// left and right buttons will set the sprite index, and the normal update
+// phase of the spriteObj will be skipped...
+function setDebugTarget(spriteObj) {
+  window.debugTarget = spriteObj;
+  debugTarget.isBeingDebugged = true;
+  var last_i = ( debugTarget.stances[ debugTarget["stance"] ]["spriteIndecies"].length - 1 );
+  document.getElementById('debug-int').innerHTML = last_i;
+  window.debugTarget.spriteIndex_i = last_i;
+}
 
 function setSpriteIndex(val) {
-    var index_element = document.getElementById('debug-int');
-    index_element.innerHTML = val;
+  var index_element = document.getElementById('debug-int');
+  index_element.innerHTML = val;
 }
 
 
 function sprite_left() {
-    myGhost.x = myGhost.x - 1;
+  myGhost.x = myGhost.x - 1;
 
-    var index_element = document.getElementById('inputa')
+  var index_element = document.getElementById('inputa')
 
-    var val = parseInt(index_element.value);
+  var val = parseInt(index_element.value);
 
-    var new_val = val - 1;
-    if (new_val < 0) {
-        new_val = enemies_data["frames"].length - 1;
-    }
+  var new_val = val - 1;
+  if (new_val < 0) {
+    new_val = enemies_data["frames"].length - 1;
+  }
 
-    index_element.value = new_val;
+  index_element.value = new_val;
 }
 
 
 function sprite_right() {
-    myGhost.x = myGhost.x + 1;
+  myGhost.x = myGhost.x + 1;
 
-    var index_element = document.getElementById('inputa')
+  var index_element = document.getElementById('inputa')
 
-    var val = parseInt(index_element.value);
+  var val = parseInt(index_element.value);
 
-    var new_val = val + 1;
-    if (new_val > enemies_data["frames"].length - 1) {
-        new_val = 0;
-    }
+  var new_val = val + 1;
+  if (new_val > enemies_data["frames"].length - 1) {
+    new_val = 0;
+  }
 
-    index_element.value = new_val;
+  index_element.value = new_val;
 }
 
 
@@ -106,16 +116,14 @@ function spawnCoinBox() {
     };
 
 
-    window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 0], stances, "still", { "sizeMultiplier": 1 });
+    window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 0], stances, "struck", { "sizeMultiplier": 1 });
 
-    // var myObj = window.myCoinBox
-    // var last_i = (stances[myObj["stance"]["spriteIndecies"].length - 1)
-    // document.getElementById('debug-int').innerHTML = last_i
-    // window.myCoinBox.spriteCurrentIndex = last_i
+    setDebugTarget(myCoinBox);
 
     myCoinBox.loadGraphics();
     window.animationObjects.push(myCoinBox);
 }
+
 
 
 function spawnBlah() {

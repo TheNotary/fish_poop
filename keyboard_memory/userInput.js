@@ -26,12 +26,12 @@ function addEventHandlersToDom() {
                     case 39: // right arrow
                         var val = spriteIndex + 1;
                         setSpriteIndex(val);
-                        myCoinBox.spriteCurrentIndex = val;
+                        window.debugTarget.spriteIndex_i = val;
                         break;
                     case 37: // left arrow
                         var val = spriteIndex - 1;
                         setSpriteIndex(val);
-                        myCoinBox.spriteCurrentIndex = val;
+                        window.debugTarget.spriteIndex_i = val;
                         break;
                 }
 
