@@ -1,4 +1,11 @@
 
+
+function setSpriteIndex(val) {
+    var index_element = document.getElementById('debug-int');
+    index_element.innerHTML = val;
+}
+
+
 function sprite_left() {
     myGhost.x = myGhost.x - 1;
 
@@ -42,7 +49,7 @@ function spawnGhost() {
   };
 
   window.myGhost = new Unit("ghost", 0, "assets/enemies.png", enemies_data,
-    [0, 75], stances, "floating");
+    [0, 75], stances, "floating", { "sizeMultiplier": 1});
   window.animationObjects.push(myGhost);
   myGhost.loadGraphics();
 }
@@ -62,10 +69,41 @@ function spawnMario() {
         }
     };
 
-    window.myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 85], stances, "standing");
+    window.myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 85], stances, "standing", { "sizeMultiplier": 2});
     window.animationObjects.push(myMario);
     myMario.loadGraphics();
 }
+
+
+function spawnCoinBox() {
+  var stances = {
+      "debug": {
+          "spriteIndecies": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+          "animationCycleSlowness": 4
+      },
+      "still": {
+          "spriteIndecies": [4],
+          "animationCycleSlowness": 0
+      },
+      "hit": {
+          "spriteIndecies": [0, 1, 2, 3, 3],
+          "animationCycleSlowness": 5
+      }
+  };
+
+
+  document.getElementById('debug-int').innerHTML = (stances["debug"]["spriteIndecies"].length - 1)
+
+  window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coins_data, [0, 50], stances, "debug", { "sizeMultiplier": 1});
+  window.animationObjects.push(myCoinBox);
+  myCoinBox.loadGraphics();
+
+}
+
+function spawnBlah() {
+    spawnCoinBox();
+}
+
 
 
 function interaction() {
@@ -83,18 +121,29 @@ function useArrowKeysToMoveCanvasSprite() {
         myProc.call(this, evt); // do the thing that onkeydown is meant to do in production mode too...
 
         if (game.currentScreen == "battle_screen") {
+            alert()
+
+
+            var index_element = document.getElementById('debug-int');
+            var spriteIndex = parseInt(index_element.innerHTML);
+
             switch (evt.keyCode) {
                 case 39: // right arrow
-                    alert(game.battleScreen.mobs[0].position);
+                    var val = spriteIndex + 1;
+                    setSpriteIndex(val);
                     break;
                 case 37: // left arrow
-                    game.battleScreen.mobs[0].setY(game.battleScreen.mobs[0].y + 1);
+                    var val = spriteIndex - 1;
+                    setSpriteIndex(val);
+                    alert();
                     break;
             }
 
         }
     }
 }
+
+useArrowKeysToMoveCanvasSprite();
 
 
 
@@ -168,13 +217,13 @@ function processTimeDebugInfo(screen) {
 
 function debuggingFunctions() {
     // make it so there is no sound on title screen
-    game.titleScreen.audio.volume = 0.1;
+    // game.titleScreen.audio.volume = 0.1;
 
     // make it so there is no delay on titlescreen
-    game.removeTitleScreenDelay = true;
+    // game.removeTitleScreenDelay = true;
 
     // auto skip title screen
-    game.titleScreen.ExitScreen("intro-on_air_ship");
+    // game.titleScreen.ExitScreen("intro-on_air_ship");
 
     useArrowKeysToMoveCanvasSprite();
 }

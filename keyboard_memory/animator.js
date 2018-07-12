@@ -32,7 +32,18 @@ function battle_screen_update() {
   // Do ordinary updates
   for (var i = 0; i < animationObjects.length; i++) {
     var obj = animationObjects[i];
-    obj.update();
+
+    // obj.update();
+
+
+    if (obj.type == "coinbox") {
+      // var i = parseInt( document.getElementById('debug-int').innerHTML );
+      // alert(i);
+      obj.update();
+    }
+    else {
+      obj.update();
+    }
   }
 
   // Move the ghost
@@ -79,3 +90,5 @@ game.start();
 
 
 spawnMario();
+
+spawnBlah();

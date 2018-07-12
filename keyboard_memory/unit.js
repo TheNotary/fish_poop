@@ -1,5 +1,5 @@
 // new Unit("ghost", 0, "assets/enemies.png", [0, 0], "floating")
-function Unit(type, id, spriteSheet, spriteData, position, stances, stance) {
+function Unit(type, id, spriteSheet, spriteData, position, stances, stance, config) {
     if (arguments.length == 0) return;
     this.id = id;
     this.name =  "blah";   // Unit.getUnitName(type, id);
@@ -14,6 +14,7 @@ function Unit(type, id, spriteSheet, spriteData, position, stances, stance) {
     this.animationPhase = 0;
     this.animationPhaseEnd = 0;
 
+    this.sizeMultiplier = config["sizeMultiplier"];
     this.spriteSheet = spriteSheet;
     this.spriteData = spriteData;
     this.animationCycleSlowness = 10;
@@ -74,5 +75,5 @@ Unit.prototype.draw = function(ctx) {
         frame['x'], frame['y'],   // src position
         frame['w'], frame['h'],   // src bounds (width/ height)
         this.x + this.animation_x, this.y + this.animation_y,    // dst position
-        2*frame['w'], 2*frame['h']);  // dst bounds
+        this.sizeMultiplier * frame['w'], this.sizeMultiplier * frame['h']);  // dst bounds
 };

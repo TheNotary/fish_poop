@@ -17,7 +17,25 @@ function addEventHandlersToDom() {
                 break;
             case "battle_screen":
                 // TODO: refactor game.titleScreen into a more nested pattern...
-                game.battleScreen.handleKeys(evt);
+                // game.battleScreen.handleKeys(evt);
+
+                var index_element = document.getElementById('debug-int');
+                var spriteIndex = parseInt(index_element.innerHTML);
+
+                switch (evt.keyCode) {
+                    case 39: // right arrow
+                        var val = spriteIndex + 1;
+                        setSpriteIndex(val);
+                        myCoinBox.spriteCurrentIndex = val;
+                        break;
+                    case 37: // left arrow
+                        var val = spriteIndex - 1;
+                        setSpriteIndex(val);
+                        myCoinBox.spriteCurrentIndex = val;
+
+                        break;
+                }
+
                 break;
         }
     };
