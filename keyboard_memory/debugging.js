@@ -5,9 +5,10 @@
 function setDebugTarget(spriteObj) {
   window.debugTarget = spriteObj;
   debugTarget.isBeingDebugged = true;
-  var last_i = ( debugTarget.stances[ debugTarget["stance"] ]["spriteIndecies"].length - 1 );
-  document.getElementById('debug-int').innerHTML = last_i;
-  window.debugTarget.spriteIndex_i = last_i;
+  var startingSpriteIndex = ( debugTarget.stances[ debugTarget["stance"] ]["spriteIndecies"].length - 1 );
+  // startingSpriteIndex = 10; // force starting sprite to be something other than last
+  document.getElementById('debug-int').innerHTML = startingSpriteIndex;
+  window.debugTarget.spriteIndex_i = startingSpriteIndex;
 }
 
 function setSpriteIndex(val) {
@@ -131,7 +132,6 @@ function spawnCoinBox() {
 function spawnBlah() {
     spawnMario();
     spawnCoinBox();
-    spawnCoin();
 }
 
 

@@ -1,7 +1,7 @@
 var coins_data = {
    "frames":[
       {
-         "filename":"box0",
+         "filename":"coin0",
          "frame":{
             "x":18,
             "y":372,
@@ -22,7 +22,7 @@ var coins_data = {
          }
       },
       {
-         "filename":"box1",
+         "filename":"coin1",
          "frame":{
             "x":46,
             "y":372,
@@ -43,7 +43,7 @@ var coins_data = {
          }
       },
       {
-         "filename":"box2",
+         "filename":"coin2",
          "frame":{
             "x":74,
             "y":372,
@@ -64,7 +64,7 @@ var coins_data = {
          }
       },
       {
-         "filename":"box3",
+         "filename":"coin3",
          "frame":{
             "x":102,
             "y":372,
@@ -85,7 +85,7 @@ var coins_data = {
          }
       },
       {
-         "filename":"box4",
+         "filename":"coin4",
          "frame":{
             "x":130,
             "y":372,
@@ -106,7 +106,7 @@ var coins_data = {
          }
       },
       {
-         "filename":"box5",
+         "filename":"coin5",
          "frame":{
             "x":158,
             "y":372,
@@ -127,7 +127,7 @@ var coins_data = {
          }
       },
       {
-         "filename":"box6",
+         "filename":"coin6",
          "frame":{
             "x":186,
             "y":372,
@@ -148,7 +148,7 @@ var coins_data = {
          }
       },
       {
-         "filename":"box7",
+         "filename":"coin7",
          "frame":{
             "x":214,
             "y":372,
@@ -169,7 +169,7 @@ var coins_data = {
          }
       },
       {
-         "filename":"box8",
+         "filename":"coin8",
          "frame":{
             "x":244,
             "y":372,
@@ -190,7 +190,7 @@ var coins_data = {
          }
       },
       {
-         "filename":"box9",
+         "filename":"coin9",
          "frame":{
             "x":274,
             "y":372,
@@ -211,9 +211,9 @@ var coins_data = {
          }
       },
       {
-         "filename":"box10",
+         "filename":"coin10",
          "frame":{
-            "x":172,
+            "x":304,
             "y":372,
             "w":36,
             "h":40
@@ -232,7 +232,7 @@ var coins_data = {
          }
       },
       {
-         "filename":"box11",
+         "filename":"coin11",
          "frame":{
             "x":334,
             "y":372,
@@ -253,7 +253,7 @@ var coins_data = {
          }
       },
       {
-         "filename":"box12",
+         "filename":"coin12",
          "frame":{
             "x":364,
             "y":372,
@@ -274,7 +274,7 @@ var coins_data = {
          }
       },
       {
-         "filename":"box13",
+         "filename":"coin13",
          "frame":{
             "x":394,
             "y":372,
@@ -295,7 +295,7 @@ var coins_data = {
          }
       },
       {
-         "filename":"box14",
+         "filename":"coin14",
          "frame":{
             "x":428,
             "y":372,
@@ -316,7 +316,7 @@ var coins_data = {
          }
       },
       {
-         "filename":"box15",
+         "filename":"coin15",
          "frame":{
             "x":464,
             "y":372,

@@ -87,6 +87,9 @@ init();
 game.start();
 
 
+spawnCoin();
+
+
 // spawnMario();
 
 // spawnBlah();
