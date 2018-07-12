@@ -107,9 +107,9 @@ function spawnCoinBox() {
 
 
     window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [0, 50], stances, "still", { "sizeMultiplier": 1 });
-    var last_i = (stances["struck"]["spriteIndecies"].length - 1)
-    document.getElementById('debug-int').innerHTML = last_i
-    window.myCoinBox.spriteCurrentIndex = last_i
+    // var last_i = (stances["struck"]["spriteIndecies"].length - 1)
+    // document.getElementById('debug-int').innerHTML = last_i
+    // window.myCoinBox.spriteCurrentIndex = last_i
     myCoinBox.loadGraphics();
     window.animationObjects.push(myCoinBox);
 }

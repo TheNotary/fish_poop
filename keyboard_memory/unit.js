@@ -31,7 +31,7 @@ function Unit(type, id, spriteSheet, spriteData, position, stances, stance, conf
     // this.stance = stance;
     // this.stance = (stance == undefined ? stances[0] : stances[stance]);
 
-    this.spriteCurrentIndex = 0;
+    this.spriteCurrentIndex = this.stances[this.stance]["spriteIndecies"][0];
     this.spriteIndex_i = 0;
 
     this.sprites = stances;
@@ -46,6 +46,9 @@ Unit.prototype.getStanceHash = function() {
     return (this.stances[this.stance]);
 }
 
+// !properFrames.includes(this.spriteCurrentIndex)
+//
+//
 
 Unit.prototype.update = function() {
     var tickCount = game.tickCount;
@@ -54,27 +57,36 @@ Unit.prototype.update = function() {
         // if spriteCurrentIndex isn't within the properFrames possible, set it to the first of one
         if ( !properFrames.includes(this.spriteCurrentIndex) ) {
             console.log("wtf")
+            alert();
             this.spriteCurrentIndex = properFrames[0];
             this.spriteIndex_i = 0;
         }
         else {
             // oscilate between sprites in animation
-            nextFrame = properFrames[ properFrames.indexOf(this.spriteCurrentIndex) + 1 % properFrames.length ];
+
+            this.spriteIndex_i = (1 + this.spriteIndex_i) % (properFrames.length);
+
+            // nextFrame = properFrames[ properFrames.indexOf(this.spriteCurrentIndex) + 1 % properFrames.length ];
+            nextFrame = properFrames[this.spriteIndex_i];
             this.spriteCurrentIndex = nextFrame;
-            this.spriteIndex_i = 1 + this.spriteIndex_i % (properFrames.length - 1);
 
-            console.log("UPDATE PHASE:")
-            console.log("properFrames:" + properFrames)
-            console.log("nextFrame: " + nextFrame)
-            console.log("")
-            console.log("")
-
+            // console.log("UPDATE PHASE:")
+            // console.log("(1 + " + this.spriteIndex_i + ") % (" + properFrames.length + ")");
+            // console.log("spriteIndex_i: " + this.spriteIndex_i)
+            // console.log("properFrames:" + properFrames)
+            // console.log("nextFrame: " + nextFrame)
+            // console.log("")
         }
+
     }
 }
 
 
 Unit.prototype.draw = function(ctx) {
+
+    if (this.spriteCurrentIndex == 15)
+      alert(this.spriteCurrentIndex + this.type)
+
     var properFrames = this.sprites[this.stance]["spriteIndecies"];
     // if spriteCurrentIndex isn't within the properFrames possible, set it to the first of one
     if ( !properFrames.includes(this.spriteCurrentIndex) ) {
@@ -83,6 +95,8 @@ Unit.prototype.draw = function(ctx) {
         console.log("spriteCurrentIndex:" + this.spriteCurrentIndex)
         console.log("properFrames:" + properFrames)
         console.log("")
+
+        // alert();
 
 
         this.spriteCurrentIndex = properFrames[0];
