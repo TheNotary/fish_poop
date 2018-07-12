@@ -67,7 +67,7 @@ function battle_screen_update() {
 
         if (window.myMario.animation_y >= 0) {
             window.myMario.animation_y = 0;
-            window.myMario.stance = "standing";
+            window.myMario.setStance("standing");
             window.jump["direction"] = "up"  // reset
             window.jump["jumpPower"] = 10;
         }

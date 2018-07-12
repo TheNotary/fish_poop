@@ -82,10 +82,17 @@ Unit.prototype.update = function() {
 }
 
 
-Unit.prototype.draw = function(ctx) {
+Unit.prototype.setStance = function(stance) {
+    this.stance = stance;
 
-    if (this.spriteCurrentIndex == 15)
-      alert(this.spriteCurrentIndex + this.type)
+    var properFrames = this.sprites[this.stance]["spriteIndecies"];
+    this.spriteCurrentIndex = properFrames[0];
+    this.spriteIndex_i = 0;
+}
+
+
+
+Unit.prototype.draw = function(ctx) {
 
     var properFrames = this.sprites[this.stance]["spriteIndecies"];
     // if spriteCurrentIndex isn't within the properFrames possible, set it to the first of one

@@ -126,8 +126,8 @@ function spawnBlah() {
 
 function interaction() {
     // jump mario
-    window.myMario.stance = "jumping";
-    window.myCoinBox.stance = "struck";
+    window.myMario.setStance("jumping");
+    window.myCoinBox.setStance("struck");
 }
 
 
