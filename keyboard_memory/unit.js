@@ -8,6 +8,8 @@ function Unit(type, id, spriteSheet, spriteData, position, stances, stance, conf
     this.position = position; // position on the battle screen...
     this.x = position[0]; // these variables are for hovering/ flying effects and misc. toneberry shananagins
     this.y = position[1];
+
+    this.effects = {};
     this.animation_x = 0;
     this.animation_y = 0;
 
@@ -49,42 +51,65 @@ Unit.prototype.getProperFrames = function() {
   return this.sprites[this.stance]["spriteIndecies"];
 }
 
-
+Unit.prototype.animationIsConcluded = function() {
+  if (this.spriteIndex_i > this.stances[this.stance]["spriteIndecies"].length - 1 )
+    return true;
+  else
+    return false;
+}
 
 Unit.prototype.update = function() {
-    var tickCount = game.tickCount;
-    if (tickCount % this.getStanceHash()["animationCycleSlowness"] === 0) {
-        var properFrames = this.getProperFrames();
-        this.spriteIndex_i = (1 + this.spriteIndex_i) % (properFrames.length);
+  var tickCount = game.tickCount;
+  if (tickCount % this.getStanceHash()["animationCycleSlowness"] === 0) {
+    var properFrames = this.getProperFrames();
 
-        nextFrame = properFrames[this.spriteIndex_i];
-
-        // console.log("UPDATE PHASE:")
-        // console.log("(1 + " + this.spriteIndex_i + ") % (" + properFrames.length + ")");
-        // console.log("spriteIndex_i: " + this.spriteIndex_i)
-        // console.log("properFrames:" + properFrames)
-        // console.log("nextFrame: " + nextFrame)
-        // console.log("")
+    var stanceData = this.stances[this.stance];
+    if (stanceData["loop"]) {
+      this.spriteIndex_i = (1 + this.spriteIndex_i) % (properFrames.length);
     }
+    else {
+      this.spriteIndex_i = (1 + this.spriteIndex_i);
+
+      // if you're over-indexed... switch stance to "followedBy"
+      if ( this.animationIsConcluded() ) {
+        if (stanceData["followedBy"] != undefined) {
+          this.setStance(stanceData["followedBy"]);
+        }
+        else { // destroy the object if it doesn't loop, nor does it want to
+          this.spriteIndex_i = properFrames.length - 1;  // move back to the final frame....
+          this.destroyMe = true;
+        }
+      }
+    }
+
+    // console.log("UPDATE PHASE:")
+    // console.log("(1 + " + this.spriteIndex_i + ") % (" + properFrames.length + ")");
+    // console.log("spriteIndex_i: " + this.spriteIndex_i)
+    // console.log("properFrames:" + properFrames)
+    // console.log("")
+  }
 }
 
 
 Unit.prototype.setStance = function(stance) {
-    this.stance = stance;
+  this.stance = stance;
 
-    var properFrames = this.getProperFrames();
-    this.spriteIndex_i = 0;
+  var properFrames = this.getProperFrames();
+  this.spriteIndex_i = 0;
 }
 
 
 
 Unit.prototype.draw = function(ctx) {
-    var properFrames = this.getProperFrames();
-    var frame = this.spriteSheetData[properFrames[this.spriteIndex_i]]["frame"];
+  var properFrames = this.getProperFrames();
+  if (properFrames[this.spriteIndex_i] == undefined) {
+    console.log("this.spriteIndex_i: " + this.spriteIndex_i);
+  }
+  var frame = this.spriteSheetData[properFrames[this.spriteIndex_i]]["frame"];
 
-    ctx.drawImage(this.image,
-        frame['x'], frame['y'],   // src position
-        frame['w'], frame['h'],   // src bounds (width/ height)
-        this.x + this.animation_x, this.y + this.animation_y,    // dst position
-        this.sizeMultiplier * frame['w'], this.sizeMultiplier * frame['h']);  // dst bounds
+  ctx.drawImage(this.image,
+      frame['x'], frame['y'],   // src position
+      frame['w'], frame['h'],   // src bounds (width/ height)
+      this.x + this.animation_x, this.y + this.animation_y,    // dst position
+      this.sizeMultiplier * frame['w'], this.sizeMultiplier * frame['h']);  // dst bounds
 };

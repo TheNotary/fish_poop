@@ -55,7 +55,8 @@ function spawnGhost() {
   var stances = {
       "floating": {
         "spriteIndecies": [4, 5],
-        "animationCycleSlowness": 10
+        "animationCycleSlowness": 10,
+        "loop": true
       }
   };
 
@@ -72,11 +73,13 @@ function spawnMario() {
     var stances = {
         "standing": {
             "spriteIndecies": [4],
-            "animationCycleSlowness": 0
+            "animationCycleSlowness": 0,
+            "loop": true
         },
         "jumping": {
             "spriteIndecies": [0, 1, 2, 3, 3],
-            "animationCycleSlowness": 5
+            "animationCycleSlowness": 5,
+            "loop": true
         }
     };
 
@@ -90,18 +93,20 @@ function spawnCoin() {
   var stances = {
       "exploding": {
           "spriteIndecies": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-          "animationCycleSlowness": 4
+          "animationCycleSlowness": 2,
+          "loop": false
       },
       "still": {
           "spriteIndecies": [4],
-          "animationCycleSlowness": 0
+          "animationCycleSlowness": 0,
+          "loop": true
       }
   };
 
   window.myCoin = new Unit("coin", 0, "assets/coins.png", coins_data, [0, 50], stances, "exploding", { "sizeMultiplier": 1});
   myCoin.loadGraphics();
 
-  setDebugTarget(myCoin);
+  // setDebugTarget(myCoin);
 
   window.animationObjects.push(myCoin);
 }
@@ -111,17 +116,17 @@ function spawnCoinBox() {
     var stances = {
         "struck": {
             "spriteIndecies": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,  9, 8, 6, 4, 2],
-            "animationCycleSlowness": 4
+            "animationCycleSlowness": 4,
+            "followedBy": "still"
         },
         "still": {
             "spriteIndecies": [0],
-            "animationCycleSlowness": 1000
+            "animationCycleSlowness": 1000,
+            "loop": true
         }
     };
 
-
     window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 0], stances, "struck", { "sizeMultiplier": 1 });
-
 
     myCoinBox.loadGraphics();
     window.animationObjects.push(myCoinBox);

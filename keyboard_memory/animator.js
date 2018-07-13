@@ -31,7 +31,7 @@ function draw() {
 window.jump = {
   "direction": "up",
   "jumpPower": 10
-}
+};
 
 
 function battle_screen_update() {
@@ -42,15 +42,29 @@ function battle_screen_update() {
     if (!obj.isBeingDebugged) {
       obj.update();
     }
+
+    if (obj.effects[obj.stance] != undefined) {
+      var activeEffect = obj.effects[obj.stance];
+      if (activeEffect != undefined) {
+        activeEffect["updateLogic"].call();
+      }
+    }
+
+    // destroy completed objects
+    if (obj.destroyMe) {
+      obj = animationObjects.splice(i, 1);
+      delete obj;
+      i--;
+    }
   }
 
-  // Move the ghost
-  if (window.myGhost  != undefined) {
+  // Handle the ghost Moving
+  if (window.myGhost != undefined) {
     window.myGhost.x = window.myGhost.x + 1;
   }
 
-  // Handle Jumping....
-  if (window.myMario  != undefined) {
+  // Handle myMario Jumping....
+  if (window.myMario != undefined) {
     if (window.myMario.stance == "jumping") {
         var gravity = 1;      // m/s/s   (seconds are 1 tick, btw....)
         var startingJumpPower = 10; // m/s
@@ -71,6 +85,7 @@ function battle_screen_update() {
         }
     }
   }
+
 }
 
 
@@ -88,6 +103,9 @@ game.start();
 
 
 spawnCoin();
+
+asExplodable.call(window.myCoin);
+
 
 
 // spawnMario();
