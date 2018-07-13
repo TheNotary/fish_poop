@@ -26,6 +26,12 @@ window.KeyboardMemory = function(debugMode, configs) {
 
       if (this.debugMode) window.debuggingFunctions();
   };
+
+  this.resetChallenge = function() {
+    spawnMario();
+    spawnCoinBox();
+    spawnGhost();
+  }
 };
 
 

@@ -9,6 +9,11 @@ var mario_data = {
             "spriteIndecies": [0, 1, 2, 3, 3],
             "animationCycleSlowness": 5,
             "loop": true
+        },
+        "dieing": {
+            "spriteIndecies": [5, 6, 7, 7, 7,7, 8, 7,7,7,7, 8, 7,7,7,7, 8, 7,7,7,7 ],
+            "animationCycleSlowness": 4,
+            "loop": false
         }
     },
    "frames":[
@@ -97,7 +102,7 @@ var mario_data = {
          }
       },
       {
-         "filename":"standing0",
+         "filename":"standing4",
          "frame":{
             "x":30,
             "y":18,
@@ -114,6 +119,90 @@ var mario_data = {
          },
          "sourceSize":{
             "w":22,
+            "h":32
+         }
+      },
+      {
+         "filename":"dieing5",
+         "frame":{
+            "x":30,
+            "y":18,
+            "w":22,
+            "h":32
+         },
+         "rotated":false,
+         "trimmed":false,
+         "spriteSourceSize":{
+            "x":0,
+            "y":0,
+            "w":22,
+            "h":32
+         },
+         "sourceSize":{
+            "w":22,
+            "h":32
+         }
+      },
+      {
+         "filename":"dieing6",
+         "frame":{
+            "x":155,
+            "y":279,
+            "w":22,
+            "h":32
+         },
+         "rotated":false,
+         "trimmed":false,
+         "spriteSourceSize":{
+            "x":0,
+            "y":0,
+            "w":22,
+            "h":32
+         },
+         "sourceSize":{
+            "w":22,
+            "h":32
+         }
+      },
+      {
+         "filename":"dieing7",
+         "frame":{
+            "x":100,
+            "y":315,
+            "w":28,
+            "h":32
+         },
+         "rotated":false,
+         "trimmed":false,
+         "spriteSourceSize":{
+            "x":0,
+            "y":0,
+            "w":28,
+            "h":32
+         },
+         "sourceSize":{
+            "w":28,
+            "h":32
+         }
+      },
+      {
+         "filename":"missing8",
+         "frame":{
+            "x":315,
+            "y":315,
+            "w":28,
+            "h":32
+         },
+         "rotated":false,
+         "trimmed":false,
+         "spriteSourceSize":{
+            "x":0,
+            "y":0,
+            "w":28,
+            "h":32
+         },
+         "sourceSize":{
+            "w":28,
             "h":32
          }
       }

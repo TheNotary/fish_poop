@@ -17,17 +17,17 @@ body {
 
 #console {
   margin: 0 auto;
-  width: 180px;
+  width: 178px;
 }
 
 #about-text {
   display: none;
-  max-width: 400px;
+  max-width: 500px;
 }
 
 #game {
-  display: none;
-  max-width: 400px;
+  display: block;
+  max-width: 500px;
 }
 
 #challenge {
@@ -76,7 +76,7 @@ function start_game() {
   reset_game()
   document.getElementById('game').style.display = "block"
 
-  game_timer = setInterval(game_timer_func, 16)
+  // game_timer = setInterval(game_timer_func, 16)
 
   setTimeout(challenge_player, 200)
 }
@@ -113,20 +113,23 @@ function pick_random_letter() {
   return available_letters[rand]
 }
 
-function game_timer_func() {
-  var progress_bar = document.getElementById('progress')
-  progress_bar.value = progress_bar.value + 1
-  if (progress_bar.value >= progress_bar.max) {
-    reset_game()
-    gameStatus = 'stopped'
-    document.getElementById('game').style.display = "none"
-  }
-  global_v = progress_bar
-}
+// function game_timer_func() {
+//   var progress_bar = document.getElementById('progress')
+//   progress_bar.value = progress_bar.value + 1
+//   if (progress_bar.value >= progress_bar.max) {
+//     reset_game()
+//     gameStatus = 'stopped'
+//     document.getElementById('game').style.display = "none"
+//   }
+//   global_v = progress_bar
+// }
 
 function reset_game() {
-  clearInterval(game_timer)
-  document.getElementById('progress').value = 0
+  // clearInterval(game_timer)
+
+
+  window.game.resetChallenge();
+  // document.getElementById('progress').value = 0
   clear_challenge()
 }
 
@@ -166,11 +169,19 @@ function toggle_about_text() {
     Press the start button and a letter will appear on the screen.  Type that letter as fast as you can to make the letter dissapear.  The faster you are, the better your score!  Ghosts will chase mario for as long as a letter is on the screen.
   </div>
 
+
+
   <div id="game">
     <h1 id="challenge">&nbsp;</h1>
 
-    <progress id="progress" value="0" max="1000"></progress>
+    <div>
+      <canvas id="canvas" width="500" height="150"></canvas>
+    </div>
+
   </div>
+
+
+
 
   <div id="stats">
     <div>Coins Left: <span id="coins-left">10</span></div>
@@ -183,11 +194,6 @@ function toggle_about_text() {
     <button onclick="spawnGhost()">Spawn Ghost</button>
     <button onclick="spawnBlah()">Spawn Blah</button>
     <button onclick="interaction()">interaction</button>
-
-  </div>
-
-  <div>
-    <canvas id="canvas" width="500" height="150"></canvas>
   </div>
 
 </div>

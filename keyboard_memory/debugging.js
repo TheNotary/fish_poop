@@ -55,6 +55,7 @@ function spawnGhost() {
   asMovable.call(myGhost);
   myGhost.loadGraphics();
   window.animationObjects.push(myGhost);
+  window.myGhost.setStance("moving");
 }
 
 

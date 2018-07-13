@@ -41,6 +41,15 @@ function battle_screen_update() {
       }
     }
 
+    // Handle if mario is hit by the ghost
+    if (obj.type == "ghost") {
+      if (window.myMario.stance != "dieing" && obj.x > 420) {
+        obj.setStance("floating");
+        // alert("I touched mario");
+        window.myMario.setStance("dieing");
+      }
+    }
+
     // destroy completed objects
     if (obj.destroyMe) {
       animationObjects.splice(i, 1);
@@ -65,9 +74,7 @@ init();
 
 game.start();
 
-spawnMario();
-spawnCoinBox();
 
-spawnCoin([0, 50]);
+// spawnCoin([0, 50]);
 
 // spawnBlah();
