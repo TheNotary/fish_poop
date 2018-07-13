@@ -45,38 +45,38 @@ progress {
 
 <script>
 // Variables
+var nCoins = 10;
 var available_letters = [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';' ]
 var current_letter
+
 
 var gameStatus = 'stopped'
 var game_timer
 var global_v;
 
 function keyboard_func(e) {
-
   if (gameStatus == 'started' && e.keyCode >= 32 && e.keyCode <= 126) {
     var typed_letter = String.fromCharCode(e.keyCode).toLowerCase()
 
     if (typed_letter == current_letter) {
       register_a_hit(current_letter, e.keyCode)
       clear_challenge()
-      setTimeout(challenge_player, 200)
+      if (gameStatus != 'stopped') {
+        setTimeout(challenge_player, 200)
+      }
     }
     else {
       register_a_miss(current_letter, e.keyCode)
     }
   }
-
 }
 
 
 function start_game() {
   gameStatus = 'started'
-  clear_stats()
+  clear_stats(nCoins)
   reset_game()
-  document.getElementById('game').style.display = "block"
-
-  // game_timer = setInterval(game_timer_func, 16)
+  window.game.resetChallenge(nCoins);
 
   setTimeout(challenge_player, 200)
 }
@@ -102,8 +102,12 @@ function register_a_miss(current_letter, keyCode) {
 
 function register_a_hit(current_letter, keyCode) {
   var tag = document.getElementById("hits")
-  var misses_count =  parseInt(tag.innerHTML)
-  tag.innerHTML = misses_count + 1
+  var newCount =  parseInt(tag.innerHTML) + 1
+  tag.innerHTML = newCount
+  if (newCount >= nCoins) {
+    end_game()
+  }
+  window.myMario.setStance("jumping");
 }
 
 function pick_random_letter() {
@@ -113,29 +117,20 @@ function pick_random_letter() {
   return available_letters[rand]
 }
 
-// function game_timer_func() {
-//   var progress_bar = document.getElementById('progress')
-//   progress_bar.value = progress_bar.value + 1
-//   if (progress_bar.value >= progress_bar.max) {
-//     reset_game()
-//     gameStatus = 'stopped'
-//     document.getElementById('game').style.display = "none"
-//   }
-//   global_v = progress_bar
-// }
+function end_game() {
+  reset_game()
+  gameStatus = 'stopped'
+  setTimeout(clear_challenge, 200)
+}
 
 function reset_game() {
-  // clearInterval(game_timer)
-
-
-  window.game.resetChallenge();
-  // document.getElementById('progress').value = 0
   clear_challenge()
 }
 
-function clear_stats() {
+function clear_stats(nCoins) {
   document.getElementById("hits").innerHTML = 0
   document.getElementById("misses").innerHTML = 0
+  document.getElementById("coins-left").innerHTML = nCoins
 }
 
 
@@ -184,7 +179,7 @@ function toggle_about_text() {
 
 
   <div id="stats">
-    <div>Coins Left: <span id="coins-left">10</span></div>
+    <div>Coins Left: <span id="coins-left"></span></div>
     <div>Misses: <span id="misses">0</div>
     <div>Hits: <span id="hits">0</div>
   </div>

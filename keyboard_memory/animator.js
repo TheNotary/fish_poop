@@ -41,12 +41,19 @@ function battle_screen_update() {
       }
     }
 
-    // Handle if mario is hit by the ghost
     if (obj.type == "ghost") {
+      // Handle if mario is touched by the ghost
       if (window.myMario.stance != "dieing" && obj.x > 420) {
         obj.setStance("floating");
         // alert("I touched mario");
         window.myMario.setStance("dieing");
+        end_game();
+      }
+
+      // Handle if mario has gotten all the coins
+      if (window.myCoinBox.fx_loot['treasure'].length <= 0) {
+        obj.destroyMe = true;
+        end_game();
       }
     }
 

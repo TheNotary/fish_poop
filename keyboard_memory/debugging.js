@@ -77,9 +77,14 @@ function spawnCoin(pos) {
   window.animationObjects.push(myCoin);
 }
 
-function spawnCoinBox() {
-    window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 8], "lootable", { "sizeMultiplier": 1 });
+function spawnCoinBox(nCoins) {
+    window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 18], "lootable", { "sizeMultiplier": 1 });
     asLootable.call(window.myCoinBox);
+
+    myCoinBox.fx_loot['treasure'] = [];
+    for (var i = 0; i < nCoins; i++) {
+      myCoinBox.fx_loot['treasure'].push("coin");
+    }
 
     myCoinBox.loadGraphics();
     window.animationObjects.push(myCoinBox);
@@ -97,7 +102,7 @@ function interaction() {
     window.myMario.setStance("jumping");
 
     // window.myCoinBox.setStance("struck");
-    window.myGhost.setStance("moving");
+    // window.myGhost.setStance("moving");
 }
 
 

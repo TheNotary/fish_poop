@@ -27,9 +27,11 @@ window.KeyboardMemory = function(debugMode, configs) {
       if (this.debugMode) window.debuggingFunctions();
   };
 
-  this.resetChallenge = function() {
+  this.resetChallenge = function(nCoins) {
+    window.animationObjects = [];
+
     spawnMario();
-    spawnCoinBox();
+    spawnCoinBox(nCoins);
     spawnGhost();
   }
 };
