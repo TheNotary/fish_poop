@@ -8,9 +8,14 @@
 var asExplodable = function() {
   var that = this;
 
+  that.fx_exploding = {
+    "speed": 6
+  }
+
   this.effects["exploding"] = {
     "updateLogic": function() {
-
+      that.fx_exploding["speed"] -= 0.5;
+      that.animation_y -= that.fx_exploding["speed"];
     }
   };
 

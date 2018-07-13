@@ -1,14 +1,15 @@
 var coinbox_data = {
     "animations": {
         "struck": {
-            "spriteIndecies": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,  9, 8, 6, 4, 2],
-            "animationCycleSlowness": 4,
-            "followedBy": "still"
+            "spriteIndecies": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 9, 8, 6, 4, 2],
+            "animationCycleSlowness": 1,
+            "followedBy": "lootable"
         },
-        "still": {
-            "spriteIndecies": [0],
-            "animationCycleSlowness": 1000,
-            "loop": true
+        "lootable": {
+            "spriteIndecies": [0]
+        },
+        "empty": {
+            "spriteIndecies": [11]
         }
     },
     "frames":[
@@ -227,6 +228,27 @@ var coinbox_data = {
          "frame":{
             "x":586,
             "y":144,
+            "w":36,
+            "h":60
+         },
+         "rotated":false,
+         "trimmed":false,
+         "spriteSourceSize":{
+            "x":0,
+            "y":0,
+            "w":36,
+            "h":40
+         },
+         "sourceSize":{
+            "w":36,
+            "h":40
+         }
+      },
+      {
+         "filename":"emptybox11",
+         "frame":{
+            "x":175,
+            "y":205,
             "w":36,
             "h":60
          },

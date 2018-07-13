@@ -6,9 +6,7 @@ var coins_data = {
             "loop": false
         },
         "still": {
-            "spriteIndecies": [4],
-            "animationCycleSlowness": 0,
-            "loop": true
+            "spriteIndecies": [4]
         }
     },
     "frames":[

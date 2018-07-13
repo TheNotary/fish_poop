@@ -68,6 +68,6 @@ game.start();
 spawnMario();
 spawnCoinBox();
 
-spawnCoin();
+spawnCoin([0, 50]);
 
 // spawnBlah();

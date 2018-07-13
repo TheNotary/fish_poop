@@ -54,12 +54,17 @@ Unit.prototype.animationIsConcluded = function() {
 }
 
 Unit.prototype.update = function() {
-  var tickCount = game.tickCount;
-  if (tickCount % this.getStanceHash()["animationCycleSlowness"] === 0) {
+  var stanceHash = this.getStanceHash();
+  if (stanceHash["animationCycleSlowness"] == undefined)
+    return;
+
+  if (game.tickCount % stanceHash["animationCycleSlowness"] === 0) {
     var properFrames = this.getProperFrames();
 
     var stanceData = this.stances[this.stance];
     if (stanceData["loop"]) {
+      if (properFrames.length == 1)
+        return;
       this.spriteIndex_i = (1 + this.spriteIndex_i) % (properFrames.length);
     }
     else {

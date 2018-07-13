@@ -65,9 +65,9 @@ function spawnMario() {
     window.animationObjects.push(myMario);
 }
 
-
-function spawnCoin() {
-  window.myCoin = new Unit("coin", 0, "assets/coins.png", coins_data, [0, 50], "exploding", { "sizeMultiplier": 1});
+// pos = [0, 50]
+function spawnCoin(pos) {
+  window.myCoin = new Unit("coin", 0, "assets/coins.png", coins_data, pos, "exploding", { "sizeMultiplier": 1});
   asExplodable.call(window.myCoin);
   myCoin.loadGraphics();
 
@@ -76,9 +76,9 @@ function spawnCoin() {
   window.animationObjects.push(myCoin);
 }
 
-
 function spawnCoinBox() {
-    window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 0], "still", { "sizeMultiplier": 1 });
+    window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 8], "lootable", { "sizeMultiplier": 1 });
+    asLootable.call(window.myCoinBox);
 
     myCoinBox.loadGraphics();
     window.animationObjects.push(myCoinBox);

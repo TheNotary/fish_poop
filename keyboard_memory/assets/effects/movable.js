@@ -5,7 +5,7 @@
 // the update loop to account for the fact that the effect is taking place!
 
 
-// automobiles are any things that move all on their own, plainly in some direction...
+// movables are any things that move all on their own, plainly in some direction...
 var asMovable = function() {
   var that = this;
 
