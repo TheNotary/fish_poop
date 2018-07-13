@@ -47,26 +47,31 @@ progress {
 // Variables
 var nCoins = 10;
 var available_letters = [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';' ]
-var current_letter
-
+var currentLetter
+var challengeDelay = 20
 
 var gameStatus = 'stopped'
-var game_timer
-var global_v;
+var global_v
 
 function keyboard_func(e) {
-  if (gameStatus == 'started' && e.keyCode >= 32 && e.keyCode <= 126) {
-    var typed_letter = String.fromCharCode(e.keyCode).toLowerCase()
+  var keyCode = e.keyCode
 
-    if (typed_letter == current_letter) {
-      register_a_hit(current_letter, e.keyCode)
+  // fix safaris/ chrome macbook pro semicolon keyCode error
+  if (keyCode == 186)
+    keyCode = 59
+
+  if (gameStatus == 'started' && keyCode >= 32 && keyCode <= 126) {
+    var typedLetter = String.fromCharCode(keyCode).toLowerCase()
+
+    if (typedLetter == currentLetter) {
+      register_a_hit(currentLetter, keyCode)
       clear_challenge()
       if (gameStatus != 'stopped') {
-        setTimeout(challenge_player, 200)
+        setTimeout(challenge_player, challengeDelay)
       }
     }
     else {
-      register_a_miss(current_letter, e.keyCode)
+      register_a_miss(currentLetter, keyCode)
     }
   }
 }
@@ -78,29 +83,29 @@ function start_game() {
   reset_game()
   window.game.resetChallenge(nCoins);
 
-  setTimeout(challenge_player, 200)
+  setTimeout(challenge_player, challengeDelay)
 }
 
 function challenge_player() {
-  var challenge_tag = document.getElementById('challenge')
+  var challengeTag = document.getElementById('challenge')
 
-  current_letter = pick_random_letter()
-  challenge_tag.innerHTML = current_letter
+  currentLetter = pick_random_letter()
+  challengeTag.innerHTML = currentLetter
 }
 
 function clear_challenge() {
-  var challenge_tag = document.getElementById('challenge')
-  challenge_tag.innerHTML = "&nbsp;"
+  var challengeTag = document.getElementById('challenge')
+  challengeTag.innerHTML = "&nbsp;"
 }
 
 
-function register_a_miss(current_letter, keyCode) {
+function register_a_miss(currentLetter, keyCode) {
   var tag = document.getElementById("misses")
-  var misses_count =  parseInt(tag.innerHTML)
-  tag.innerHTML = misses_count + 1
+  var missesCount =  parseInt(tag.innerHTML)
+  tag.innerHTML = missesCount + 1
 }
 
-function register_a_hit(current_letter, keyCode) {
+function register_a_hit(currentLetter, keyCode) {
   var tag = document.getElementById("hits")
   var newCount =  parseInt(tag.innerHTML) + 1
   tag.innerHTML = newCount
@@ -120,7 +125,7 @@ function pick_random_letter() {
 function end_game() {
   reset_game()
   gameStatus = 'stopped'
-  setTimeout(clear_challenge, 200)
+  clear_challenge()
 }
 
 function reset_game() {
