@@ -1,7 +1,7 @@
 window.thisSpotWasRun = 0;
 
-// This mixin is applied to InitialFantasy to give it a game loop pipeline
-// pattern from within initialize_game.js
+// This mixin is applied to the game object (eg InitialFantasy) to give it a
+// game loop pipeline pattern from within initialize_game.js
 var asGameLoop = function() {
     this.tickCount = 0;
     var lastMainEndedAt = 0;
@@ -72,7 +72,7 @@ var asGameLoop = function() {
     // the game loop.
     function itsTimeToDoAnotherTick(lastTick, tickInterval) {
         delta = Date.now() - lastTick;
-        if (delta >= tickInterval * 4) {
+        if (delta >= tickInterval * 4 && lastTick > 0) {
             console.debug("we're an entire tick behind!  We probably aren't finishing drawing fast enough  " + delta + " / " + tickInterval + '   last draw t: ' + lastDrawTime);
             thisSpotWasRun++;
         }

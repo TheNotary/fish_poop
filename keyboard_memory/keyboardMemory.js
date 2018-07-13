@@ -5,6 +5,7 @@
 window.KeyboardMemory = function(debugMode, configs) {
   this.debugMode = debugMode;
   this.currentScreen = "battle_screen";
+  this.screens = [];
 
   // this.titleScreen = new TitleScreen('title_screen', 'audTitleScreen',
   //     null, '/images/ui/title_screen.png');

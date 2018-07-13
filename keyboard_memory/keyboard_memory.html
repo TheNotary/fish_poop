@@ -2,6 +2,10 @@
 
 <style>
 
+.debug {
+  display: none;
+}
+
 body {
   background-color: grey;
 }
@@ -172,12 +176,12 @@ function toggle_about_text() {
     <div>Hits: <span id="hits">0</span></div>
   </div>
 
-  <!-- <div id="sprite-controls">
+  <div id="sprite-controls" class="debug">
     <div id="debug-int">0</div>
     <button onclick="spawnGhost()">Spawn Ghost</button>
     <button onclick="spawnBlah()">Spawn Blah</button>
     <button onclick="interaction()">interaction</button>
-  </div> -->
+  </div>
 
 </div>
 </body>
