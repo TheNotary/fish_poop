@@ -3,18 +3,10 @@
 
 // Do the asExplodable.call(myCoin) trick!
 
-var explodingFrames = {
-  "exploding": {
-    "spriteIndecies": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-    "animationCycleSlowness": 2
-  }
-};
-
 
 var explodingUpdate = function() {
 
 }
-
 
 
 var asExplodable = function() {
@@ -22,7 +14,7 @@ var asExplodable = function() {
 
   this.effects["exploding"] = {
     "updateLogic": function() {
-      
+
     }
   };
 

@@ -52,8 +52,7 @@ function battle_screen_update() {
 
     // destroy completed objects
     if (obj.destroyMe) {
-      obj = animationObjects.splice(i, 1);
-      delete obj;
+      animationObjects.splice(i, 1);
       i--;
     }
   }
@@ -101,11 +100,11 @@ init();
 
 game.start();
 
+spawnMario();
+spawnCoinBox();
+
 
 spawnCoin();
-
-asExplodable.call(window.myCoin);
-
 
 
 // spawnMario();

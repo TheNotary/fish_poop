@@ -1,4 +1,16 @@
 var mario_data = {
+    "animations": {
+        "standing": {
+            "spriteIndecies": [4],
+            "animationCycleSlowness": 0,
+            "loop": true
+        },
+        "jumping": {
+            "spriteIndecies": [0, 1, 2, 3, 3],
+            "animationCycleSlowness": 5,
+            "loop": true
+        }
+    },
    "frames":[
       {
          "filename":"jump0",

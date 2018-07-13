@@ -50,60 +50,23 @@ function sprite_right() {
 
 
 function spawnGhost() {
-  // load_sprite_data("assets/enemies.json")
-
-  var stances = {
-      "floating": {
-        "spriteIndecies": [4, 5],
-        "animationCycleSlowness": 10,
-        "loop": true
-      }
-  };
-
   window.myGhost = new Unit("ghost", 0, "assets/enemies.png", enemies_data,
-    [0, 85], stances, "floating", { "sizeMultiplier": 1.5});
+    [0, 85], "floating", { "sizeMultiplier": 1.5});
     myGhost.loadGraphics();
   window.animationObjects.push(myGhost);
 }
 
 
 function spawnMario() {
-    // load_sprite_data("assets/mario.json")
-
-    var stances = {
-        "standing": {
-            "spriteIndecies": [4],
-            "animationCycleSlowness": 0,
-            "loop": true
-        },
-        "jumping": {
-            "spriteIndecies": [0, 1, 2, 3, 3],
-            "animationCycleSlowness": 5,
-            "loop": true
-        }
-    };
-
-    window.myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 95], stances, "standing", { "sizeMultiplier": 1.5});
+    window.myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 95], "standing", { "sizeMultiplier": 1.5});
     myMario.loadGraphics();
     window.animationObjects.push(myMario);
 }
 
 
 function spawnCoin() {
-  var stances = {
-      "exploding": {
-          "spriteIndecies": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-          "animationCycleSlowness": 2,
-          "loop": false
-      },
-      "still": {
-          "spriteIndecies": [4],
-          "animationCycleSlowness": 0,
-          "loop": true
-      }
-  };
-
-  window.myCoin = new Unit("coin", 0, "assets/coins.png", coins_data, [0, 50], stances, "exploding", { "sizeMultiplier": 1});
+  window.myCoin = new Unit("coin", 0, "assets/coins.png", coins_data, [0, 50], "exploding", { "sizeMultiplier": 1});
+  asExplodable.call(window.myCoin);
   myCoin.loadGraphics();
 
   // setDebugTarget(myCoin);
@@ -113,20 +76,7 @@ function spawnCoin() {
 
 
 function spawnCoinBox() {
-    var stances = {
-        "struck": {
-            "spriteIndecies": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,  9, 8, 6, 4, 2],
-            "animationCycleSlowness": 4,
-            "followedBy": "still"
-        },
-        "still": {
-            "spriteIndecies": [0],
-            "animationCycleSlowness": 1000,
-            "loop": true
-        }
-    };
-
-    window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 0], stances, "struck", { "sizeMultiplier": 1 });
+    window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 0], "still", { "sizeMultiplier": 1 });
 
     myCoinBox.loadGraphics();
     window.animationObjects.push(myCoinBox);
@@ -136,14 +86,14 @@ function spawnCoinBox() {
 
 function spawnBlah() {
     spawnMario();
-    spawnCoinBox();
 }
 
 
 function interaction() {
     // jump mario
     window.myMario.setStance("jumping");
-    window.myCoinBox.setStance("struck");
+
+    // window.myCoinBox.setStance("struck");
 }
 
 

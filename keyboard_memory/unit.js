@@ -1,5 +1,5 @@
 // new Unit("ghost", 0, "assets/enemies.png", [0, 0], "floating")
-function Unit(type, id, spriteSheet, spriteData, position, stances, stance, config) {
+function Unit(type, id, spriteSheet, spriteData, position, stance, config) {
     if (arguments.length == 0) return;
     this.id = id;
     this.name =  "blah";   // Unit.getUnitName(type, id);
@@ -23,19 +23,14 @@ function Unit(type, id, spriteSheet, spriteData, position, stances, stance, conf
     this.image = new Image();
     this.spriteSheetData = spriteData["frames"];
 
-    this.stances = stances;
+    this.stances = spriteData["animations"];
 
     if (stance == undefined)
       this.stance = Object.keys(stances)[0]
     else
       this.stance = stance
 
-    // this.stance = stance;
-    // this.stance = (stance == undefined ? stances[0] : stances[stance]);
-
     this.spriteIndex_i = 0;
-
-    this.sprites = stances;
 }
 
 
@@ -48,7 +43,7 @@ Unit.prototype.getStanceHash = function() {
 }
 
 Unit.prototype.getProperFrames = function() {
-  return this.sprites[this.stance]["spriteIndecies"];
+  return this.stances[this.stance]["spriteIndecies"];
 }
 
 Unit.prototype.animationIsConcluded = function() {
