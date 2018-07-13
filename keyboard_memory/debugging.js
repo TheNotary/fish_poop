@@ -59,6 +59,7 @@ function spawnGhost() {
 
 function spawnMario() {
     window.myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 95], "standing", { "sizeMultiplier": 1.5});
+    asJumpable.call(window.myMario);
     myMario.loadGraphics();
     window.animationObjects.push(myMario);
 }

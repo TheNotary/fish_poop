@@ -39,10 +39,12 @@ function battle_screen_update() {
   for (var i = 0; i < animationObjects.length; i++) {
     var obj = animationObjects[i];
 
+    // Handle default/ general sprite updates
     if (!obj.isBeingDebugged) {
       obj.update();
     }
 
+    // Handle any special effects/ conditions/ behaviors
     if (obj.effects[obj.stance] != undefined) {
       var activeEffect = obj.effects[obj.stance];
       if (activeEffect != undefined) {
@@ -60,29 +62,6 @@ function battle_screen_update() {
   // Handle the ghost Moving
   if (window.myGhost != undefined) {
     window.myGhost.x = window.myGhost.x + 1;
-  }
-
-  // Handle myMario Jumping....
-  if (window.myMario != undefined) {
-    if (window.myMario.stance == "jumping") {
-        var gravity = 1;      // m/s/s   (seconds are 1 tick, btw....)
-        var startingJumpPower = 10; // m/s
-        var max_jump_height = -100;
-
-        window.jump["jumpPower"] = (window.jump["jumpPower"] - gravity);
-        window.myMario.animation_y = window.myMario.animation_y - window.jump["jumpPower"];
-
-        if (window.jump["direction"] == "up" && window.myMario.animation_y < max_jump_height) {
-            window.jump["direction"] = "down"
-        }
-
-        if (window.myMario.animation_y >= 0) {
-            window.myMario.animation_y = 0;
-            window.myMario.setStance("standing");
-            window.jump["direction"] = "up"  // reset
-            window.jump["jumpPower"] = 10;
-        }
-    }
   }
 
 }
