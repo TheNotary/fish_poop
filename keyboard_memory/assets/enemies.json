@@ -1,9 +1,14 @@
 var enemies_data = {
     "animations": {
         "floating": {
-          "spriteIndecies": [4, 5],
-          "animationCycleSlowness": 10,
-          "loop": true
+            "spriteIndecies": [4, 5],
+            "animationCycleSlowness": 10,
+            "loop": true
+        },
+        "moving": {
+            "spriteIndecies": [4, 5],
+            "animationCycleSlowness": 10,
+            "loop": true
         }
     },
    "frames":[

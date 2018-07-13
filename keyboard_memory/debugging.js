@@ -52,7 +52,8 @@ function sprite_right() {
 function spawnGhost() {
   window.myGhost = new Unit("ghost", 0, "assets/enemies.png", enemies_data,
     [0, 85], "floating", { "sizeMultiplier": 1.5});
-    myGhost.loadGraphics();
+  asMovable.call(myGhost);
+  myGhost.loadGraphics();
   window.animationObjects.push(myGhost);
 }
 
@@ -95,6 +96,7 @@ function interaction() {
     window.myMario.setStance("jumping");
 
     // window.myCoinBox.setStance("struck");
+    window.myGhost.setStance("moving");
 }
 
 

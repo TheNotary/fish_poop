@@ -1,17 +1,15 @@
-var animationObjects = [];
-
-var background = new Image();
 
 function init() {
   background.src = 'assets/background.png'
 }
 
-var ctx = document.getElementById('canvas').getContext('2d');
 
 function draw() {
-  // ctx.clearRect(0, 0, 500, 150); // clear entire canvas...
+  if (window.ctx == undefined)
+    window.ctx = document.getElementById('canvas').getContext('2d');
 
   // re-draw background
+  // ctx.clearRect(0, 0, 500, 150); // clear entire canvas...
   ctx.drawImage(background,
     20, 40,   // src position
     500, 150,   // src bounds (width/ height)
@@ -26,16 +24,7 @@ function draw() {
 }
 
 
-
-// TODO: refactor into jumpable.js
-window.jump = {
-  "direction": "up",
-  "jumpPower": 10
-};
-
-
 function battle_screen_update() {
-  // Do ordinary updates
   for (var i = 0; i < animationObjects.length; i++) {
     var obj = animationObjects[i];
 
@@ -58,15 +47,12 @@ function battle_screen_update() {
       i--;
     }
   }
-
-  // Handle the ghost Moving
-  if (window.myGhost != undefined) {
-    window.myGhost.x = window.myGhost.x + 1;
-  }
-
 }
 
 
+
+window.animationObjects = [];
+window.background = new Image();
 
 debugMode = false;
 
@@ -82,10 +68,6 @@ game.start();
 spawnMario();
 spawnCoinBox();
 
-
 spawnCoin();
-
-
-// spawnMario();
 
 // spawnBlah();
