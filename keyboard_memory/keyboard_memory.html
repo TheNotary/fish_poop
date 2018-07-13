@@ -36,11 +36,6 @@ body {
   width: 20px;
 }
 
-progress {
-  height: 100px;
-  width: 100%;
-}
-
 </style>
 
 <script>
@@ -138,7 +133,6 @@ function clear_stats(nCoins) {
   document.getElementById("coins-left").innerHTML = nCoins
 }
 
-
 function toggle_about_text() {
   var about_text_tag = document.getElementById("about-text")
   global_v = about_text_tag
@@ -151,8 +145,6 @@ function toggle_about_text() {
 }
 
 </script>
-
-
 
 </head>
 
@@ -169,42 +161,35 @@ function toggle_about_text() {
     Press the start button and a letter will appear on the screen.  Type that letter as fast as you can to make the letter dissapear.  The faster you are, the better your score!  Ghosts will chase mario for as long as a letter is on the screen.
   </div>
 
-
-
   <div id="game">
     <h1 id="challenge">&nbsp;</h1>
-
-    <div>
-      <canvas id="canvas" width="500" height="150"></canvas>
-    </div>
-
+    <canvas id="canvas" width="500" height="150"></canvas>
   </div>
-
-
-
 
   <div id="stats">
     <div>Coins Left: <span id="coins-left"></span></div>
     <div>Misses: <span id="misses">0</div>
-    <div>Hits: <span id="hits">0</div>
+    <div>Hits: <span id="hits">0</span></div>
   </div>
 
-  <div id="sprite-controls">
+  <!-- <div id="sprite-controls">
     <div id="debug-int">0</div>
     <button onclick="spawnGhost()">Spawn Ghost</button>
     <button onclick="spawnBlah()">Spawn Blah</button>
     <button onclick="interaction()">interaction</button>
-  </div>
+  </div> -->
 
 </div>
 </body>
+
+<!--  Load the piffy game file -->
+
+<!--  Load the more serious 2d game engine files -->
 
 <script src="assets/effects/movable.js"></script>
 <script src="assets/effects/lootable.js"></script>
 <script src="assets/effects/explodable.js"></script>
 <script src="assets/effects/jumpable.js"></script>
-
-
 
 <script src="assets/enemies.json"></script>
 <script src="assets/mario.json"></script>
