@@ -99,6 +99,10 @@ function keyboard_func(e) {
       register_a_miss(currentLetter, keyCode)
     }
   }
+
+  if (gameStatus == 'stopped' && keyCode == 32) {
+      start_game();
+  }
 }
 
 
