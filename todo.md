@@ -18,6 +18,7 @@
   - (coins) https://www.spriters-resource.com/snes/smariorpg/sheet/12860/
   - (Coin Box) https://www.spriters-resource.com/snes/smariorpg/sheet/12839/
   - (background) https://www.spriters-resource.com/resources/sheets/46/48755.png
+  - (Sound) https://themushroomkingdom.net/media/mk64/wav
 
 
 

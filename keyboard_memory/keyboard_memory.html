@@ -78,6 +78,13 @@ var challengeDelay = 20
 var gameStatus = 'stopped'
 var global_v
 
+
+var config = {
+  "challengeElementId": "challenge",
+  "missesElementId": "misses",
+  "hitsElementId": "hits"
+};
+
 function keyboard_func(e) {
   var keyCode = e.keyCode
 
@@ -127,7 +134,6 @@ function clear_challenge() {
   challengeTag.innerHTML = "&nbsp;"
 }
 
-
 function register_a_miss(currentLetter, keyCode) {
   var tag = document.getElementById("misses")
   var missesCount =  parseInt(tag.innerHTML)
@@ -171,6 +177,7 @@ function clear_stats(nCoins) {
   document.getElementById("misses").innerHTML = 0
   // document.getElementById("coins-left").innerHTML = nCoins
 }
+
 
 function toggle_about_text() {
   var about_text_tag = document.getElementById("about-text")
