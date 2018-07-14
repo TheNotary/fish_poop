@@ -36,8 +36,6 @@ var asLootable = function() {
         }
 
       }
-      // that.x = that.x + that.fx_move["x"];
-      // that.y = that.y + that.fx_move["y"];
     }
   };
 

@@ -6,7 +6,7 @@ window.KeyboardMemory = function(debugMode, configs) {
   var that = this;
   this.debugMode = debugMode;
   this.currentScreen = "coin_ghost_challenge_screen";
-  this.getCurrentScreen = function() { return that.screens[that.currentScreen]}
+  this.getCurrentScreen = function() { return that.screens[that.currentScreen] }
 
   this.screens = {
     "coin_ghost_challenge_screen": new CoinGhostChallengeScreen('canvas', 'audBattle', 'stats')

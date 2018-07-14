@@ -6,6 +6,17 @@
 
 <style>
 
+.Aligner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Aligner-item {
+  max-width: 50%;
+}
+
 .debug {
   display: none;
 }
@@ -24,8 +35,13 @@ body {
 }
 
 #console {
-  margin: 0 auto;
-  width: 178px;
+  align-self: flex-start;
+  /* min-width: 178px; */
+}
+
+#stats {
+  align-self: flex-end;
+  /* min-width: 178px; */
 }
 
 #about-text {
@@ -34,11 +50,17 @@ body {
 }
 
 #game {
+  position: relative;
   display: block;
   max-width: 500px;
 }
 
 #challenge {
+  color: white;
+  font-size: 24px;
+  position: absolute;
+  right: 45px;
+  top: 33px;
   margin-left: auto;
   margin-right: auto;
   width: 20px;
@@ -106,6 +128,9 @@ function register_a_miss(currentLetter, keyCode) {
   var tag = document.getElementById("misses")
   var missesCount =  parseInt(tag.innerHTML)
   tag.innerHTML = missesCount + 1
+
+  game.sound.booLaugh.play();
+  window.myGhost.x += 50;
 }
 
 function register_a_hit(currentLetter, keyCode) {
@@ -115,6 +140,7 @@ function register_a_hit(currentLetter, keyCode) {
   if (newCount >= nCoins) {
     end_game()
     game.sound['victory'].play();
+    window.myGhost.destroyMe = true;
   }
   window.myMario.setStance("jumping");
 }
@@ -139,7 +165,7 @@ function reset_game() {
 function clear_stats(nCoins) {
   document.getElementById("hits").innerHTML = 0
   document.getElementById("misses").innerHTML = 0
-  document.getElementById("coins-left").innerHTML = nCoins
+  // document.getElementById("coins-left").innerHTML = nCoins
 }
 
 function toggle_about_text() {
@@ -160,23 +186,23 @@ function toggle_about_text() {
 
 <body onkeydown="keyboard_func(event)">
 
-<div id="page-wrap">
+<div id="page-wrap" class="Aligner">
 
-  <div id="console">
+  <div id="console" class="Aligner-item">
     <button onclick="start_game()">Start</button>
     <button onclick="toggle_about_text()">About</button>
-  </div>
-  <div id="about-text">
-    Press the start button and a letter will appear on the screen.  Type that letter as fast as you can to make the letter dissapear.  The faster you are, the better your score!  Ghosts will chase mario for as long as a letter is on the screen.
+    <div id="about-text">
+      Press the start button and a letter will appear on the screen.  Type that letter as fast as you can to make the letter dissapear.  The faster you are, the better your score!  Ghosts will chase mario for as long as a letter is on the screen.
+    </div>
   </div>
 
-  <div id="game">
+  <div id="game" class="Aligner-item">
     <h1 id="challenge">&nbsp;</h1>
     <canvas id="canvas" width="500" height="150"></canvas>
   </div>
 
-  <div id="stats">
-    <div>Coins Left: <span id="coins-left"></span></div>
+  <div id="stats" class="Aligner-item">
+    <!-- <div>Coins Left: <span id="coins-left"></span></div> -->
     <div>Misses: <span id="misses">0</div>
     <div>Hits: <span id="hits">0</span></div>
   </div>
