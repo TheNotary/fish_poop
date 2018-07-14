@@ -50,44 +50,48 @@ function sprite_right() {
 
 
 function spawnGhost() {
+  var animationObjects = game.getCurrentScreen().animationObjects;
   window.myGhost = new Unit("ghost", 0, "assets/enemies.png", enemies_data,
     [0, 85], "floating", { "sizeMultiplier": 1.5});
   asMovable.call(myGhost);
   myGhost.loadGraphics();
-  window.animationObjects.push(myGhost);
+  animationObjects.push(myGhost);
   window.myGhost.setStance("moving");
 }
 
 
 function spawnMario() {
-    window.myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 95], "standing", { "sizeMultiplier": 1.5});
-    asJumpable.call(window.myMario);
-    myMario.loadGraphics();
-    window.animationObjects.push(myMario);
+  var animationObjects = game.getCurrentScreen().animationObjects;
+  window.myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 95], "standing", { "sizeMultiplier": 1.5});
+  asJumpable.call(window.myMario);
+  myMario.loadGraphics();
+  animationObjects.push(myMario);
 }
 
 // pos = [0, 50]
 function spawnCoin(pos) {
+  var animationObjects = game.getCurrentScreen().animationObjects;
   window.myCoin = new Unit("coin", 0, "assets/coins.png", coins_data, pos, "exploding", { "sizeMultiplier": 1});
   asExplodable.call(window.myCoin);
   myCoin.loadGraphics();
 
   // setDebugTarget(myCoin);
 
-  window.animationObjects.push(myCoin);
+  animationObjects.push(myCoin);
 }
 
 function spawnCoinBox(nCoins) {
-    window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 18], "lootable", { "sizeMultiplier": 1 });
-    asLootable.call(window.myCoinBox);
+  var animationObjects = game.getCurrentScreen().animationObjects;
+  window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 18], "lootable", { "sizeMultiplier": 1 });
+  asLootable.call(window.myCoinBox);
 
-    myCoinBox.fx_loot['treasure'] = [];
-    for (var i = 0; i < nCoins; i++) {
-      myCoinBox.fx_loot['treasure'].push("coin");
-    }
+  myCoinBox.fx_loot['treasure'] = [];
+  for (var i = 0; i < nCoins; i++) {
+    myCoinBox.fx_loot['treasure'].push("coin");
+  }
 
-    myCoinBox.loadGraphics();
-    window.animationObjects.push(myCoinBox);
+  myCoinBox.loadGraphics();
+  animationObjects.push(myCoinBox);
 }
 
 
@@ -114,7 +118,7 @@ function useArrowKeysToMoveCanvasSprite() {
     document.onkeydown = function(evt) {
         myProc.call(this, evt); // do the thing that onkeydown is meant to do in production mode too...
 
-        if (game.currentScreen == "battle_screen") {
+        if (game.currentScreen == "coin_ghost_challenge_screen") {
             var index_element = document.getElementById('debug-int');
             var spriteIndex = parseInt(index_element.innerHTML);
 

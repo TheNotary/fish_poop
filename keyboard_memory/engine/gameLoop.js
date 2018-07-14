@@ -84,23 +84,11 @@ var asGameLoop = function() {
     }
 
     function render() {
-        switch (game.currentScreen) {
-            case "title_screen": // never use render loop for title screen... unless I make it more interesting...
-                break;
-            case "battle_screen":
-                // game.battleScreen.render();
-                window.draw();
-                break;
-            case "town_screen":
-                break;
-            case "world_screen":
-                break;
-        }
+      game.getCurrentScreen().render();
     }
 
     function update(secondsPassed) {
-        // eval(game.currentScreen + "_update()"); // call the update for the specific screen we're running
-        battle_screen_update();
+        game.getCurrentScreen().update();
         game.tickCount++;
     }
 

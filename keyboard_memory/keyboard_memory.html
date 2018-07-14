@@ -1,4 +1,8 @@
+<!DOCTYPE html>
+<html>
 <head>
+  <meta charset="UTF-8">
+  <title>title</title>
 
 <style>
 
@@ -183,6 +187,19 @@ function toggle_about_text() {
     <button onclick="interaction()">interaction</button>
   </div>
 
+
+  <audio id="audTitleScreen" class="music">
+    <!-- <source src="/audio/opener/Final_Fantasy_4_Lacrima_OC_ReMix.ogg" type="audio/ogg"></source> -->
+    <!-- <source src="/audio/opener/Final_Fantasy_4_Lacrima_OC_ReMix.mp3" type="audio/mp3"></source> -->
+    Your browser isn't intended for super fun audio time.
+  </audio>
+
+  <audio id="audBattle" class="music">
+    <!-- <source src="/audio/opener/Final_Fantasy_4_Lacrima_OC_ReMix.ogg" type="audio/ogg"></source> -->
+    <!-- <source src="/audio/opener/Final_Fantasy_4_Lacrima_OC_ReMix.mp3" type="audio/mp3"></source> -->
+    Your browser isn't intended for super fun audio time.
+  </audio>
+
 </div>
 </body>
 
@@ -200,11 +217,15 @@ function toggle_about_text() {
 <script src="assets/coins.json"></script>
 <script src="assets/coinbox.json"></script>
 
-<script src="gameLoop.js"></script>
-<script src="userInput.js"></script>
+<script src="engine/screen.js"></script>
+<script src="engine/gameLoop.js"></script>
+<script src="engine/userInput.js"></script>
 <script src="unit.js"></script>
 <script src="debugging.js"></script>
 
 <script src="keyboardMemory.js"></script>
+<script src="screens/coinGhostChallengeScreen/coinGhostChallengeScreen.js"></script>
 
 <script src="animator.js"></script>
+
+</html>

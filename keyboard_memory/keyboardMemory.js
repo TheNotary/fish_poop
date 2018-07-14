@@ -3,17 +3,24 @@
 //
 
 window.KeyboardMemory = function(debugMode, configs) {
+  var that = this;
   this.debugMode = debugMode;
-  this.currentScreen = "battle_screen";
-  this.screens = [];
+  this.currentScreen = "coin_ghost_challenge_screen";
+  this.getCurrentScreen = function() { return that.screens[that.currentScreen]}
 
+  this.screens = {
+    "coin_ghost_challenge_screen": new CoinGhostChallengeScreen('canvas', 'audBattle', 'stats')
+  };
   // this.titleScreen = new TitleScreen('title_screen', 'audTitleScreen',
   //     null, '/images/ui/title_screen.png');
   //
-  // this.battleScreen = new BattleScreen('battle_screen', 'audBattle', 'battle_menu');
-  //
-  // this.graphics = new this.Graphics();
-  // this.sound = new this.Sound();
+
+
+  if (this.Graphics != undefined)
+    this.graphics = new this.Graphics();
+
+  if (this.Sound != undefined)
+    this.sound = new this.Sound();
 
 
   // Calling this method will initiate the game
@@ -29,7 +36,7 @@ window.KeyboardMemory = function(debugMode, configs) {
   };
 
   this.resetChallenge = function(nCoins) {
-    window.animationObjects = [];
+    that.getCurrentScreen().animationObjects = [];
 
     spawnMario();
     spawnCoinBox(nCoins);

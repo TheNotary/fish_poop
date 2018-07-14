@@ -13,8 +13,9 @@ var asLootable = function() {
         that.setStance("empty");
       }
 
-      for (var i = 0; i < window.animationObjects.length; i++) {
-        var obj = window.animationObjects[i];
+      var animationObjects = game.getCurrentScreen().animationObjects;
+      for (var i = 0; i < animationObjects.length; i++) {
+        var obj = animationObjects[i];
         if (obj.type == "mario" &&
             (obj.y + obj.animation_y) <= (that.y + 50) ) {
           // alert('i am struck' + (obj.y + obj.animation_y) );
