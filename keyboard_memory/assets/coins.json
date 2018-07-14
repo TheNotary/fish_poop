@@ -3,7 +3,15 @@ var coins_data = {
         "exploding": {
             "spriteIndecies": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
             "animationCycleSlowness": 2,
-            "loop": false
+            "loop": false,
+            "audoKeys": [
+              {
+                  "name": "coin",
+                  "path": "assets/audio/unit/smb_coin.wav",
+                  "volume": 0.05,
+                  "playOnFrameIndex": 0
+              }
+            ]
         },
         "still": {
             "spriteIndecies": [4]

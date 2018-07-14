@@ -26,9 +26,9 @@ function Unit(type, id, spriteSheet, spriteData, position, stance, config) {
     this.stances = spriteData["animations"];
 
     if (stance == undefined)
-      this.stance = Object.keys(stances)[0]
+      this.setStance(Object.keys(stances)[0]); // this.stance = Object.keys(stances)[0]
     else
-      this.stance = stance
+      this.setStance(stance);
 
     this.spriteIndex_i = 0;
 }
@@ -94,10 +94,20 @@ Unit.prototype.update = function() {
 Unit.prototype.setStance = function(stance) {
   this.stance = stance;
 
+  this.playAssociatedAudio(stance);
+
   var properFrames = this.getProperFrames();
   this.spriteIndex_i = 0;
 }
 
+Unit.prototype.playAssociatedAudio = function(stance) {
+  var stanceHash = this.getStanceHash()
+
+  if (stanceHash["audoKeys"] != undefined) {
+    var soundName = stanceHash["audoKeys"][0]["name"]
+    game.sound[soundName].play();
+  }
+}
 
 
 Unit.prototype.draw = function(ctx) {

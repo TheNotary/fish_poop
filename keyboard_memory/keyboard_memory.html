@@ -114,6 +114,7 @@ function register_a_hit(currentLetter, keyCode) {
   tag.innerHTML = newCount
   if (newCount >= nCoins) {
     end_game()
+    game.sound['victory'].play();
   }
   window.myMario.setStance("jumping");
 }
@@ -203,7 +204,12 @@ function toggle_about_text() {
 </div>
 </body>
 
-<!--  Load the piffy game file -->
+<!--  Load required 3rd party libraries -->
+
+<script src="vendor/howler.min.js"></script>
+
+<!--  Load the piffy game logic file -->
+
 
 <!--  Load the more serious 2d game engine files -->
 
@@ -224,6 +230,7 @@ function toggle_about_text() {
 <script src="debugging.js"></script>
 
 <script src="keyboardMemory.js"></script>
+<script src="assetLoading.js"></script>
 <script src="screens/coinGhostChallengeScreen/coinGhostChallengeScreen.js"></script>
 
 <script src="animator.js"></script>

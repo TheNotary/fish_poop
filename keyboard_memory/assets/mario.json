@@ -8,12 +8,28 @@ var mario_data = {
         "jumping": {
             "spriteIndecies": [0, 1, 2, 3, 3],
             "animationCycleSlowness": 5,
-            "loop": true
+            "followedBy": "standing",
+            "audoKeys": [
+              {
+                  "name": "smallJump",
+                  "path": "assets/audio/unit/smb_jump-small.wav",
+                  "volume": 0.05,
+                  "playOnFrameIndex": 0
+              }
+            ]
         },
         "dieing": {
             "spriteIndecies": [5, 6, 7, 7, 7,7, 8, 7,7,7,7, 8, 7,7,7,7, 8, 7,7,7,7 ],
             "animationCycleSlowness": 4,
-            "loop": false
+            "loop": false,
+            "audoKeys": [
+              {
+                  "name": "marioDeath",
+                  "path": "assets/audio/unit/smb_mariodie.wav",
+                  "volume": 0.10,
+                  "playOnFrameIndex": 0
+              }
+            ]
         }
     },
    "frames":[
