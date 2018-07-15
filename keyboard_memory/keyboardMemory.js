@@ -2,19 +2,39 @@
 //
 //
 
-window.KeyboardMemory = function(debugMode, configs) {
+window.KeyboardMemory = function(debugMode) {
   var that = this;
   this.debugMode = debugMode;
-  this.currentScreen = "coin_ghost_challenge_screen";
-  this.getCurrentScreen = function() { return that.screens[that.currentScreen] }
+  // this.currentScreen = "coin_ghost_challenge_screen";
+  this.getCurrentScreen = function() { return that.screens[that.currentScreen] };
 
-  this.screens = {
-    "coin_ghost_challenge_screen": new CoinGhostChallengeScreen('canvas', 'audBattle', 'stats')
+  this.configs = {
+    "debugMode": false,
+    "screens":
+      [
+        // {
+        //   "name": "title_screen",
+        //   "constructor": null
+        // },
+        {
+          "name": "coin_ghost_challenge_screen",
+          "default": true,
+          "constructor": CoinGhostChallengeScreen,
+          "canvasId": "canvas",
+          "canvasWidth": 1000,
+          "canvasHeight": 700,
+          "menuId": 'stats',
+          "bgMusicId": 'audBattle'
+        }
+      ]
   };
+
+
   // this.titleScreen = new TitleScreen('title_screen', 'audTitleScreen',
   //     null, '/images/ui/title_screen.png');
   //
 
+  this.screens = {};
 
   if (this.Graphics != undefined)
     this.graphics = new this.Graphics();
@@ -26,6 +46,8 @@ window.KeyboardMemory = function(debugMode, configs) {
   // Calling this method will initiate the game
   this.start = function() {
       window.addEventHandlersToDom();
+
+      that.initScreens();
 
       // queue up the game loop to itereate whenever the browser can
       window.onEachFrame(game.main);
@@ -42,6 +64,25 @@ window.KeyboardMemory = function(debugMode, configs) {
     spawnCoinBox(nCoins);
     spawnGhost();
   }
+
+  this.initScreens = function() {
+    var configs = this.configs;
+    for (var i = 0; i < configs['screens'].length; i++) {
+      var screenData = configs['screens'][i];
+      var sName = screenData["name"];
+      var sConstructor = screenData["constructor"];
+      this.screens[sName] = new sConstructor(screenData);
+      // this.screens[sName].init();
+
+      if (screenData['default']) {
+        this.currentScreen = sName;
+      }
+    }
+
+    this.getCurrentScreen().context.scale(2,2);
+    this.getCurrentScreen().context.save();
+  }
+
 };
 
 

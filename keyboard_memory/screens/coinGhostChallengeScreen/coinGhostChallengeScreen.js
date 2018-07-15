@@ -1,5 +1,5 @@
-function CoinGhostChallengeScreen(canvasId, bgMusicPaths, menuId) {
-  Screen.call(this, canvasId, bgMusicPaths, menuId);
+function CoinGhostChallengeScreen(screenConfig) {
+  Screen.call(this, screenConfig);
   this.background;
   this.animationObjects = [];
   this.introFinished = false;
@@ -62,16 +62,17 @@ CoinGhostChallengeScreen.prototype.update = function() {
   }
 }
 
-
 CoinGhostChallengeScreen.prototype.render = function() {
   var animationObjects = this.animationObjects;
   // re-draw background
   // ctx.clearRect(0, 0, 500, 150); // clear entire canvas...
+  var canvasWidth = this.screenConfig['canvasWidth'] / 2;
+  var canvasHeight = this.screenConfig['canvasHeight'] / 2;
   this.context.drawImage(background,
     20, 40,     // src position
-    500, 150,   // src bounds (width/ height)
+    canvasWidth, canvasHeight,   // src bounds (width/ height)
     0, 0,       // dst position
-    1 * 500, 1 * 150);  // dst bounds
+    1 * canvasWidth, 1 * canvasHeight);  // dst bounds
 
   // Draw all objects
   for (var i = 0; i < animationObjects.length; i++) {

@@ -46,21 +46,21 @@ body {
 
 #about-text {
   display: none;
-  max-width: 500px;
+  min-width: 500px;
 }
 
 #game {
   position: relative;
   display: block;
-  max-width: 500px;
+  max-width: 1000px;
 }
 
 #challenge {
   color: white;
-  font-size: 24px;
+  font-size: 28px;
   position: absolute;
-  right: 45px;
-  top: 33px;
+  right: 110px;
+  top: 88px;
   margin-left: auto;
   margin-right: auto;
   width: 20px;
@@ -203,13 +203,16 @@ function toggle_about_text() {
     <button onclick="start_game()">Start</button>
     <button onclick="toggle_about_text()">About</button>
     <div id="about-text">
-      Press the start button and a letter will appear on the screen.  Type that letter as fast as you can to make the letter dissapear.  The faster you are, the better your score!  Ghosts will chase mario for as long as a letter is on the screen.
+      Press the start button and a letter will appear on the screen.
+      Type that letter as fast as you can to make the letter dissapear.
+      The faster you are, the better your score!
+      The ghost will close in on mario for as long as a letter is on the screen.
     </div>
   </div>
 
   <div id="game" class="Aligner-item">
     <h1 id="challenge">&nbsp;</h1>
-    <canvas id="canvas" width="500" height="150"></canvas>
+    <canvas id="canvas" width="1000" height="500"></canvas>
   </div>
 
   <div id="stats" class="Aligner-item">

@@ -11,14 +11,13 @@ window.background = new Image();
 
 debugMode = false;
 
-window.game = new KeyboardMemory(
-  debugMode,
-  { "screens": [ "title_screen", "coin_ghost_challenge_screen"] }
-);
+window.game = new KeyboardMemory(debugMode);
 
 init();
 
 game.start();
+
+
 
 
 // spawnCoin([0, 50]);

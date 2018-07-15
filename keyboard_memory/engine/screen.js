@@ -3,16 +3,23 @@
 // A coinGhostChallengeScreen which shows the party lined up against
 // Eventually a worldScreen will show up I hope...
 // and possibly a real-time fighting adventureScreen (Zelda link to past style)
-function Screen(canvasId, audioId, menuId) {
-    if (canvasId === undefined) {
+function Screen(screenConfig) {
+    if (screenConfig === undefined) {
         return;
     }
-    this.context = document.getElementById(canvasId).getContext('2d');
-    this.audio = document.getElementById(audioId);
-    this.audio.volume = 0.05;
+    this.screenConfig = screenConfig;
 
-    this.canvasId = canvasId;
-    this.menuId = menuId;
+    this.bgMusicId = screenConfig['bgMusicId']
+    this.menuId = screenConfig['menuId'];
+    this.canvasId = screenConfig['canvasId'];
+
+    this.cavasElement = document.getElementById(this.canvasId)
+    this.context = this.cavasElement.getContext('2d');
+    this.cavasElement.width = screenConfig['canvasWidth']
+    this.cavasElement.height = screenConfig['canvasHeight']
+
+    this.audio = document.getElementById(this.bgMusicId);
+    this.audio.volume = 0.05;
 };
 
 Screen.handleKeys = function(evt) {};
