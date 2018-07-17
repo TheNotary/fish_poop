@@ -6,6 +6,11 @@
 
 <style>
 
+@font-face {
+    font-family: "My Custom Font";
+    src: url(assets/fonts/SuperMario256.ttf) format("truetype");
+}
+
 .Aligner {
   display: flex;
   flex-direction: column;
@@ -47,6 +52,21 @@ body {
 #about-text {
   display: none;
   min-width: 500px;
+  font-family: "My Custom Font", Verdana, Tahoma;
+}
+
+#overlay-message {
+  position: absolute;
+  font-family: "My Custom Font", Verdana, Tahoma;
+  font-size: 30px;
+  color: white;
+  width: 180px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+  text-align: center;
 }
 
 #game {
@@ -107,14 +127,19 @@ function keyboard_func(e) {
     }
   }
 
-  if (gameStatus == 'stopped' && keyCode == 32) {
-      start_game();
+  if (keyCode == 32) {
+    e.preventDefault(); // don't let space scroll the screen down
+    if (gameStatus == 'stopped') {
+      start_game()
+    }
   }
 }
 
 
 function start_game() {
   gameStatus = 'started'
+  handleOverlayGameStart();
+
   clear_stats(nCoins)
   reset_game()
   window.game.resetChallenge(nCoins);
@@ -148,7 +173,7 @@ function register_a_hit(currentLetter, keyCode) {
   var newCount =  parseInt(tag.innerHTML) + 1
   tag.innerHTML = newCount
   if (newCount >= nCoins) {
-    end_game()
+    end_game("victory")
     game.sound['victory'].play();
     window.myGhost.destroyMe = true;
   }
@@ -162,14 +187,34 @@ function pick_random_letter() {
   return available_letters[rand]
 }
 
-function end_game() {
+function end_game(outcome) {
   reset_game()
   gameStatus = 'stopped'
+  handleOverlayGameEnd(outcome)
   clear_challenge()
 }
 
 function reset_game() {
   clear_challenge()
+}
+
+function handleOverlayGameEnd(outcome) {
+  var overlay = document.getElementById('overlay-message')
+  var msg = "Great Work!"
+  if (outcome != "victory")
+    msg = "Game Over"
+
+  overlay.innerHTML = msg
+  setTimeout(function() {
+    overlay.innerHTML = "Press Space"
+  }, 5000)
+  overlay.style.display = "block"
+}
+
+function handleOverlayGameStart() {
+  var overlay = document.getElementById('overlay-message')
+  overlay.style.display = "none"
+  overlay.innerHTML = ""
 }
 
 function clear_stats(nCoins) {
@@ -211,6 +256,7 @@ function toggle_about_text() {
   </div>
 
   <div id="game" class="Aligner-item">
+    <div id="overlay-message">Press Space</div>
     <h1 id="challenge">&nbsp;</h1>
     <canvas id="canvas" width="1000" height="500"></canvas>
   </div>
