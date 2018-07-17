@@ -64,8 +64,8 @@ body {
   height: 100px;
   top: 50%;
   left: 50%;
-  margin-left: -50px;
-  margin-top: -50px;
+  margin-left: -60px;
+  margin-top: -60px;
   text-align: center;
 }
 
@@ -89,9 +89,13 @@ body {
 </style>
 
 <script>
+// challenge sets
+var home_row = [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';' ]
+var home_row_adv = [ 'g', 'h' ]
+
 // Variables
 var nCoins = 10;
-var available_letters = [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';' ]
+var available_letters = home_row.concat(home_row_adv);
 var currentLetter
 var challengeDelay = 20
 
@@ -150,7 +154,7 @@ function start_game() {
 function challenge_player() {
   var challengeTag = document.getElementById('challenge')
 
-  currentLetter = pick_random_letter()
+  currentLetter = pick_random_letter_smart()
   challengeTag.innerHTML = currentLetter
 }
 
@@ -180,11 +184,23 @@ function register_a_hit(currentLetter, keyCode) {
   window.myMario.setStance("jumping");
 }
 
+// This method picks an item from the available_letters array at random, on the fly
 function pick_random_letter() {
   var max = available_letters.length - 1
   var min = 0
   var rand = Math.floor(Math.random()*(max-min+1)+min);
   return available_letters[rand]
+}
+
+// This method uses a pre-caluclated global array to source the next challenge
+function pick_random_letter_smart() {
+  if (window.precalculated_challenge_letters == undefined) {
+    window.precalculated_challenge_letters = shuffle(available_letters)
+    window.precalculated_challenge_letters = window.precalculated_challenge_letters.concat( shuffle(available_letters) )
+    window.precalculated_challenge_letters = window.precalculated_challenge_letters.concat( shuffle(available_letters) )
+  }
+  debugger;
+  return window.precalculated_challenge_letters.splice(0,1)
 }
 
 function end_game(outcome) {
@@ -233,6 +249,16 @@ function toggle_about_text() {
   else {
     about_text_tag.style.display = ""
   }
+}
+
+// https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
+function shuffle(array) {
+  var a = array.slice(0);
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
 </script>
