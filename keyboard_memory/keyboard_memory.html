@@ -194,7 +194,7 @@ function pick_random_letter() {
 
 // This method uses a pre-caluclated global array to source the next challenge
 function pick_random_letter_smart() {
-  if (window.precalculated_challenge_letters == undefined) {
+  if (window.precalculated_challenge_letters == undefined || window.precalculated_challenge_letters.length < nCoins) {
     window.precalculated_challenge_letters = shuffle(available_letters)
     window.precalculated_challenge_letters = window.precalculated_challenge_letters.concat( shuffle(available_letters) )
     window.precalculated_challenge_letters = window.precalculated_challenge_letters.concat( shuffle(available_letters) )
