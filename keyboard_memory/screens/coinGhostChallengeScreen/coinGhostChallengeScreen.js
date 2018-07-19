@@ -4,6 +4,8 @@ function CoinGhostChallengeScreen(screenConfig) {
   this.animationObjects = [];
   this.introFinished = false;
 
+  this.level = 0;
+
 
   this._heroQueue = []; // int IDs... first on last off
 
@@ -101,3 +103,8 @@ CoinGhostChallengeScreen.prototype.handleKeys = function(evt) {
       break;
   }
 };
+
+
+CoinGhostChallengeScreen.prototype.setLevel = function(val) {
+  this.level = val;
+}

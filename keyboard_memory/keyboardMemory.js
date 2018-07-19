@@ -83,6 +83,10 @@ window.KeyboardMemory = function(debugMode) {
     this.getCurrentScreen().context.save();
   }
 
+  this.setLevel = function(val) {
+    that.screens["coin_ghost_challenge_screen"]
+  };
+
 };
 
 

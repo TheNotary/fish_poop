@@ -94,13 +94,15 @@ var home_row = [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';' ]
 var home_row_adv = [ 'g', 'h' ]
 
 // Variables
-var nCoins = 10;
-var available_letters = home_row.concat(home_row_adv);
+var nCoins = 10
+var available_letters = home_row.concat(home_row_adv)
 var currentLetter
 var challengeDelay = 20
 
 var gameStatus = 'stopped'
 var global_v
+
+var currentLevel = 0
 
 
 var config = {
@@ -143,6 +145,7 @@ function keyboard_func(e) {
 function start_game() {
   gameStatus = 'started'
   handleOverlayGameStart();
+
 
   clear_stats(nCoins)
   reset_game()
@@ -261,6 +264,23 @@ function shuffle(array) {
   return a;
 }
 
+function setLevel(val) {
+  window.currentLevel = val
+  // set background image
+  window.game.setLevel(val)
+  var tag = document.getElementById("level")
+  tag.innerHTML = val
+
+}
+
+function changeLevelUp() {
+  setLevel(window.currentLevel + 1)
+}
+
+function changeLevelDown() {
+  setLevel(window.currentLevel - 1)
+}
+
 </script>
 
 </head>
@@ -271,8 +291,10 @@ function shuffle(array) {
 <div id="page-wrap" class="Aligner">
 
   <div id="console" class="Aligner-item">
-    <button onclick="start_game()">Start</button>
+    <button onclick="changeLevelUp()">Level Up</button>
+    <button onclick="changeLevelDown()">Level Down</button>
     <button onclick="toggle_about_text()">About</button>
+    <div id="level">0</div>
     <div id="about-text">
       Press the start button and a letter will appear on the screen.
       Type that letter as fast as you can to make the letter dissapear.
