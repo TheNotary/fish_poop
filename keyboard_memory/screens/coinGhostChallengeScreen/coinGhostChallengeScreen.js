@@ -1,10 +1,10 @@
 function CoinGhostChallengeScreen(screenConfig) {
   Screen.call(this, screenConfig);
-  this.background;
+  this.levels = screenConfig['levels']
   this.animationObjects = [];
   this.introFinished = false;
 
-  this.level = 0;
+  this.level = window.currentLevel;
 
 
   this._heroQueue = []; // int IDs... first on last off
@@ -70,11 +70,13 @@ CoinGhostChallengeScreen.prototype.render = function() {
   // ctx.clearRect(0, 0, 500, 150); // clear entire canvas...
   var canvasWidth = this.screenConfig['canvasWidth'] / 2;
   var canvasHeight = this.screenConfig['canvasHeight'] / 2;
+  var lvl = window.currentLevel;
+  var background = this.levels[lvl]['background'];
   this.context.drawImage(background,
     20, 40,     // src position
     canvasWidth, canvasHeight,   // src bounds (width/ height)
     0, 0,       // dst position
-    1 * canvasWidth, 1 * canvasHeight);  // dst bounds
+    canvasWidth, canvasHeight);  // dst bounds
 
   // Draw all objects
   for (var i = 0; i < animationObjects.length; i++) {

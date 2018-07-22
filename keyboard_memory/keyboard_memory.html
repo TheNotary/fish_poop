@@ -202,7 +202,6 @@ function pick_random_letter_smart() {
     window.precalculated_challenge_letters = window.precalculated_challenge_letters.concat( shuffle(available_letters) )
     window.precalculated_challenge_letters = window.precalculated_challenge_letters.concat( shuffle(available_letters) )
   }
-  debugger;
   return window.precalculated_challenge_letters.splice(0,1)
 }
 
@@ -294,7 +293,6 @@ function changeLevelDown() {
     <button onclick="changeLevelUp()">Level Up</button>
     <button onclick="changeLevelDown()">Level Down</button>
     <button onclick="toggle_about_text()">About</button>
-    <div id="level">0</div>
     <div id="about-text">
       Press the start button and a letter will appear on the screen.
       Type that letter as fast as you can to make the letter dissapear.
@@ -311,6 +309,7 @@ function changeLevelDown() {
 
   <div id="stats" class="Aligner-item">
     <!-- <div>Coins Left: <span id="coins-left"></span></div> -->
+    <div>Level: <span id="level">0</span></div>
     <div>Misses: <span id="misses">0</div>
     <div>Hits: <span id="hits">0</span></div>
   </div>

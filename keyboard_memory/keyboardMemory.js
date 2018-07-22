@@ -24,7 +24,8 @@ window.KeyboardMemory = function(debugMode) {
           "canvasWidth": 1000,
           "canvasHeight": 700,
           "menuId": 'stats',
-          "bgMusicId": 'audBattle'
+          "bgMusicId": 'audBattle',
+          "levels": window.levels
         }
       ]
   };
