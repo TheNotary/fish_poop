@@ -71,7 +71,8 @@ CoinGhostChallengeScreen.prototype.render = function() {
   var canvasWidth = this.screenConfig['canvasWidth'] / 2;
   var canvasHeight = this.screenConfig['canvasHeight'] / 2;
   var lvl = window.currentLevel;
-  var background = this.levels[lvl]['background'];
+  var background = this.levels[lvl]['bgImage'];
+
   this.context.drawImage(background,
     20, 40,     // src position
     canvasWidth, canvasHeight,   // src bounds (width/ height)
@@ -109,4 +110,17 @@ CoinGhostChallengeScreen.prototype.handleKeys = function(evt) {
 
 CoinGhostChallengeScreen.prototype.setLevel = function(val) {
   this.level = val;
+}
+
+CoinGhostChallengeScreen.prototype.init = function() {
+  var config = this.screenConfig;
+
+  for (var i = 0; i < this.levels.length; i++) {
+    var lvl = this.levels[i];
+
+    // load up the graphics for this level
+    lvl['bgImage'] = new Image();
+    lvl['bgImage'].src = lvl['background'];
+  }
+
 }

@@ -3,10 +3,19 @@
 //
 
 window.KeyboardMemory = function(debugMode) {
-  var that = this;
+  var that = this; // need to store this variable to help out animations which have their own 'this' value which confuses things
   this.debugMode = debugMode;
-  // this.currentScreen = "coin_ghost_challenge_screen";
-  this.getCurrentScreen = function() { return that.screens[that.currentScreen] };
+  this.getCurrentScreen = function() { return this.screens[this.currentScreen] };
+
+  var levels = [
+    {
+      "background": 'assets/backgrounds/fields.png',
+    },
+    {
+      "background": 'assets/backgrounds/sewers.png',
+    }
+  ];
+
 
   this.configs = {
     "debugMode": false,
@@ -25,7 +34,7 @@ window.KeyboardMemory = function(debugMode) {
           "canvasHeight": 700,
           "menuId": 'stats',
           "bgMusicId": 'audBattle',
-          "levels": window.levels
+          "levels": levels
         }
       ]
   };
@@ -48,7 +57,7 @@ window.KeyboardMemory = function(debugMode) {
   this.start = function() {
       window.addEventHandlersToDom();
 
-      that.initScreens();
+      this.initScreens();
 
       // queue up the game loop to itereate whenever the browser can
       window.onEachFrame(game.main);
@@ -59,7 +68,7 @@ window.KeyboardMemory = function(debugMode) {
   };
 
   this.resetChallenge = function(nCoins) {
-    that.getCurrentScreen().animationObjects = [];
+    this.getCurrentScreen().animationObjects = [];
 
     spawnMario();
     spawnCoinBox(nCoins);
@@ -73,7 +82,7 @@ window.KeyboardMemory = function(debugMode) {
       var sName = screenData["name"];
       var sConstructor = screenData["constructor"];
       this.screens[sName] = new sConstructor(screenData);
-      // this.screens[sName].init();
+      this.screens[sName].init();
 
       if (screenData['default']) {
         this.currentScreen = sName;
@@ -85,7 +94,7 @@ window.KeyboardMemory = function(debugMode) {
   }
 
   this.setLevel = function(val) {
-    that.screens["coin_ghost_challenge_screen"]
+    this.screens["coin_ghost_challenge_screen"]
   };
 
 };
