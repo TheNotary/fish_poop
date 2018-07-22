@@ -2,7 +2,7 @@
 var asLootable = function() {
   var that = this;
 
-  that.fx_loot = {
+  this.fx_loot = {
     "treasure": [ "coin", "coin" ],
     "a": 1
   };

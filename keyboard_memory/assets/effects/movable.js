@@ -10,7 +10,7 @@ var asMovable = function() {
   var that = this;
 
   // how far to move per update
-  that.fx_move = {
+  this.fx_move = {
     "x": 1,
     "y": 0
   };

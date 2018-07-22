@@ -8,7 +8,7 @@
 var asExplodable = function() {
   var that = this;
 
-  that.fx_exploding = {
+  this.fx_exploding = {
     "speed": 6
   }
 

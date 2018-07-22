@@ -8,7 +8,7 @@
 var asJumpable = function() {
   var that = this;
 
-  that.fx_jump = {
+  this.fx_jump = {
     "direction": "up",
     "jumpPower": 10
   };
