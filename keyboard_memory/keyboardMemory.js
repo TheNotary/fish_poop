@@ -95,7 +95,7 @@ window.KeyboardMemory = function(debugMode) {
   }
 
   this.setLevel = function(val) {
-    this.screens["coin_ghost_challenge_screen"].level = val;
+    this.screens["coin_ghost_challenge_screen"].setLevel(val);
   };
 
 };

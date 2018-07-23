@@ -226,7 +226,7 @@ function register_a_hit(currentLetter, keyCode) {
       window.game.sound['win'].play()
     else
       game.sound['victory'].play()
-    end_game("victory")
+    end_game("Great Work!")
     window.myGhost.destroyMe = true
   }
   window.myMario.setStance("jumping");
@@ -250,10 +250,11 @@ function pick_random_letter_smart() {
   return window.precalculated_challenge_letters.splice(0,1)
 }
 
-function end_game(outcome) {
+function end_game(msg) {
   reset_game()
   gameStatus = 'stopped'
-  handleOverlayGameEnd(outcome)
+
+  handleOverlayGameEnd(msg)
   clear_challenge()
 }
 
@@ -298,11 +299,8 @@ function set_available_letters() {
   }
 }
 
-function handleOverlayGameEnd(outcome) {
+function handleOverlayGameEnd(msg) {
   var overlay = document.getElementById('overlay-message')
-  var msg = "Great Work!"
-  if (outcome != "victory")
-    msg = "Game Over"
 
   overlay.innerHTML = msg
   setTimeout(function() {

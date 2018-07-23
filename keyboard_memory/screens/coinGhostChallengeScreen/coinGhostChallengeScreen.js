@@ -47,13 +47,13 @@ CoinGhostChallengeScreen.prototype.update = function() {
         obj.setStance("floating");
         // alert("I touched mario");
         window.myMario.setStance("dieing");
-        end_game();
+        end_game("Game Over");
       }
 
       // Handle if mario has gotten all the coins
       if (window.myCoinBox.fx_loot['treasure'].length <= 0) {
         obj.destroyMe = true;
-        end_game();
+        end_game("Great Work!");
       }
     }
 
@@ -109,8 +109,15 @@ CoinGhostChallengeScreen.prototype.handleKeys = function(evt) {
 };
 
 
-CoinGhostChallengeScreen.prototype.setLevel = function(val) {
-  this.level = val;
+CoinGhostChallengeScreen.prototype.setLevel = function(newLevel) {
+  this.level = newLevel;
+
+  // reset the animation objects
+  this.animationObjects = [];
+
+  // Signal to that piffy mini-game that it needs to reset it's things
+  if (typeof end_game === "function")
+    end_game("Press Space");
 }
 
 CoinGhostChallengeScreen.prototype.init = function() {
@@ -129,13 +136,19 @@ CoinGhostChallengeScreen.prototype.init = function() {
 CoinGhostChallengeScreen.prototype.advancePart = function() {
   this.part++;
   if (this.part > 3) {
-    this.level++;
-    this.part = 1;
-    if (this.level >= this.levels.length) {
-      alert("you beat all the levels I've had time to program so far!");
-      // reset everything...
-      this.level = 0;
-    }
-
+    this.advanceLevel();
   }
+}
+
+
+CoinGhostChallengeScreen.prototype.advanceLevel = function() {
+  var newLevel = this.level + 1;
+
+  this.part = 1;
+  if (newLevel >= this.levels.length) {
+    alert("you beat all the levels I've had time to program so far!");
+    newLevel = 0
+  }
+  this.setLevel(newLevel);
+  return newLevel;
 }
