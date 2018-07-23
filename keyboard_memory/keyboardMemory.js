@@ -68,7 +68,8 @@ window.KeyboardMemory = function(debugMode) {
   };
 
   this.resetChallenge = function(nCoins) {
-    this.getCurrentScreen().animationObjects = [];
+    var coinChallengeScreen = this.getCurrentScreen();
+    coinChallengeScreen.animationObjects = [];
 
     spawnMario();
     spawnCoinBox(nCoins);
@@ -94,7 +95,7 @@ window.KeyboardMemory = function(debugMode) {
   }
 
   this.setLevel = function(val) {
-    this.screens["coin_ghost_challenge_screen"]
+    this.screens["coin_ghost_challenge_screen"].level = val;
   };
 
 };

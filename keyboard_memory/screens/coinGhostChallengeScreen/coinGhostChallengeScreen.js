@@ -4,7 +4,8 @@ function CoinGhostChallengeScreen(screenConfig) {
   this.animationObjects = [];
   this.introFinished = false;
 
-  this.level = window.currentLevel;
+  this.level = 0;
+  this.part = 1;
 
 
   this._heroQueue = []; // int IDs... first on last off
@@ -70,7 +71,7 @@ CoinGhostChallengeScreen.prototype.render = function() {
   // ctx.clearRect(0, 0, 500, 150); // clear entire canvas...
   var canvasWidth = this.screenConfig['canvasWidth'] / 2;
   var canvasHeight = this.screenConfig['canvasHeight'] / 2;
-  var lvl = window.currentLevel;
+  var lvl = this.level;
   var background = this.levels[lvl]['bgImage'];
 
   this.context.drawImage(background,
@@ -122,5 +123,19 @@ CoinGhostChallengeScreen.prototype.init = function() {
     lvl['bgImage'] = new Image();
     lvl['bgImage'].src = lvl['background'];
   }
+}
 
+
+CoinGhostChallengeScreen.prototype.advancePart = function() {
+  this.part++;
+  if (this.part > 3) {
+    this.level++;
+    this.part = 1;
+    if (this.level >= this.levels.length) {
+      alert("you beat all the levels I've had time to program so far!");
+      // reset everything...
+      this.level = 0;
+    }
+
+  }
 }

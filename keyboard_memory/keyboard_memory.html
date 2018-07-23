@@ -93,9 +93,42 @@ body {
 var home_row = [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';' ]
 var home_row_adv = [ 'g', 'h' ]
 
+// Candidate format only, not really implemented....
+var challenge_levels = [
+  [  // Level 1
+    {
+      "n": 8,
+      "available_letters": [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';' ]
+    },
+    {
+      "n": 10,
+      "available_letters": [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';', 'g', 'h' ]
+    },
+    {
+      "n": 10,
+      "available_letters": [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';', 'g', 'h' ]
+    }
+  ],
+  [  // Level 2
+    {
+      "n": 6,
+      "available_letters": [ 'f', 't', 'k', 'i', 'l', '.' ]
+    },
+    {
+      "n": 8,
+      "available_letters": [ 't', 'i', 'd', 'f', 'j', 'k', 'l', '.'  ]
+    },
+    {
+      "n": 10,
+      "available_letters": [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';', 'g', 'h' ]
+    }
+  ]
+]
+
+
 // Variables
 var nCoins = 10
-var available_letters = home_row.concat(home_row_adv)
+var available_letters
 var currentLetter
 var challengeDelay = 20
 
@@ -109,7 +142,7 @@ var config = {
   "challengeElementId": "challenge",
   "missesElementId": "misses",
   "hitsElementId": "hits"
-};
+}
 
 function keyboard_func(e) {
   var keyCode = e.keyCode
@@ -117,8 +150,10 @@ function keyboard_func(e) {
   // fix safaris/ chrome macbook pro semicolon keyCode error
   if (keyCode == 186)
     keyCode = 59
+  if (keyCode == 190)
+    keyCode = 46
 
-  if (gameStatus == 'started' && keyCode >= 32 && keyCode <= 126) {
+  if ( gameStatus == 'started' && wasPossibleChallegeLetterPressed(keyCode) ) {
     var typedLetter = String.fromCharCode(keyCode).toLowerCase()
 
     if (typedLetter == currentLetter) {
@@ -141,15 +176,18 @@ function keyboard_func(e) {
   }
 }
 
+function wasPossibleChallegeLetterPressed(keyCode) {
+  return (keyCode >= 32 && keyCode <= 126)
+}
+
 
 function start_game() {
   gameStatus = 'started'
   handleOverlayGameStart();
 
-
   clear_stats(nCoins)
   reset_game()
-  window.game.resetChallenge(nCoins);
+  window.game.resetChallenge(nCoins)
 
   setTimeout(challenge_player, challengeDelay)
 }
@@ -180,9 +218,16 @@ function register_a_hit(currentLetter, keyCode) {
   var newCount =  parseInt(tag.innerHTML) + 1
   tag.innerHTML = newCount
   if (newCount >= nCoins) {
+    var screen = game.getCurrentScreen()
+    screen.advancePart()
+    document.getElementById('part').innerHTML = screen.part
+    document.getElementById('level').innerHTML = screen.level
+    if (screen.part != 1)
+      window.game.sound['win'].play()
+    else
+      game.sound['victory'].play()
     end_game("victory")
-    game.sound['victory'].play();
-    window.myGhost.destroyMe = true;
+    window.myGhost.destroyMe = true
   }
   window.myMario.setStance("jumping");
 }
@@ -191,7 +236,7 @@ function register_a_hit(currentLetter, keyCode) {
 function pick_random_letter() {
   var max = available_letters.length - 1
   var min = 0
-  var rand = Math.floor(Math.random()*(max-min+1)+min);
+  var rand = Math.floor(Math.random()*(max-min+1)+min)
   return available_letters[rand]
 }
 
@@ -214,6 +259,43 @@ function end_game(outcome) {
 
 function reset_game() {
   clear_challenge()
+  set_available_letters()
+}
+
+function set_available_letters() {
+  var screen = game.getCurrentScreen()
+  if (screen.level == 0) {
+    switch (screen.part) {
+      case 1:
+        nCoins = 8
+        window.available_letters = home_row
+        break;
+      case 2:
+        nCoins = 10
+        window.available_letters = home_row.concat(home_row_adv)
+        break;
+      case 3:
+        nCoins = 10
+        window.available_letters = home_row.concat(home_row_adv)
+        break;
+    }
+  }
+  else if (screen.level == 1) {
+    switch (screen.part) {
+      case 1:
+        nCoins = 6
+        window.available_letters = [ 'f', 't', 'k', 'i', 'l', '.' ] // 3/4 is a period somehow...
+        break;
+      case 2:
+        nCoins = 8
+        window.available_letters = [ 't', 'i', 'd', 'f', 'j', 'k', 'l', '.'  ]
+        break;
+      case 3:
+        nCoins = 10
+        window.available_letters = [ 'a', 's', 'd', 'f', 'j', 'k', 'l', 'i', '.', 't' ]
+        break;
+    }
+  }
 }
 
 function handleOverlayGameEnd(outcome) {
@@ -269,15 +351,18 @@ function setLevel(val) {
   window.game.setLevel(val)
   var tag = document.getElementById("level")
   tag.innerHTML = val
-
 }
 
 function changeLevelUp() {
-  setLevel(window.currentLevel + 1)
+  var lvl = parseInt(document.getElementById("level").innerHTML)
+  if (lvl >= game.getCurrentScreen().levels.length - 1) return
+  setLevel(lvl + 1)
 }
 
 function changeLevelDown() {
-  setLevel(window.currentLevel - 1)
+  var lvl = parseInt(document.getElementById("level").innerHTML)
+  if (lvl <= 0) return
+  setLevel(lvl - 1)
 }
 
 </script>

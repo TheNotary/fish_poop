@@ -31,6 +31,11 @@ window.KeyboardMemory.prototype.Sound = function() {
     volume: 0.10
   });
 
+  this['win'] = new Howl({
+    urls: ["assets/audio/misc/nsmb_power-up.wav"],
+    volume: 0.40
+  });
+
   this['booLaugh'] = new Howl({
     urls: ["assets/audio/unit/mk64_boo_laugh.wav"],
     volume: 0.40
