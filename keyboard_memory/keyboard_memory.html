@@ -195,7 +195,8 @@ function start_game() {
 function challenge_player() {
   var challengeTag = document.getElementById('challenge')
 
-  currentLetter = pick_random_letter_smart()
+  // currentLetter = pick_random_letter_smart()
+  currentLetter = window.precalculated_challenge_letters.splice(0,1)
   challengeTag.innerHTML = currentLetter
 }
 
@@ -217,7 +218,7 @@ function register_a_hit(currentLetter, keyCode) {
   var tag = document.getElementById("hits")
   var newCount =  parseInt(tag.innerHTML) + 1
   tag.innerHTML = newCount
-  if (newCount >= nCoins) {
+  if (newCount >= window.available_letters.length) {
     var screen = game.getCurrentScreen()
     screen.advancePart()
     document.getElementById('part').innerHTML = screen.part
@@ -232,26 +233,8 @@ function register_a_hit(currentLetter, keyCode) {
   window.myMario.setStance("jumping");
 }
 
-// This method picks an item from the available_letters array at random, on the fly
-function pick_random_letter() {
-  var max = available_letters.length - 1
-  var min = 0
-  var rand = Math.floor(Math.random()*(max-min+1)+min)
-  return available_letters[rand]
-}
-
-// This method uses a pre-caluclated global array to source the next challenge
-function pick_random_letter_smart() {
-  if (window.precalculated_challenge_letters == undefined || window.precalculated_challenge_letters.length < nCoins) {
-    window.precalculated_challenge_letters = shuffle(available_letters)
-    window.precalculated_challenge_letters = window.precalculated_challenge_letters.concat( shuffle(available_letters) )
-    window.precalculated_challenge_letters = window.precalculated_challenge_letters.concat( shuffle(available_letters) )
-  }
-  return window.precalculated_challenge_letters.splice(0,1)
-}
-
 function end_game(msg) {
-  reset_game()
+  // reset_game()
   gameStatus = 'stopped'
 
   handleOverlayGameEnd(msg)
@@ -264,39 +247,135 @@ function reset_game() {
 }
 
 function set_available_letters() {
+  var level_letters = [
+    ['g', 'h'],
+    ['i', 't', '.'],
+    ['o', 'r', 'n']
+  ]
+
   var screen = game.getCurrentScreen()
   if (screen.level == 0) {
     switch (screen.part) {
       case 1:
-        nCoins = 8
-        window.available_letters = home_row
+        ghostSpeed = 2
+
+        window.available_letters = padWithOldLetters({
+          "new_letters": [],
+          "n_new_letters": 0,
+          "nCoins": 8 })
         break;
       case 2:
-        nCoins = 10
-        window.available_letters = home_row.concat(home_row_adv)
+        ghostSpeed = 2
+
+        window.available_letters = padWithOldLetters({
+          "new_letters": level_letters[0],
+          "n_new_letters": 4,
+          "nCoins": 8 })
         break;
       case 3:
-        nCoins = 10
-        window.available_letters = home_row.concat(home_row_adv)
+        ghostSpeed = 2
+
+        window.available_letters = padWithOldLetters({
+          "new_letters": level_letters[0],
+          "n_new_letters": 4,
+          "nCoins": 10 })
         break;
     }
   }
+
+  // I'd like these to have the prior worked on letters,
+  // but for half of the challenges to be of the new set!
   else if (screen.level == 1) {
     switch (screen.part) {
       case 1:
-        nCoins = 6
-        window.available_letters = [ 'f', 't', 'k', 'i', 'l', '.' ] // 3/4 is a period somehow...
+        ghostSpeed = 2
+
+        window.available_letters = padWithOldLetters({
+          "new_letters": level_letters[1],
+          "n_new_letters": 3,
+          "nCoins": 6 })
         break;
       case 2:
-        nCoins = 8
-        window.available_letters = [ 't', 'i', 'd', 'f', 'j', 'k', 'l', '.'  ]
+        ghostSpeed = 2
+
+        window.available_letters = padWithOldLetters({
+          "new_letters": level_letters[1],
+          "n_new_letters": 5,
+          "nCoins": 8 })
         break;
       case 3:
-        nCoins = 10
-        window.available_letters = [ 'a', 's', 'd', 'f', 'j', 'k', 'l', 'i', '.', 't' ]
+        ghostSpeed = 2
+
+        window.available_letters = padWithOldLetters({
+          "new_letters": level_letters[1],
+          "n_new_letters": 7,
+          "nCoins": 10 })
         break;
     }
   }
+  else if (screen.level == 2) {
+    switch (screen.part) {
+      case 1:
+        ghostSpeed = 2
+
+        window.available_letters = padWithOldLetters({
+          "new_letters": level_letters[2],
+          "n_new_letters": 3,
+          "nCoins": 6 })
+        break;
+      case 2:
+        ghostSpeed = 2
+
+        window.available_letters = padWithOldLetters({
+          "new_letters": level_letters[2],
+          "n_new_letters": 5,
+          "nCoins": 8 })
+        break;
+      case 3:
+        ghostSpeed = 2
+
+        window.available_letters = padWithOldLetters({
+          "new_letters": level_letters[2],
+          "n_new_letters": 7,
+          "nCoins": 10 })
+        break;
+    }
+  }
+
+  window.precalculated_challenge_letters = window.available_letters.slice(0);
+}
+
+
+function padWithOldLetters(config) {
+  var new_letters = config['new_letters']
+  var nCoins = config['nCoins']
+  var n_new_letters = config['n_new_letters']
+
+  if (nCoins < n_new_letters)
+    alert("Failing, impossible condition:  nCoins < n_new_letters... can't fit all the new letters into the array")
+
+  var n_old_letters = nCoins - n_new_letters
+
+  var new_letter_stock = []
+  var old_letter_stock = []
+
+  // Ensure *ALL* of the new letters are available
+  new_letter_stock = new_letter_stock.concat(new_letters)
+
+  while (new_letter_stock.length < n_new_letters) {
+    new_letter_stock.push(selectRandomElement(new_letters));
+  }
+
+  while (old_letter_stock.length < n_old_letters) {
+    old_letter_stock.push(selectRandomElement(home_row));
+  }
+
+  return shuffle(new_letter_stock.concat(old_letter_stock))
+}
+
+
+function selectRandomElement(array) {
+  return shuffle(array)[0];
 }
 
 function handleOverlayGameEnd(msg) {

@@ -13,6 +13,9 @@ window.KeyboardMemory = function(debugMode) {
     },
     {
       "background": 'assets/backgrounds/sewers.png',
+    },
+    {
+      "background": 'assets/backgrounds/bean_valley.png',
     }
   ];
 
