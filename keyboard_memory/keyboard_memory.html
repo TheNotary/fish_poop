@@ -86,6 +86,14 @@ body {
   width: 20px;
 }
 
+#load-status {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 200px;
+  height: 200px;
+}
+
 </style>
 
 <script>
@@ -464,6 +472,16 @@ function changeLevelDown() {
   </div>
 
   <div id="game" class="Aligner-item">
+    <div id="load-status">
+      Download Status
+      <ul>
+        <li>Mario: <span id="mario-img">loading...</span> </li>
+        <li>Coinbox: <span id="coinbox-img">loading...</span> </li>
+        <li>Ghost: <span id="ghost-img">loading...</span> </li>
+        <li>Level 1 Background: <span id="ghost-img">loading...</span> </li>
+      </ul>
+
+    </div>
     <div id="overlay-message">Press Space</div>
     <h1 id="challenge">&nbsp;</h1>
     <canvas id="canvas" width="1000" height="500"></canvas>
