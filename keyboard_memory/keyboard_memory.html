@@ -11,6 +11,11 @@
     src: url(assets/fonts/SuperMario256.ttf) format("truetype");
 }
 
+li {
+  list-style: circle;
+  margin-bottom: 5px;
+}
+
 .Aligner {
   display: flex;
   flex-direction: column;
@@ -92,6 +97,14 @@ body {
   left: 20px;
   width: 200px;
   height: 200px;
+  background-color: #00fa;
+  padding: 20px;
+}
+
+#load-status h3 {
+  margin-left: auto;
+  margin-right: auto;
+  width: 140px;
 }
 
 </style>
@@ -473,15 +486,16 @@ function changeLevelDown() {
 
   <div id="game" class="Aligner-item">
     <div id="load-status">
-      Download Status
+      <h3>Loading Status</h3>
       <ul>
+        <li>Objects still Loading: <span id="loading-count"></span></li>
         <li>Mario: <span id="mario-img">loading...</span> </li>
         <li>Coinbox: <span id="coinbox-img">loading...</span> </li>
         <li>Ghost: <span id="ghost-img">loading...</span> </li>
-        <li>Level 1 Background: <span id="ghost-img">loading...</span> </li>
+        <li>Level 1 Background: <span id="fields-img">loading...</span> </li>
       </ul>
-
     </div>
+
     <div id="overlay-message">Press Space</div>
     <h1 id="challenge">&nbsp;</h1>
     <canvas id="canvas" width="1000" height="500"></canvas>
