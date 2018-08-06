@@ -74,6 +74,10 @@ body {
   text-align: center;
 }
 
+#loading-dots {
+  position: absolute;
+}
+
 #game {
   position: relative;
   display: block;
@@ -104,7 +108,7 @@ body {
 #load-status h3 {
   margin-left: auto;
   margin-right: auto;
-  width: 140px;
+  width: 90px;
 }
 
 </style>
@@ -486,7 +490,7 @@ function changeLevelDown() {
 
   <div id="game" class="Aligner-item">
     <div id="load-status">
-      <h3>Loading Status</h3>
+      <h3>Loading...</h3>
       <ul>
         <li>Objects still Loading: <span id="loading-count"></span></li>
         <li>Mario: <span id="mario-img">loading...</span> </li>
@@ -496,7 +500,7 @@ function changeLevelDown() {
       </ul>
     </div>
 
-    <div id="overlay-message">Press Space</div>
+    <div id="overlay-message">Loading<span id="loading-dots"></span></div>
     <h1 id="challenge">&nbsp;</h1>
     <canvas id="canvas" width="1000" height="500"></canvas>
   </div>

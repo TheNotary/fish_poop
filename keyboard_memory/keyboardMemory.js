@@ -144,10 +144,16 @@ window.KeyboardMemory = function(debugMode) {
   this.updateLoadingCountElement = function(count) {
     var countEl = document.getElementById("loading-count")
     countEl.innerHTML = count;
-    if (count == 0) // Hide the loading HTML element if we're done loading...
+    if (count == 0) { // Hide the loading HTML element if we're done loading...
       document.getElementById("load-status").style.display = "none";
-    else
+      this.stopLoadingAnimation();
+      var overlay = document.getElementById('overlay-message')
+      overlay.innerHTML = "Press Start";
+    }
+    else {
       document.getElementById("load-status").style.display = "block";
+      this.startLoadingAnimation();
+    }
   };
 
   this.specifyToHtmlThatAssetsLoaded = function(elId) {
@@ -157,6 +163,25 @@ window.KeyboardMemory = function(debugMode) {
     if (el != null)
       el.innerHTML = "Loaded";
   };
+
+  this.startLoadingAnimation = function() {
+    clearInterval(window.dotTimer);
+
+    window.dotTimer = setInterval( _ => {
+      var dots = document.getElementById("loading-dots");
+      dots.innerHTML += ".";
+      if (dots.innerHTML.length > 3)
+        dots.innerHTML = ".";
+    }, 500);
+
+  };
+
+  this.stopLoadingAnimation = function() {
+    clearInterval(window.dotTimer);
+    var dots = document.getElementById("loading-dots");
+    dots.innerHTML = "";
+  };
+
 
 };
 
