@@ -5,8 +5,6 @@
 
 # Keyboard Memory
 
-
-
 - Win/ Loss thresholds?
 
 

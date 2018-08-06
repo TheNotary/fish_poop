@@ -51,10 +51,8 @@ function sprite_right() {
 
 function spawnGhost() {
   var animationObjects = game.getCurrentScreen().animationObjects;
-  window.myGhost = new Unit("ghost", 0, "assets/enemies.png", enemies_data,
-    [0, 85], "floating", { "sizeMultiplier": 1.5});
+  window.myGhost = new Unit("ghost", 0, "assets/enemies.png", enemies_data, [0, 85], "floating", { "sizeMultiplier": 1.5});
   asMovable.call(myGhost);
-  myGhost.loadGraphics();
   animationObjects.push(myGhost);
   window.myGhost.setStance("moving");
 }
@@ -64,8 +62,7 @@ function spawnMario() {
   var animationObjects = game.getCurrentScreen().animationObjects;
   window.myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 95], "standing", { "sizeMultiplier": 1.5});
   asJumpable.call(window.myMario);
-  myMario.loadGraphics();
-  animationObjects.push(myMario);
+  animationObjects.push(window.myMario);
 }
 
 // pos = [0, 50]
@@ -73,15 +70,13 @@ function spawnCoin(pos) {
   var animationObjects = game.getCurrentScreen().animationObjects;
   window.myCoin = new Unit("coin", 0, "assets/coins.png", coins_data, pos, "exploding", { "sizeMultiplier": 1});
   asExplodable.call(window.myCoin);
-  myCoin.loadGraphics();
-
   // setDebugTarget(myCoin);
-
-  animationObjects.push(myCoin);
+  animationObjects.push(window.myCoin);
 }
 
 function spawnCoinBox(nCoins) {
   var animationObjects = game.getCurrentScreen().animationObjects;
+
   window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 18], "lootable", { "sizeMultiplier": 1 });
   asLootable.call(window.myCoinBox);
 
@@ -90,10 +85,8 @@ function spawnCoinBox(nCoins) {
     myCoinBox.fx_loot['treasure'].push("coin");
   }
 
-  myCoinBox.loadGraphics();
   animationObjects.push(myCoinBox);
 }
-
 
 
 function spawnBlah() {
@@ -108,9 +101,6 @@ function interaction() {
     // window.myCoinBox.setStance("struck");
     // window.myGhost.setStance("moving");
 }
-
-
-
 
 
 function useArrowKeysToMoveCanvasSprite() {
@@ -137,14 +127,13 @@ function useArrowKeysToMoveCanvasSprite() {
     }
 }
 
-useArrowKeysToMoveCanvasSprite();
 
+useArrowKeysToMoveCanvasSprite();
 
 
 function printBoundingBox(mob) {
     var x
 }
-
 
 
 var avgFps = 0;
@@ -206,7 +195,6 @@ function processTimeDebugInfo(screen) {
     //screen.context.fillText("Average Time Spent: " + avgTimeSpent, 10, 50);
     screen.context.fillText("Golden Score: " + goldenScore, 10, 50);
 }
-
 
 
 function debuggingFunctions() {

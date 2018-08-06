@@ -120,15 +120,14 @@ CoinGhostChallengeScreen.prototype.setLevel = function(newLevel) {
     end_game("Press Space");
 }
 
-CoinGhostChallengeScreen.prototype.init = function() {
+CoinGhostChallengeScreen.prototype.init = function(that) {
   var config = this.screenConfig;
 
   for (var i = 0; i < this.levels.length; i++) {
     var lvl = this.levels[i];
 
     // load up the graphics for this level
-    lvl['bgImage'] = new Image();
-    lvl['bgImage'].src = lvl['background'];
+    lvl['bgImage'] = that.graphics.loadImage(lvl['background'], that.signalHtmlLoadingBegun, that.signalHtmlGraphicLoadingComplete);
   }
 }
 

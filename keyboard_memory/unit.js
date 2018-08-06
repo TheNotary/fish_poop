@@ -34,10 +34,6 @@ function Unit(type, id, spriteSheet, spriteData, position, stance, config) {
 }
 
 
-Unit.prototype.loadGraphics = function() {
-  this.image.src = this.spriteSheet;
-}
-
 Unit.prototype.getStanceHash = function() {
     return (this.stances[this.stance]);
 }
@@ -116,8 +112,9 @@ Unit.prototype.draw = function(ctx) {
     console.log("this.spriteIndex_i: " + this.spriteIndex_i);
   }
   var frame = this.spriteSheetData[properFrames[this.spriteIndex_i]]["frame"];
+  var image = game.graphics.imageCache[this.spriteSheet];
 
-  ctx.drawImage(this.image,
+  ctx.drawImage(image,
       frame['x'], frame['y'],   // src position
       frame['w'], frame['h'],   // src bounds (width/ height)
       this.x + this.animation_x, this.y + this.animation_y,    // dst position
