@@ -16,6 +16,11 @@ li {
   margin-bottom: 5px;
 }
 
+em {
+  font-weight: bold;
+  font-style: normal;
+}
+
 .Aligner {
   display: flex;
   flex-direction: column;
@@ -24,7 +29,7 @@ li {
 }
 
 .Aligner-item {
-  max-width: 50%;
+  max-width: 60%;
 }
 
 .debug {
@@ -109,6 +114,42 @@ body {
   margin-left: auto;
   margin-right: auto;
   width: 90px;
+}
+
+#settings-menu {
+  display: none;
+  padding: 30px;
+  z-index: 9;
+  position: absolute;
+  left: 30%;
+  top: 100px;
+  background-color: #333c;
+  color: #fffc;
+  width: 450px;
+  height: 300px;
+}
+
+#settings-menu > div {
+  margin-bottom: 20px;
+}
+
+#settings-menu li {
+  list-style: none;
+}
+
+
+#game-modes {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+#save-settings-btn {
+  font-size: 15px;
+  right: 10px;
+  bottom: 10px;
+  position: absolute;
+
 }
 
 </style>
@@ -467,6 +508,17 @@ function changeLevelDown() {
   setLevel(lvl - 1)
 }
 
+function toggleSettings() {
+  var el = document.getElementById("settings-menu");
+
+  if (el.style.display == "") {
+    el.style.display = "block";
+  }
+  else {
+    el.style.display = "";
+  }
+}
+
 </script>
 
 </head>
@@ -477,6 +529,8 @@ function changeLevelDown() {
 <div id="page-wrap" class="Aligner">
 
   <div id="console" class="Aligner-item">
+
+    <button onclick="toggleSettings()">Settings</button>
     <button onclick="changeLevelUp()">Level Up</button>
     <button onclick="changeLevelDown()">Level Down</button>
     <button onclick="toggle_about_text()">About</button>
@@ -486,6 +540,7 @@ function changeLevelDown() {
       The faster you are, the better your score!
       The ghost will close in on mario for as long as a letter is on the screen.
     </div>
+
   </div>
 
   <div id="game" class="Aligner-item">
@@ -498,6 +553,34 @@ function changeLevelDown() {
         <li>Ghost: <span id="ghost-img">loading...</span> </li>
         <li>Level 1 Background: <span id="fields-img">loading...</span> </li>
       </ul>
+    </div>
+
+    <div id="settings-menu">
+      <div>
+        <em>Logged in User:</em> <span>TheNotary</span>
+      </div>
+
+      <div>
+        <em>Difficulty Setting:</em>
+        <div id="game-modes" style="margin-left: 20px">
+          <span><input id="mode1" name="mode" type="radio" checked="checked"></input> <label for="mode1">Starter Kid</label></span>
+          <span><input id="mode2" name="mode" type="radio"></input> <label for="mode2">Proper Kid</label></span>
+          <span><input id="mode3" name="mode" type="radio"></input> <label for="mode3">Hacker Elite</label></span>
+        </div>
+
+      </div>
+
+      <div>
+        <em>Enabled Levels:</em>
+        <ul>
+          <li><input id="lvl1" type="checkbox" checked="checked"></input> 1 - Home Row (including G + H)</li>
+          <li><input id="lvl2" type="checkbox" checked="checked"></input> 2 - I T .</li>
+          <li><input id="lvl3" type="checkbox" checked="checked"></input> 2 - O R N</li>
+        </ul>
+      </div>
+
+      <button id="save-settings-btn" onclick="toggleSettings()">Save</button>
+
     </div>
 
     <div id="overlay-message">Loading<span id="loading-dots"></span></div>
