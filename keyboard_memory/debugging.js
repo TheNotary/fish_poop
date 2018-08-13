@@ -55,6 +55,11 @@ function spawnGhost() {
   asMovable.call(myGhost);
   animationObjects.push(myGhost);
   window.myGhost.setStance("moving");
+
+  window.myGhost.fx_move = {
+    "x": get_current_difficulty()["ghost_speed"],
+    "y": 0
+  };
 }
 
 

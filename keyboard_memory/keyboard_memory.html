@@ -138,7 +138,7 @@ body {
 }
 
 
-#game-modes {
+#game-difficulty {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
@@ -158,6 +158,38 @@ body {
 // challenge sets
 var home_row = [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';' ]
 var home_row_adv = [ 'g', 'h' ]
+
+
+// DIFFICULTY SECTION
+var difficulty_settings = [
+  {
+    "name": "Starter Kid",
+    "ghost_speed": 1,
+    "penalty_lunge": 40
+  },
+  {
+    "name": "Proper Kid",
+    "ghost_speed": 1.5,
+    "penalty_lunge": 60
+  },
+  {
+    "name": "Hacker Elite",
+    "ghost_speed": 2.9,
+    "penalty_lunge": 80
+  }
+]
+
+var current_difficulty_i = 0
+function get_current_difficulty() {
+  return difficulty_settings[get_difficulty_i()]
+}
+
+function get_difficulty_i() {
+  var radios = document.getElementsByName('difficulty')
+  for (var i = 0, length = radios.length; i < length; i++)
+    if (radios[i].checked) return i;
+}
+
 
 // Candidate format only, not really implemented....
 var challenge_levels = [
@@ -246,7 +278,6 @@ function wasPossibleChallegeLetterPressed(keyCode) {
   return (keyCode >= 32 && keyCode <= 126 && keyCode != 91)
 }
 
-
 function start_game() {
   gameStatus = 'started'
   handleOverlayGameStart();
@@ -261,7 +292,6 @@ function start_game() {
 function challenge_player() {
   var challengeTag = document.getElementById('challenge')
 
-  // currentLetter = pick_random_letter_smart()
   currentLetter = window.precalculated_challenge_letters.splice(0,1)
   challengeTag.innerHTML = currentLetter
 }
@@ -277,7 +307,7 @@ function register_a_miss(currentLetter, keyCode) {
   tag.innerHTML = missesCount + 1
 
   game.sound.booLaugh.play();
-  window.myGhost.x += 50;
+  window.myGhost.x += get_current_difficulty()["penalty_lunge"];
 }
 
 function register_a_hit(currentLetter, keyCode) {
@@ -562,10 +592,10 @@ function toggleSettings() {
 
       <div>
         <em>Difficulty Setting:</em>
-        <div id="game-modes" style="margin-left: 20px">
-          <span><input id="mode1" name="mode" type="radio" checked="checked"></input> <label for="mode1">Starter Kid</label></span>
-          <span><input id="mode2" name="mode" type="radio"></input> <label for="mode2">Proper Kid</label></span>
-          <span><input id="mode3" name="mode" type="radio"></input> <label for="mode3">Hacker Elite</label></span>
+        <div id="game-difficulty" style="margin-left: 20px">
+          <span><input id="difficulty0" name="difficulty" type="radio" checked="checked"></input> <label for="difficulty0">Starter Kid</label></span>
+          <span><input id="difficulty1" name="difficulty" type="radio"></input> <label for="difficulty1">Proper Kid</label></span>
+          <span><input id="difficulty2" name="difficulty" type="radio"></input> <label for="difficulty2">Hacker Elite</label></span>
         </div>
 
       </div>
