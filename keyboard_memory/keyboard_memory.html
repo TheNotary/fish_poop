@@ -36,6 +36,12 @@ em {
   display: none;
 }
 
+.center {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 body {
   background-color: grey;
 }
@@ -79,6 +85,11 @@ body {
   text-align: center;
 }
 
+#dialog-menu {
+  display: none;
+  font-family: "My Custom Font", Verdana, Tahoma;
+}
+
 #loading-dots {
   position: absolute;
 }
@@ -118,15 +129,23 @@ body {
 
 #settings-menu {
   display: none;
+
+}
+
+.menu {
   padding: 30px;
   z-index: 9;
   position: absolute;
   left: 30%;
   top: 100px;
-  background-color: #333c;
-  color: #fffc;
-  width: 450px;
   height: 300px;
+  background-color: #333c;
+  width: 450px;
+  color: #fffc;
+}
+
+.confirm-btn {
+  margin-top: 40px;
 }
 
 #settings-menu > div {
@@ -149,7 +168,6 @@ body {
   right: 10px;
   bottom: 10px;
   position: absolute;
-
 }
 
 </style>
@@ -281,13 +299,20 @@ function wasPossibleChallegeLetterPressed(keyCode) {
 
 function handleEscape(keyCode) {
   if (keyCode == 27)
-    if ( document.getElementById("settings-menu").style.display == "block" )
-      toggleSettings()
+    clearMenus()
+}
+
+function clearMenus() {
+  if ( document.getElementById("settings-menu").style.display == "block")
+    toggleSettings()
+  if ( document.getElementById("dialog-menu").style.display == "block" )
+    toggleDialog()
 }
 
 function start_game() {
   gameStatus = 'started'
-  handleOverlayGameStart();
+  clearMenus()
+  handleOverlayGameStart()
 
   clear_stats(nCoins)
   reset_game()
@@ -505,13 +530,16 @@ function clear_stats(nCoins) {
 
 
 function toggle_about_text() {
-  var about_text_tag = document.getElementById("about-text")
-  global_v = about_text_tag
-  if (about_text_tag.style.display == "") {
-    about_text_tag.style.display = "block"
+  var txt = document.getElementById("about-text").innerHTML
+
+  var dm = document.getElementById("dialog-menu")
+  dm.innerHTML = txt
+
+  if (dm.style.display == "") {
+    dm.style.display = "block"
   }
   else {
-    about_text_tag.style.display = ""
+    dm.style.display = ""
   }
 }
 
@@ -556,6 +584,17 @@ function toggleSettings() {
   }
 }
 
+function toggleDialog() {
+  var el = document.getElementById("dialog-menu");
+
+  if (el.style.display == "") {
+    el.style.display = "block";
+  }
+  else {
+    el.style.display = "";
+  }
+}
+
 </script>
 
 </head>
@@ -572,10 +611,14 @@ function toggleSettings() {
     <button onclick="changeLevelDown()">Level Down</button>
     <button onclick="toggle_about_text()">About</button>
     <div id="about-text">
-      Press the start button and a letter will appear on the screen.
-      Type that letter as fast as you can to make the letter dissapear.
-      The faster you are, the better your score!
-      The ghost will close in on mario for as long as a letter is on the screen.
+      <div>
+        Press the start button (space) and a letter will appear on the screen.
+        Type that letter as fast as you can to make the letter dissapear.
+        The faster you are, the better your score!
+        The ghost will close in on mario for as long as a letter is on the screen.
+      </div>
+
+      <button onclick="toggle_about_text()" class="center confirm-btn">DONE</button>
     </div>
 
   </div>
@@ -592,7 +635,7 @@ function toggleSettings() {
       </ul>
     </div>
 
-    <div id="settings-menu">
+    <div id="settings-menu" class="menu">
       <div>
         <em>Logged in User:</em> <span>TheNotary</span>
       </div>
@@ -628,6 +671,8 @@ function toggleSettings() {
 
       <button id="save-settings-btn" onclick="toggleSettings()">Done</button>
     </div>
+
+    <div id="dialog-menu" class="menu">About</div>
 
     <div id="overlay-message">Loading<span id="loading-dots"></span></div>
     <h1 id="challenge">&nbsp;</h1>
