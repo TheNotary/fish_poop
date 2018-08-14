@@ -245,6 +245,7 @@ var config = {
 function keyboard_func(e) {
   var keyCode = e.keyCode
 
+  handleEscape(keyCode)
   // fix safaris/ chrome macbook pro semicolon keyCode error
   if (keyCode == 186)
     keyCode = 59
@@ -275,7 +276,13 @@ function keyboard_func(e) {
 }
 
 function wasPossibleChallegeLetterPressed(keyCode) {
-  return (keyCode >= 32 && keyCode <= 126 && keyCode != 91)
+  return (keyCode >= 32 && keyCode <= 126 && keyCode != 91);
+}
+
+function handleEscape(keyCode) {
+  if (keyCode == 27)
+    if ( document.getElementById("settings-menu").style.display == "block" )
+      toggleSettings()
 }
 
 function start_game() {
@@ -609,8 +616,17 @@ function toggleSettings() {
         </ul>
       </div>
 
-      <button id="save-settings-btn" onclick="toggleSettings()">Save</button>
+      <div>
+        <em>Game Style:</em>
+        <div id="game-style" style="margin-left: 20px; display: none;">
+          <span><input id="gameStyle0" name="gameStyle" type="radio" checked="checked"></input> <label for="gameStyle0">Progress</label></span>
+          <span><input id="gameStyle1" name="gameStyle" type="radio"></input> <label for="gameStyle1">Training</label></span>
+          <span><input id="gameStyle2" name="gameStyle" type="radio"></input> <label for="gameStyle2">Min Reaction Speed</label></span>
+          <span><input id="gameStyle3" name="gameStyle" type="radio"></input> <label for="gameStyle3">Versus</label></span>
+        </div>
+      </div>
 
+      <button id="save-settings-btn" onclick="toggleSettings()">Done</button>
     </div>
 
     <div id="overlay-message">Loading<span id="loading-dots"></span></div>
