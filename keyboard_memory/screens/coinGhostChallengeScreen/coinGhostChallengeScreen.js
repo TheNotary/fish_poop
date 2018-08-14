@@ -132,12 +132,12 @@ CoinGhostChallengeScreen.prototype.init = function(that) {
 }
 
 
-CoinGhostChallengeScreen.prototype.advancePart = function() {
-  this.part++;
-  if (this.part > 3) {
-    this.advanceLevel();
-  }
-}
+// CoinGhostChallengeScreen.prototype.advancePart = function() {
+//   this.part++;
+//   if (this.part > 3) {
+//     this.advanceLevel();
+//   }
+// }
 
 
 CoinGhostChallengeScreen.prototype.advanceLevel = function() {

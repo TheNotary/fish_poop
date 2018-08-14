@@ -7,7 +7,7 @@ window.KeyboardMemory = function(debugMode) {
   this.debugMode = debugMode;
   this.getCurrentScreen = function() { return this.screens[this.currentScreen] };
 
-  var levels = [
+  this.levels = [
     {
       "background": 'assets/backgrounds/fields.png',
     },
@@ -37,7 +37,7 @@ window.KeyboardMemory = function(debugMode) {
           "canvasHeight": 700,
           "menuId": 'stats',
           "bgMusicId": 'audBattle',
-          "levels": levels
+          "levels": this.levels
         }
       ]
   };

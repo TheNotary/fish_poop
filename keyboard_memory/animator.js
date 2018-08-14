@@ -1,3 +1,6 @@
+
+window.leveler = new Leveler();
+
 debugMode = false;
 
 window.game = new KeyboardMemory(debugMode);

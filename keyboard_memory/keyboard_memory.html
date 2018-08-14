@@ -88,6 +88,9 @@ body {
 #dialog-menu {
   display: none;
   font-family: "My Custom Font", Verdana, Tahoma;
+  font-size: 18px;
+  line-height: 1.3em;
+  letter-spacing: 1px;
 }
 
 #loading-dots {
@@ -343,14 +346,13 @@ function register_a_miss(currentLetter, keyCode) {
 }
 
 function register_a_hit(currentLetter, keyCode) {
-  var tag = document.getElementById("hits")
-  var newCount =  parseInt(tag.innerHTML) + 1
-  tag.innerHTML = newCount
-  if (newCount >= window.available_letters.length) {
+  var hits_register = document.getElementById("hits")
+  var newHitCount =  parseInt(hits_register.innerHTML) + 1
+  hits_register.innerHTML = newHitCount
+  if (newHitCount >= window.available_letters.length) {
     var screen = game.getCurrentScreen()
-    screen.advancePart()
-    document.getElementById('part').innerHTML = screen.part
-    document.getElementById('level').innerHTML = screen.level
+    leveler.advancePart()
+
     if (screen.part != 1)
       window.game.sound['win'].play()
     else
@@ -385,24 +387,18 @@ function set_available_letters() {
   if (screen.level == 0) {
     switch (screen.part) {
       case 1:
-        ghostSpeed = 2
-
         window.available_letters = padWithOldLetters({
           "new_letters": [],
           "n_new_letters": 0,
           "nCoins": 8 })
         break;
       case 2:
-        ghostSpeed = 2
-
         window.available_letters = padWithOldLetters({
           "new_letters": level_letters[0],
           "n_new_letters": 4,
           "nCoins": 8 })
         break;
       case 3:
-        ghostSpeed = 2
-
         window.available_letters = padWithOldLetters({
           "new_letters": level_letters[0],
           "n_new_letters": 4,
@@ -416,24 +412,18 @@ function set_available_letters() {
   else if (screen.level == 1) {
     switch (screen.part) {
       case 1:
-        ghostSpeed = 2
-
         window.available_letters = padWithOldLetters({
           "new_letters": level_letters[1],
           "n_new_letters": 3,
           "nCoins": 6 })
         break;
       case 2:
-        ghostSpeed = 2
-
         window.available_letters = padWithOldLetters({
           "new_letters": level_letters[1],
           "n_new_letters": 5,
           "nCoins": 8 })
         break;
       case 3:
-        ghostSpeed = 2
-
         window.available_letters = padWithOldLetters({
           "new_letters": level_letters[1],
           "n_new_letters": 7,
@@ -444,24 +434,18 @@ function set_available_letters() {
   else if (screen.level == 2) {
     switch (screen.part) {
       case 1:
-        ghostSpeed = 2
-
         window.available_letters = padWithOldLetters({
           "new_letters": level_letters[2],
           "n_new_letters": 3,
           "nCoins": 6 })
         break;
       case 2:
-        ghostSpeed = 2
-
         window.available_letters = padWithOldLetters({
           "new_letters": level_letters[2],
           "n_new_letters": 5,
           "nCoins": 8 })
         break;
       case 3:
-        ghostSpeed = 2
-
         window.available_letters = padWithOldLetters({
           "new_letters": level_letters[2],
           "n_new_letters": 7,
@@ -529,19 +513,6 @@ function clear_stats(nCoins) {
 }
 
 
-function toggle_about_text() {
-  var txt = document.getElementById("about-text").innerHTML
-
-  var dm = document.getElementById("dialog-menu")
-  dm.innerHTML = txt
-
-  if (dm.style.display == "") {
-    dm.style.display = "block"
-  }
-  else {
-    dm.style.display = ""
-  }
-}
 
 // https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
 function shuffle(array) {
@@ -553,30 +524,29 @@ function shuffle(array) {
   return a;
 }
 
-function setLevel(val) {
-  window.currentLevel = val
-  // set background image
-  window.game.setLevel(val)
-  var tag = document.getElementById("level")
-  tag.innerHTML = val
-}
 
-function changeLevelUp() {
-  var lvl = parseInt(document.getElementById("level").innerHTML)
-  if (lvl >= game.getCurrentScreen().levels.length - 1) return
-  setLevel(lvl + 1)
-}
 
-function changeLevelDown() {
-  var lvl = parseInt(document.getElementById("level").innerHTML)
-  if (lvl <= 0) return
-  setLevel(lvl - 1)
+
+function toggle_about_text() {
+  var txt = document.getElementById("about-text").innerHTML
+
+  var dm = document.getElementById("dialog-menu")
+  dm.innerHTML = txt
+
+  if (dm.style.display == "") {
+    clearMenus()
+    dm.style.display = "block"
+  }
+  else {
+    dm.style.display = ""
+  }
 }
 
 function toggleSettings() {
   var el = document.getElementById("settings-menu");
 
   if (el.style.display == "") {
+    clearMenus()
     el.style.display = "block";
   }
   else {
@@ -588,6 +558,7 @@ function toggleDialog() {
   var el = document.getElementById("dialog-menu");
 
   if (el.style.display == "") {
+    clearMenus()
     el.style.display = "block";
   }
   else {
@@ -607,8 +578,9 @@ function toggleDialog() {
   <div id="console" class="Aligner-item">
 
     <button onclick="toggleSettings()">Settings</button>
-    <button onclick="changeLevelUp()">Level Up</button>
-    <button onclick="changeLevelDown()">Level Down</button>
+    <button class="debug" onclick="leveler.changeLevelUp()">Level Up</button>
+    <button class="debug" onclick="leveler.changeLevelDown()">Level Down</button>
+    <button class="debug" onclick="leveler.advancePart()">Advance Part</button>
     <button onclick="toggle_about_text()">About</button>
     <div id="about-text">
       <div>
@@ -653,9 +625,9 @@ function toggleDialog() {
       <div>
         <em>Enabled Levels:</em>
         <ul>
-          <li><input id="lvl1" type="checkbox" checked="checked"></input> 1 - Home Row (including G + H)</li>
-          <li><input id="lvl2" type="checkbox" checked="checked"></input> 2 - I T .</li>
-          <li><input id="lvl3" type="checkbox" checked="checked"></input> 2 - O R N</li>
+          <li><input id="lvl0" type="checkbox" checked="checked"></input> 1 - Home Row (including G + H)</li>
+          <li><input id="lvl1" type="checkbox" checked="checked"></input> 2 - I T .</li>
+          <li><input id="lvl2" type="checkbox" checked="checked"></input> 2 - O R N</li>
         </ul>
       </div>
 
@@ -734,9 +706,11 @@ function toggleDialog() {
 <script src="unit.js"></script>
 <script src="debugging.js"></script>
 
+<script src="piffyLeveler.js"></script>
 <script src="keyboardMemory.js"></script>
 <script src="assetLoading.js"></script>
 <script src="screens/coinGhostChallengeScreen/coinGhostChallengeScreen.js"></script>
+
 
 <script src="animator.js"></script>
 
