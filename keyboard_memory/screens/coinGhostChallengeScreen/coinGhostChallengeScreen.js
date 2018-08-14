@@ -109,17 +109,6 @@ CoinGhostChallengeScreen.prototype.handleKeys = function(evt) {
 };
 
 
-CoinGhostChallengeScreen.prototype.setLevel = function(newLevel) {
-  this.level = newLevel;
-
-  // reset the animation objects
-  this.animationObjects = [];
-
-  // Signal to that piffy mini-game that it needs to reset it's things
-  if (typeof end_game === "function")
-    end_game("Press Space");
-}
-
 CoinGhostChallengeScreen.prototype.init = function(that) {
   var config = this.screenConfig;
 
@@ -132,22 +121,9 @@ CoinGhostChallengeScreen.prototype.init = function(that) {
 }
 
 
-// CoinGhostChallengeScreen.prototype.advancePart = function() {
-//   this.part++;
-//   if (this.part > 3) {
-//     this.advanceLevel();
-//   }
-// }
+CoinGhostChallengeScreen.prototype.setLevel = function(newLevel) {
+  this.level = newLevel;
 
-
-CoinGhostChallengeScreen.prototype.advanceLevel = function() {
-  var newLevel = this.level + 1;
-
-  this.part = 1;
-  if (newLevel >= this.levels.length) {
-    alert("you beat all the levels I've had time to program so far!");
-    newLevel = 0
-  }
-  this.setLevel(newLevel);
-  return newLevel;
+  // reset the animation objects
+  this.animationObjects = [];
 }

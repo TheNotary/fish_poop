@@ -10,6 +10,8 @@ function Leveler() {
     window.game.setLevel(val)
     var tag = document.getElementById("level")
     tag.innerHTML = val
+
+    end_game("Press Space");
   }
 
   this.changeLevelUp = function() {
@@ -26,9 +28,6 @@ function Leveler() {
 
   this.advancePart = function() {
     var part = parseInt( document.getElementById('part').innerHTML )
-    var level = parseInt( document.getElementById('level').innerHTML )
-
-    var screen = game.getCurrentScreen()
 
     part++;
     if (part > 3) {
@@ -37,7 +36,6 @@ function Leveler() {
     }
 
     document.getElementById('part').innerHTML = part
-    document.getElementById('level').innerHTML = screen.level
   }
 
   this.advanceLevel = function() {
@@ -56,13 +54,14 @@ function Leveler() {
     }
 
     screen.setLevel(newLevel);
+    document.getElementById('level').innerHTML = newLevel
     return newLevel;
   }
 
   function shouldWeSkipLevel(lvl) {
     if ( atLeastOneLevelIsSelected() &&
-    thisLevelIsDisabled(lvl))
-    return true
+         thisLevelIsDisabled(lvl) )
+      return true
     return false;
   }
 
@@ -70,7 +69,7 @@ function Leveler() {
     for (var i = 0; i < game.levels.length; i++) {
       var el = document.getElementById("lvl" + i)
       if (el.checked)
-      return true
+        return true
     }
 
     return false;
@@ -80,7 +79,7 @@ function Leveler() {
     var el = document.getElementById("lvl" + lvl)
 
     if (!el.checked)
-    return true
+      return true
     return false
   }
 
