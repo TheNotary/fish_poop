@@ -58,6 +58,16 @@ function Leveler() {
     return newLevel;
   }
 
+  // If current level is no-longer enabled, set current level to first available level
+  // and reset the game...
+  this.resetToFirstValidLevelIfLevelInvalidated = function() {
+    var level = parseInt( document.getElementById('level').innerHTML )
+
+    if ( shouldWeSkipLevel(window.currentLevel) ) {
+      this.setLevel( getFirstEnabledLevel() )
+    }
+  }
+
   function shouldWeSkipLevel(lvl) {
     if ( atLeastOneLevelIsSelected() &&
          thisLevelIsDisabled(lvl) )
