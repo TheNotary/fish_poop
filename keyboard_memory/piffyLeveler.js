@@ -43,9 +43,9 @@ function Leveler() {
     var newLevel = level + 1;
     var screen = game.getCurrentScreen()
 
-    if (newLevel >= game.levels.length) {
+    if (onFinalLevel(level)) {
       alert("you beat all the levels I've had time to program so far!");
-      newLevel = 0
+      newLevel = getFirstEnabledLevel()
     }
 
     while (shouldWeSkipLevel(newLevel)) {
@@ -81,6 +81,35 @@ function Leveler() {
     if (!el.checked)
       return true
     return false
+  }
+
+  function onFinalLevel(currentLvl) {
+    if (currentLvl >= getLastEnabledLevel() ) {
+      return true
+    }
+    return false
+  }
+
+  function getLastEnabledLevel() {
+    var max = 0;
+
+    for (var i = 0; i < game.levels.length; i++) {
+      var el = document.getElementById("lvl" + i)
+      if (el.checked)
+        max = i
+    }
+
+    return max
+  }
+
+  function getFirstEnabledLevel() {
+    for (var i = 0; i < game.levels.length; i++) {
+      var el = document.getElementById("lvl" + i)
+      if (el.checked)
+        return i
+    }
+
+    return -1
   }
 
 };
