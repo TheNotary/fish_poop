@@ -7,7 +7,7 @@ function setDebugTarget(spriteObj) {
   debugTarget.isBeingDebugged = true;
   var startingSpriteIndex = ( debugTarget.stances[ debugTarget["stance"] ]["spriteIndecies"].length - 1 );
   // startingSpriteIndex = 10; // force starting sprite to be something other than last
-  document.getElementById('debug-int').innerHTML = startingSpriteIndex;
+  // document.getElementById('debug-int').innerHTML = startingSpriteIndex;
   window.debugTarget.spriteIndex_i = startingSpriteIndex;
 }
 
@@ -79,16 +79,20 @@ function configureGhostSpeed() {
 
 function spawnMario() {
   var animationObjects = game.getCurrentScreen().animationObjects;
-  window.myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 95], "standing", { "sizeMultiplier": 1.5});
-  asJumpable.call(window.myMario);
-  animationObjects.push(window.myMario);
+  var myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 95], "standing", { "sizeMultiplier": 1.5});
+  asJumpable.call(myMario);
+  animationObjects.push(myMario);
+  window.myMario = myMario;
+  return myMario;
 }
 
 function spawnToad() {
   var animationObjects = game.getCurrentScreen().animationObjects;
-  window.myToad = new Unit("toad", 0, "assets/npcs.png", toad_data, [450, 95], "standing", { "sizeMultiplier": 1.5});
-  asJumpable.call(window.myToad);
-  animationObjects.push(window.myToad);
+  var myToad = new Unit("toad", 0, "assets/npcs.png", toad_data, [450, 95], "standing", { "sizeMultiplier": 1.5});
+  asJumpable.call(myToad);
+  animationObjects.push(myToad);
+  window.myToad = myToad;
+  return myToad;
 }
 
 // pos = [0, 50]
@@ -98,6 +102,7 @@ function spawnCoin(pos) {
   asExplodable.call(window.myCoin);
   // setDebugTarget(myCoin);
   animationObjects.push(window.myCoin);
+  return myCoin;
 }
 
 function spawnCoinBox(nCoins) {
@@ -112,6 +117,7 @@ function spawnCoinBox(nCoins) {
   }
 
   animationObjects.push(myCoinBox);
+  return myCoinBox;
 }
 
 
@@ -122,20 +128,12 @@ function switch_to_world_map() {
 
 
 function spawnSprite() {
-    // spawnMario();
-    spawnToad();
-    window.myToad.setStance("walking");
+    var sprite = spawnMario();
+    // var sprite = spawnToad();
+    sprite.setStance("walking");
 
-    setDebugTarget(this.window.myToad);
-
-
-    // window.myToad.fx_move = {
-    //   "x": 1,
-    //   "y": 0
-    // };
-
-
-    window.myToad.goTowards([0,0]);
+    setDebugTarget(sprite);
+    sprite.goTowards([0,0]);
 }
 
 function interaction() {

@@ -20,7 +20,7 @@ var toad_data = {
         },
         "walking": {
             "spriteIndecies": [5, 7, 6, 7],
-            "animationCycleSlowness": 4,
+            "animationCycleSlowness": 12,
             "loop": true
         }
     },
@@ -134,7 +134,7 @@ var toad_data = {
          "filename":"walking5",
          "frame":{
             "x":0,
-            "y":601,
+            "y":602,
             "w":16,
             "h":22
          },
@@ -155,7 +155,7 @@ var toad_data = {
          "filename":"walking6",
          "frame":{
             "x":16,
-            "y":601,
+            "y":602,
             "w":16,
             "h":22
          },
@@ -176,7 +176,7 @@ var toad_data = {
          "filename":"walking7",
          "frame":{
             "x":32,
-            "y":601,
+            "y":602,
             "w":16,
             "h":22
          },

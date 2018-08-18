@@ -98,19 +98,30 @@ CoinGhostChallengeScreen.prototype.render = function() {
 
 CoinGhostChallengeScreen.prototype.handleKeys = function(evt) {
   var spriteIndex = window.debugTarget.spriteIndex_i;
+  var debugTarget = window.debugTarget;
 
   switch (evt.keyCode) {
+    case 38:  // Up arrow
+      var val = (spriteIndex + 1) % (debugTarget.getProperFrames().length);
+      debugTarget.spriteIndex_i = val;
+      moveDebugTargetY(1);
+      break;
+    case 40:  // Down arrow
+      var val = (spriteIndex + 1) % (debugTarget.getProperFrames().length);
+      debugTarget.spriteIndex_i = val;
+      moveDebugTargetY(-1);
+      break;
     case 39: // right arrow
-      var val = (spriteIndex + 1) % (window.debugTarget.getProperFrames().length);
-      window.debugTarget.spriteIndex_i = val;
+      var val = (spriteIndex + 1) % (debugTarget.getProperFrames().length);
+      debugTarget.spriteIndex_i = val;
       moveDebugTargetX(-1);
       break;
     case 37: // left arrow
-      var val = (spriteIndex - 1) % (window.debugTarget.getProperFrames().length);
+      var val = (spriteIndex - 1) % (debugTarget.getProperFrames().length);
       if (val < 0)
-        val = window.debugTarget.getProperFrames().length - 1;
-      window.debugTarget.spriteIndex_i = val;
-      console.log(window.debugTarget.spriteIndex_i)
+        val = debugTarget.getProperFrames().length - 1;
+      debugTarget.spriteIndex_i = val;
+      console.log(debugTarget.spriteIndex_i)
       moveDebugTargetX(1);
       break;
   }

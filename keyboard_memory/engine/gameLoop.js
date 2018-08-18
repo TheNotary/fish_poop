@@ -26,7 +26,7 @@ var asGameLoop = function() {
             this.lastDrawTime = 0.0;
 
         // TODO:  make this a var explicitly, prolly won't hurt anything...
-        timeBetweenCallingMain = Date.now() - lastMainEndedAt;
+        // timeBetweenCallingMain = Date.now() - lastMainEndedAt;
 
         var now = Date.now();
         var delta = now - then;
@@ -36,12 +36,12 @@ var asGameLoop = function() {
         // this is because main is a callback from requestAnimationFrame...
         gameTime = gameTime + delta / 1000;
 
-        var skipTicks = 1000 / 30; // 30 fps
+        // var skipTicks = 1000 / 30; // 30 fps
         var loops = 0;
         var maxFrameSkip = 3; // skip the draw phase up to 3 times in a row if CPU is lagging
-        var nextGameTick = (new Date).getTime() + 1000;
+        var nextGameTick = now + 1000;
 
-        var tickInterval = 30; // 50ms
+        var tickInterval = 10; // 50ms
 
         while (itsTimeToDoAnotherTick(lastTick, tickInterval) && // UPDATE DATA ONLY WHEN IT'S APPROPRIATE
             weHaventBeenNeglectingTheDrawFunctionTooLong(loops, maxFrameSkip)
@@ -72,6 +72,8 @@ var asGameLoop = function() {
     // the game loop.
     function itsTimeToDoAnotherTick(lastTick, tickInterval) {
         delta = Date.now() - lastTick;
+        // console.log("Delta: " + delta);
+        // return true;
         if (delta >= tickInterval * 4 && lastTick > 0) {
             console.debug("we're an entire tick behind!  We probably aren't finishing drawing fast enough  " + delta + " / " + tickInterval + '   last draw t: ' + lastDrawTime);
             thisSpotWasRun++;
