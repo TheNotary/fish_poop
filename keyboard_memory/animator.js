@@ -11,5 +11,4 @@ game.start();
 
 
 // spawnCoin([0, 50]);
-
-// spawnBlah();
+spawnSprite();

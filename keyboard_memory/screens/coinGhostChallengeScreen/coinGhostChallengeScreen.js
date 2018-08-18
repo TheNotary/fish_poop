@@ -21,6 +21,16 @@ function CoinGhostChallengeScreen(screenConfig) {
 
 CoinGhostChallengeScreen.prototype = new Screen();
 
+CoinGhostChallengeScreen.prototype.init = function(that) {
+  var config = this.screenConfig;
+
+  for (var i = 0; i < this.levels.length; i++) {
+    var lvl = this.levels[i];
+
+    // load up the graphics for this level
+    lvl['bgImage'] = that.graphics.loadImage(lvl['background'], that.signalHtmlLoadingBegun, that.signalHtmlGraphicLoadingComplete);
+  }
+}
 
 CoinGhostChallengeScreen.prototype.update = function() {
   var animationObjects = this.animationObjects;;
@@ -108,17 +118,6 @@ CoinGhostChallengeScreen.prototype.handleKeys = function(evt) {
   }
 };
 
-
-CoinGhostChallengeScreen.prototype.init = function(that) {
-  var config = this.screenConfig;
-
-  for (var i = 0; i < this.levels.length; i++) {
-    var lvl = this.levels[i];
-
-    // load up the graphics for this level
-    lvl['bgImage'] = that.graphics.loadImage(lvl['background'], that.signalHtmlLoadingBegun, that.signalHtmlGraphicLoadingComplete);
-  }
-}
 
 
 CoinGhostChallengeScreen.prototype.setLevel = function(newLevel) {

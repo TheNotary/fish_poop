@@ -74,6 +74,13 @@ function spawnMario() {
   animationObjects.push(window.myMario);
 }
 
+function spawnToad() {
+  var animationObjects = game.getCurrentScreen().animationObjects;
+  window.myToad = new Unit("toad", 0, "assets/npcs.png", toad_data, [450, 95], "standing", { "sizeMultiplier": 1.5});
+  asJumpable.call(window.myToad);
+  animationObjects.push(window.myToad);
+}
+
 // pos = [0, 50]
 function spawnCoin(pos) {
   var animationObjects = game.getCurrentScreen().animationObjects;
@@ -103,6 +110,20 @@ function switch_to_world_map() {
     // alert('hi')
 }
 
+
+function spawnSprite() {
+    // spawnMario();
+    spawnToad();
+    window.myToad.setStance("walking");
+
+    window.myToad.fx_move = {
+      "x": 1,
+      "y": 0
+    };
+
+
+    window.myToad.goTowards([0,0]);
+}
 
 function interaction() {
     // jump mario

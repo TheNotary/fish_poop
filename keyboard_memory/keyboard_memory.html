@@ -32,9 +32,9 @@ em {
   max-width: 60%;
 }
 
-.debug {
+/* .debug {
   display: none;
-}
+} */
 
 .center {
   display: flex;
@@ -128,6 +128,12 @@ body {
   margin-left: auto;
   margin-right: auto;
   width: 90px;
+}
+
+#animation-frame {
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
 
 #settings-menu {
@@ -650,6 +656,7 @@ function toggleDialog() {
 
     <div id="overlay-message">Loading<span id="loading-dots"></span></div>
     <h1 id="challenge">&nbsp;</h1>
+    <div id="animation-frame" class="debug">Animation Frame: <span id="animationFrameIndex">1</span></div>
     <canvas id="canvas" width="1000" height="500"></canvas>
   </div>
 
@@ -663,7 +670,7 @@ function toggleDialog() {
   <div id="sprite-controls" class="debug">
     <div id="debug-int">0</div>
     <button onclick="spawnGhost()">Spawn Ghost</button>
-    <button onclick="spawnBlah()">Spawn Blah</button>
+    <button onclick="spawnSprite()">Spawn Blah</button>
     <button onclick="interaction()">interaction</button>
   </div>
 
@@ -699,6 +706,7 @@ function toggleDialog() {
 
 <script src="assets/enemies.json"></script>
 <script src="assets/mario.json"></script>
+<script src="assets/toad.json"></script>
 <script src="assets/coins.json"></script>
 <script src="assets/coinbox.json"></script>
 

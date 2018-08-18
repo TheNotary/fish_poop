@@ -101,6 +101,7 @@ window.KeyboardMemory = function(debugMode) {
     this.animationData['coin'] = coins_data;
     this.animationData['enemy'] = enemies_data;
     this.animationData['mario'] = mario_data;
+    this.animationData['toad'] = toad_data;
 
     var p = this.animationData;
     for (var key in p) {

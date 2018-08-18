@@ -58,12 +58,10 @@ Unit.prototype.update = function() {
     var properFrames = this.getProperFrames();
 
     var stanceData = this.stances[this.stance];
-    if (stanceData["loop"]) {
-      if (properFrames.length == 1)
-        return;
+    if (stanceData["loop"] && properFrames.length != 1) {  // if we're looping, and have more than one frame to loop over...
       this.spriteIndex_i = (1 + this.spriteIndex_i) % (properFrames.length);
     }
-    else {
+    else if (!stanceData["loop"]) {
       this.spriteIndex_i = (1 + this.spriteIndex_i);
 
       // if you're over-indexed... switch stance to "followedBy"
@@ -77,6 +75,37 @@ Unit.prototype.update = function() {
         }
       }
     }
+
+    if (this.aiMoving) {
+      // if (game.tickCount % this.aiMovementSlowness === 0) {
+
+        if (this.destinationPoint[0] < this.x) { // if we need to go left
+          // let msg = "About to move left towards (" + this.destinationPoint[0] + ")\n";
+          // msg += "Moving by... " ;
+          // alert(msg);
+          this.x = this.x-this.aiMovementAmount;
+
+          if (this.destinationPoint[0] > this.x) // if we overshot our destination
+            this.x = this.destinationPoint[0];
+        }
+        else if (this.destinationPoint[0] > this.x) { // if we need to go right
+          this.x = Math.min( ...[ this.x+this.aiMovementAmount, this.destinationPoint[0] ] );
+        }
+        else if (this.destinationPoint[1] < this.y) { // if we need to go down
+          this.y = Math.min( ...[ this.y - this.aiMovementAmount, this.destinationPoint[1] ] );
+        }
+        else if (this.destinationPoint[1] > this.y) { // if we need to go up
+          this.y = Math.min( ...[ this.y + this.aiMovementAmount, this.destinationPoint[1] ] );
+
+          if (this.y == this.destinationPoint[1]) {
+            this.aiMoving = false;
+          }
+        }
+
+      // }
+    }
+
+    document.getElementById("animationFrameIndex").innerHTML = this.spriteIndex_i
 
     // console.log("UPDATE PHASE:")
     // console.log("(1 + " + this.spriteIndex_i + ") % (" + properFrames.length + ")");
@@ -103,6 +132,13 @@ Unit.prototype.playAssociatedAudio = function(stance) {
     var soundName = stanceHash["audoKeys"][0]["name"]
     game.sound[soundName].play();
   }
+}
+
+Unit.prototype.goTowards = function(point) {
+  this.aiMoving = true;
+  this.destinationPoint = point;
+  this.aiMovementAmount = 2;
+  this.aiMovementSlowness = 1;
 }
 
 
