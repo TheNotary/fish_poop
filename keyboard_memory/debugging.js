@@ -7,13 +7,7 @@ function setDebugTarget(spriteObj) {
   debugTarget.isBeingDebugged = true;
   var startingSpriteIndex = ( debugTarget.stances[ debugTarget["stance"] ]["spriteIndecies"].length - 1 );
   // startingSpriteIndex = 10; // force starting sprite to be something other than last
-  // document.getElementById('debug-int').innerHTML = startingSpriteIndex;
   window.debugTarget.spriteIndex_i = startingSpriteIndex;
-}
-
-function setSpriteIndex(val) {
-  var index_element = document.getElementById('debug-int');
-  index_element.innerHTML = val;
 }
 
 function moveDebugTargetX(amount) {
@@ -25,7 +19,6 @@ function moveDebugTargetX(amount) {
 function moveDebugTargetY(amount) {
   debugTarget.y = debugTarget.y - amount;
 }
-
 
 function sprite_left() {
   myGhost.x = myGhost.x - 1;
@@ -41,7 +34,6 @@ function sprite_left() {
 
   index_element.value = new_val;
 }
-
 
 function sprite_right() {
   myGhost.x = myGhost.x + 1;
@@ -144,31 +136,6 @@ function interaction() {
     // window.myGhost.setStance("moving");
 }
 
-
-// function useArrowKeysToMoveCanvasSprite() {
-//     myProc = document.onkeydown;
-//     document.onkeydown = function(evt) {
-//         myProc.call(this, evt); // do the thing that onkeydown is meant to do in production mode too...
-//
-//         if (game.currentScreen == "coin_ghost_challenge_screen") {
-//             var index_element = document.getElementById('debug-int');
-//             var spriteIndex = parseInt(index_element.innerHTML);
-//
-//             switch (evt.keyCode) {
-//                 case 39: // right arrow
-//                     var val = spriteIndex + 1;
-//                     setSpriteIndex(val);
-//                     break;
-//                 case 37: // left arrow
-//                     var val = spriteIndex - 1;
-//                     setSpriteIndex(val);
-//                     break;
-//             }
-//
-//         }
-//     }
-// }
-// useArrowKeysToMoveCanvasSprite();
 
 
 function printBoundingBox(mob) {
