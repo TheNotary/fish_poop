@@ -51,15 +51,7 @@ function sprite_right() {
 }
 
 
-function spawnGhost() {
-  var animationObjects = game.getCurrentScreen().animationObjects;
-  window.myGhost = new Unit("ghost", 0, "assets/enemies.png", enemies_data, [0, 85], "floating", { "sizeMultiplier": 1.5});
-  asMovable.call(myGhost);
-  animationObjects.push(myGhost);
-  window.myGhost.setStance("moving");
 
-  configureGhostSpeed();
-}
 
 function configureGhostSpeed() {
   window.myGhost.fx_move = {
@@ -71,16 +63,26 @@ function configureGhostSpeed() {
 
 function spawnMario() {
   var animationObjects = game.getCurrentScreen().animationObjects;
-  var myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 95], "standing", { "sizeMultiplier": 1.5});
+  var myMario = new Unit("mario", 0, "assets/mario.png", mario_data, [450, 95], "standing", { "sizeMultiplier": 1});
   asJumpable.call(myMario);
   animationObjects.push(myMario);
   window.myMario = myMario;
   return myMario;
 }
 
+function spawnGhost() {
+  var animationObjects = game.getCurrentScreen().animationObjects;
+  window.myGhost = new Unit("ghost", 0, "assets/enemies.png", enemies_data, [0, 85], "floating", { "sizeMultiplier": 1});
+  asMovable.call(myGhost);
+  animationObjects.push(myGhost);
+  window.myGhost.setStance("moving");
+
+  configureGhostSpeed();
+}
+
 function spawnToad() {
   var animationObjects = game.getCurrentScreen().animationObjects;
-  var myToad = new Unit("toad", 0, "assets/npcs.png", toad_data, [450, 95], "standing", { "sizeMultiplier": 1.5});
+  var myToad = new Unit("toad", 0, "assets/npcs.png", toad_data, [450, 95], "standing", { "sizeMultiplier": 1});
   asJumpable.call(myToad);
   animationObjects.push(myToad);
   window.myToad = myToad;
@@ -90,7 +92,7 @@ function spawnToad() {
 // pos = [0, 50]
 function spawnCoin(pos) {
   var animationObjects = game.getCurrentScreen().animationObjects;
-  window.myCoin = new Unit("coin", 0, "assets/coins.png", coins_data, pos, "exploding", { "sizeMultiplier": 1});
+  window.myCoin = new Unit("coin", 0, "assets/coins.png", coins_data, pos, "exploding", { "sizeMultiplier": 0.8});
   asExplodable.call(window.myCoin);
   // setDebugTarget(myCoin);
   animationObjects.push(window.myCoin);
@@ -100,7 +102,7 @@ function spawnCoin(pos) {
 function spawnCoinBox(nCoins) {
   var animationObjects = game.getCurrentScreen().animationObjects;
 
-  window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 18], "lootable", { "sizeMultiplier": 1 });
+  window.myCoinBox = new Unit("coinbox", 0, "assets/coins.png", coinbox_data, [448, 30], "lootable", { "sizeMultiplier": 0.8 });
   asLootable.call(window.myCoinBox);
 
   myCoinBox.fx_loot['treasure'] = [];
@@ -120,11 +122,11 @@ function switch_to_world_map() {
 
 
 function spawnSprite() {
-    var sprite = spawnMario();
-    // var sprite = spawnToad();
+    // var sprite = spawnMario();
+    var sprite = spawnToad();
     sprite.setStance("walking");
 
-    setDebugTarget(sprite);
+    // setDebugTarget(sprite);
     sprite.goTowards([0,0]);
 }
 

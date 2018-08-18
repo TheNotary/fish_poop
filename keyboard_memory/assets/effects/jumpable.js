@@ -17,7 +17,7 @@ var asJumpable = function() {
     "updateLogic": function() {
       var gravity = 1;      // m/s/s   (seconds are 1 tick, btw....)
       var startingJumpPower = 10; // m/s
-      var max_jump_height = -100;
+      var max_jump_height = -35;
 
       that.fx_jump["jumpPower"] = (that.fx_jump["jumpPower"] - gravity);
       that.animation_y = that.animation_y - that.fx_jump["jumpPower"];

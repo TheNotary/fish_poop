@@ -41,7 +41,7 @@ var asGameLoop = function() {
         var maxFrameSkip = 3; // skip the draw phase up to 3 times in a row if CPU is lagging
         var nextGameTick = now + 1000;
 
-        var tickInterval = 10; // 50ms
+        var tickInterval = 30; // 30ms?
 
         while (itsTimeToDoAnotherTick(lastTick, tickInterval) && // UPDATE DATA ONLY WHEN IT'S APPROPRIATE
             weHaventBeenNeglectingTheDrawFunctionTooLong(loops, maxFrameSkip)

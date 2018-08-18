@@ -82,37 +82,7 @@ Unit.prototype.update = function() {
       }
     }
 
-    if (this.aiMoving) {
-      // if (game.tickCount % this.aiMovementSlowness === 0) {
 
-        if (this.destinationPoint[0] < this.x) { // if we need to go left
-          this.x = this.x-this.aiMovementAmount;
-
-          if (this.destinationPoint[0] > this.x) // if we overshot our destination
-            this.x = this.destinationPoint[0];
-        }
-        else if (this.destinationPoint[0] > this.x) { // if we need to go right
-          this.x = this.x+this.aiMovementAmount;
-          if (this.destinationPoint[0] < this.x) // if we overshot our destination
-            this.x = this.destinationPoint[0];
-        }
-        else if (this.destinationPoint[1] < this.y) { // if we need to go down
-          this.y = this.y - this.aiMovementAmount
-          if (this.destinationPoint[1] > this.y) // if we overshot our destination
-            this.y = this.destinationPoint[1];
-        }
-        else if (this.destinationPoint[1] > this.y) { // if we need to go up
-          this.y = this.y + this.aiMovementAmount
-          if (this.destinationPoint[1] < this.y) // if we overshot our destination
-            this.y = this.destinationPoint[1];
-        }
-
-        if (this.x == this.destinationPoint[0] && this.y == this.destinationPoint[1]) {
-          this.aiMoving = false;
-        }
-
-      // }
-    }
 
 
 
@@ -123,6 +93,43 @@ Unit.prototype.update = function() {
     // console.log("spriteIndex_i: " + this.spriteIndex_i)
     // console.log("properFrames:" + properFrames)
     // console.log("")
+  }
+}
+
+
+Unit.prototype.aiMovementPositionUpdate = function() {
+
+  if (this.aiMoving) {
+    if (game.tickCount % this.aiMovementSlowness === 0) {
+
+      if (this.destinationPoint[0] < this.x) { // if we need to go left
+        this.x = this.x-this.aiMovementAmount;
+
+        if (this.destinationPoint[0] > this.x) // if we overshot our destination
+          this.x = this.destinationPoint[0];
+      }
+      else if (this.destinationPoint[0] > this.x) { // if we need to go right
+        this.x = this.x+this.aiMovementAmount;
+        if (this.destinationPoint[0] < this.x) // if we overshot our destination
+          this.x = this.destinationPoint[0];
+      }
+      else if (this.destinationPoint[1] < this.y) { // if we need to go down
+        this.y = this.y - this.aiMovementAmount
+        if (this.destinationPoint[1] > this.y) // if we overshot our destination
+          this.y = this.destinationPoint[1];
+      }
+      else if (this.destinationPoint[1] > this.y) { // if we need to go up
+        this.y = this.y + this.aiMovementAmount
+        if (this.destinationPoint[1] < this.y) // if we overshot our destination
+          this.y = this.destinationPoint[1];
+      }
+
+      if (this.x == this.destinationPoint[0] && this.y == this.destinationPoint[1]) {
+        this.aiMoving = false;
+        this.setStance("standing");
+      }
+
+    }
   }
 }
 
@@ -154,6 +161,8 @@ Unit.prototype.goTowards = function(point) {
 
 
 Unit.prototype.draw = function(ctx) {
+  this.aiMovementPositionUpdate();
+
   var properFrames = this.getProperFrames();
   if (properFrames[this.spriteIndex_i] == undefined) {
     console.log("this.spriteIndex_i: " + this.spriteIndex_i);

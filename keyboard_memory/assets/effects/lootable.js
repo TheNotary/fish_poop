@@ -16,8 +16,8 @@ var asLootable = function() {
       var animationObjects = game.getCurrentScreen().animationObjects;
       for (var i = 0; i < animationObjects.length; i++) {
         var obj = animationObjects[i];
-        if (obj.type == "mario" &&
-            (obj.y + obj.animation_y) <= (that.y + 50) ) {
+        if ( obj.type == "mario" &&
+            areWeStruck(obj) ) {
           // alert('i am struck' + (obj.y + obj.animation_y) );
 
           // Handle the Looter!
@@ -38,5 +38,12 @@ var asLootable = function() {
       }
     }
   };
+
+  function areWeStruck(obj) {
+    var heightOfChestAsDrawn = 35;
+    var bottom_of_thing_being_looted = that.y + heightOfChestAsDrawn;
+    var head_of_looter = obj.y + obj.animation_y;
+    return head_of_looter <= bottom_of_thing_being_looted;    // if head_of_looter is above bottom_of_thing_being_looted
+  }
 
 }
