@@ -16,6 +16,16 @@ function setSpriteIndex(val) {
   index_element.innerHTML = val;
 }
 
+function moveDebugTargetX(amount) {
+  console.log("X: " + debugTarget.x);
+  debugTarget.x = debugTarget.x - amount;
+  console.log("X: " + debugTarget.x);
+}
+
+function moveDebugTargetY(amount) {
+  debugTarget.y = debugTarget.y - amount;
+}
+
 
 function sprite_left() {
   myGhost.x = myGhost.x - 1;
@@ -116,10 +126,13 @@ function spawnSprite() {
     spawnToad();
     window.myToad.setStance("walking");
 
-    window.myToad.fx_move = {
-      "x": 1,
-      "y": 0
-    };
+    setDebugTarget(this.window.myToad);
+
+
+    // window.myToad.fx_move = {
+    //   "x": 1,
+    //   "y": 0
+    // };
 
 
     window.myToad.goTowards([0,0]);
@@ -134,32 +147,30 @@ function interaction() {
 }
 
 
-function useArrowKeysToMoveCanvasSprite() {
-    myProc = document.onkeydown;
-    document.onkeydown = function(evt) {
-        myProc.call(this, evt); // do the thing that onkeydown is meant to do in production mode too...
-
-        if (game.currentScreen == "coin_ghost_challenge_screen") {
-            var index_element = document.getElementById('debug-int');
-            var spriteIndex = parseInt(index_element.innerHTML);
-
-            switch (evt.keyCode) {
-                case 39: // right arrow
-                    var val = spriteIndex + 1;
-                    setSpriteIndex(val);
-                    break;
-                case 37: // left arrow
-                    var val = spriteIndex - 1;
-                    setSpriteIndex(val);
-                    break;
-            }
-
-        }
-    }
-}
-
-
-useArrowKeysToMoveCanvasSprite();
+// function useArrowKeysToMoveCanvasSprite() {
+//     myProc = document.onkeydown;
+//     document.onkeydown = function(evt) {
+//         myProc.call(this, evt); // do the thing that onkeydown is meant to do in production mode too...
+//
+//         if (game.currentScreen == "coin_ghost_challenge_screen") {
+//             var index_element = document.getElementById('debug-int');
+//             var spriteIndex = parseInt(index_element.innerHTML);
+//
+//             switch (evt.keyCode) {
+//                 case 39: // right arrow
+//                     var val = spriteIndex + 1;
+//                     setSpriteIndex(val);
+//                     break;
+//                 case 37: // left arrow
+//                     var val = spriteIndex - 1;
+//                     setSpriteIndex(val);
+//                     break;
+//             }
+//
+//         }
+//     }
+// }
+// useArrowKeysToMoveCanvasSprite();
 
 
 function printBoundingBox(mob) {

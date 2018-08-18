@@ -54,6 +54,12 @@ Unit.prototype.update = function() {
   if (stanceHash["animationCycleSlowness"] == undefined)
     return;
 
+  if (this.isBeingDebugged) {
+    document.getElementById("animationFrameIndex").innerHTML = this.spriteIndex_i;
+    document.getElementById("animationFrameInJsonFile").innerHTML = this.stances[this.stance]["spriteIndecies"][this.spriteIndex_i];
+    return;
+  }
+
   if (game.tickCount % stanceHash["animationCycleSlowness"] === 0) {
     var properFrames = this.getProperFrames();
 
@@ -80,9 +86,6 @@ Unit.prototype.update = function() {
       // if (game.tickCount % this.aiMovementSlowness === 0) {
 
         if (this.destinationPoint[0] < this.x) { // if we need to go left
-          // let msg = "About to move left towards (" + this.destinationPoint[0] + ")\n";
-          // msg += "Moving by... " ;
-          // alert(msg);
           this.x = this.x-this.aiMovementAmount;
 
           if (this.destinationPoint[0] > this.x) // if we overshot our destination
@@ -111,7 +114,9 @@ Unit.prototype.update = function() {
       // }
     }
 
-    // document.getElementById("animationFrameIndex").innerHTML = this.spriteIndex_i
+
+
+
 
     // console.log("UPDATE PHASE:")
     // console.log("(1 + " + this.spriteIndex_i + ") % (" + properFrames.length + ")");
@@ -143,7 +148,7 @@ Unit.prototype.playAssociatedAudio = function(stance) {
 Unit.prototype.goTowards = function(point) {
   this.aiMoving = true;
   this.destinationPoint = point;
-  this.aiMovementAmount = 4;
+  this.aiMovementAmount = 1;
   this.aiMovementSlowness = 1;
 }
 

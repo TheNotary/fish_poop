@@ -39,9 +39,7 @@ CoinGhostChallengeScreen.prototype.update = function() {
     var obj = animationObjects[i];
 
     // Handle default/ general sprite updates
-    if (!obj.isBeingDebugged) {
-      obj.update();
-    }
+    obj.update();
 
     // Handle any special effects/ conditions/ behaviors
     if (obj.effects[obj.stance] != undefined) {
@@ -99,21 +97,21 @@ CoinGhostChallengeScreen.prototype.render = function() {
 
 
 CoinGhostChallengeScreen.prototype.handleKeys = function(evt) {
-  var index_element = document.getElementById('debug-int');
-  var spriteIndex = parseInt(index_element.innerHTML);
+  var spriteIndex = window.debugTarget.spriteIndex_i;
 
   switch (evt.keyCode) {
     case 39: // right arrow
       var val = (spriteIndex + 1) % (window.debugTarget.getProperFrames().length);
-      setSpriteIndex(val);
       window.debugTarget.spriteIndex_i = val;
+      moveDebugTargetX(-1);
       break;
     case 37: // left arrow
       var val = (spriteIndex - 1) % (window.debugTarget.getProperFrames().length);
       if (val < 0)
         val = window.debugTarget.getProperFrames().length - 1;
-      setSpriteIndex(val);
       window.debugTarget.spriteIndex_i = val;
+      console.log(window.debugTarget.spriteIndex_i)
+      moveDebugTargetX(1);
       break;
   }
 };

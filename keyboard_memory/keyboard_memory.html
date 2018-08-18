@@ -656,7 +656,11 @@ function toggleDialog() {
 
     <div id="overlay-message">Loading<span id="loading-dots"></span></div>
     <h1 id="challenge">&nbsp;</h1>
-    <div id="animation-frame" class="debug">Animation Frame: <span id="animationFrameIndex">1</span></div>
+    <div id="animation-frame" class="debug">
+      <div>Animation Frame: <span id="animationFrameIndex">1</span></div>
+      <div>Animation Frame in JSON: <span id="animationFrameInJsonFile">1</span></div>
+    </div>
+
     <canvas id="canvas" width="1000" height="500"></canvas>
   </div>
 
@@ -668,7 +672,6 @@ function toggleDialog() {
   </div>
 
   <div id="sprite-controls" class="debug">
-    <div id="debug-int">0</div>
     <button onclick="spawnGhost()">Spawn Ghost</button>
     <button onclick="spawnSprite()">Spawn Blah</button>
     <button onclick="interaction()">interaction</button>
