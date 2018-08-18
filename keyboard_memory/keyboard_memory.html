@@ -318,16 +318,32 @@ function clearMenus() {
     toggleDialog()
 }
 
-function start_game() {
+function start_game(mode) {
   gameStatus = 'started'
   clearMenus()
   handleOverlayGameStart()
 
   clear_stats(nCoins)
   reset_game()
-  window.game.resetChallenge(nCoins)
 
-  setTimeout(challenge_player, challengeDelay)
+  if (mode == undefined) {
+    window.game.resetChallenge(nCoins, mode)
+
+    setTimeout(challenge_player, challengeDelay)
+  }
+  else if (mode == "training") {
+    // Change to the training screen
+    window.game.switchScreen("training_screen")
+    
+
+    // Switch to the dojo (not needed)
+
+    // spawn toad walking to the middle
+
+    // Display a message
+
+    window.game.resetChallenge(nCoins, mode)
+  }
 }
 
 function challenge_player() {
@@ -586,6 +602,7 @@ function toggleDialog() {
 
     <button onclick="toggleSettings()">Settings</button>
     <button class="debug" onclick="switch_to_world_map()">Switch To World Map Screen</button>
+    <button class="debug" onclick="switch_to_training()">Switch To Training</button>
     <button class="debug" onclick="leveler.changeLevelUp()">Level Up</button>
     <button class="debug" onclick="leveler.changeLevelDown()">Level Down</button>
     <button class="debug" onclick="leveler.advancePart()">Advance Part</button>
@@ -724,6 +741,7 @@ function toggleDialog() {
 <script src="assetLoading.js"></script>
 <script src="screens/worldMapScreen.js"></script>
 <script src="screens/coinGhostChallengeScreen/coinGhostChallengeScreen.js"></script>
+<script src="screens/trainingScreen.js"></script>
 
 
 <script src="animator.js"></script>

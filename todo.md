@@ -18,11 +18,13 @@
   - (background) https://www.spriters-resource.com/resources/sheets/46/48755.png
     > https://www.spriters-resource.com/snes/smariorpg/
   - (Sound) https://themushroomkingdom.net/media/mk64/wav
+  -
 
 
-- Free Graphics Guys
+- Free/ human Graphics Guys
 
   - (NeoZ7) https://www.deviantart.com/neoz7/art/Free-Isometric-Tiles-385071295
+  - (The Cynical Poet) https://www.deviantart.com/thecynicalpoet/gallery/
 
 
 - Tiles....

@@ -22,6 +22,13 @@ window.KeyboardMemory = function(debugMode) {
   ];
 
 
+  this.training_level = [
+    {
+      "background": 'assets/backgrounds/dojo.png'
+    }
+  ];
+
+
   this.configs = {
     "debugMode": false,
     "screens":
@@ -50,6 +57,17 @@ window.KeyboardMemory = function(debugMode) {
           "menuId": 'stats',
           "bgMusicId": 'audBattle',
           "levels": this.levels
+        },
+        {
+          "name": "training_screen",
+          "default": false,
+          "constructor": TrainingScreen,
+          "canvasId": "canvas",
+          "canvasWidth": 1000,
+          "canvasHeight": 700,
+          "menuId": 'stats',
+          "bgMusicId": 'audBattle',
+          "levels": this.training_level
         }
       ]
   };
@@ -83,14 +101,24 @@ window.KeyboardMemory = function(debugMode) {
       if (this.debugMode) window.debuggingFunctions();
   };
 
-  this.resetChallenge = function(nCoins) {
+  this.resetChallenge = function(nCoins, mode) {
     var coinChallengeScreen = this.getCurrentScreen();
     coinChallengeScreen.animationObjects = [];
 
-    spawnMario();
-    spawnCoinBox(nCoins);
-    spawnGhost();
-  }
+    if (mode == undefined || mode == "progression") {
+      spawnMario();
+      spawnCoinBox(nCoins);
+      spawnGhost();
+    }
+    else if (mode == "training") {
+      this.setLevel();
+      var sprite = spawnToad();
+      sprite.setStance("walking");
+
+      // setDebugTarget(sprite);
+      sprite.goTowards([250, 95]);
+    }
+  };
 
   // In the future, this method would initiate the AJAX loading of this data
   // but for now it's just the interface to it
@@ -128,6 +156,10 @@ window.KeyboardMemory = function(debugMode) {
 
     this.getCurrentScreen().context.scale(2,2);
     this.getCurrentScreen().context.save();
+  }
+
+  this.switchScreen = function(newScreen) {
+    this.currentScreen = newScreen;
   }
 
   this.setLevel = function(val) {

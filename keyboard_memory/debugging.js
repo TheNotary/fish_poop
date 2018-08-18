@@ -82,7 +82,7 @@ function spawnGhost() {
 
 function spawnToad() {
   var animationObjects = game.getCurrentScreen().animationObjects;
-  var myToad = new Unit("toad", 0, "assets/npcs.png", toad_data, [450, 95], "standing", { "sizeMultiplier": 1});
+  var myToad = new Unit("toad", 0, "assets/npcs.png", toad_data, [510, 95], "standing", { "sizeMultiplier": 1});
   asJumpable.call(myToad);
   animationObjects.push(myToad);
   window.myToad = myToad;
@@ -118,6 +118,10 @@ function spawnCoinBox(nCoins) {
 function switch_to_world_map() {
     game.setCurrentScreen("world_map_screen");
     // alert('hi')
+}
+
+function switch_to_training() {
+  start_game("training")
 }
 
 

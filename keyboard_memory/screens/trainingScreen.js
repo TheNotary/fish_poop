@@ -1,4 +1,4 @@
-function CoinGhostChallengeScreen(screenConfig) {
+function TrainingScreen(screenConfig) {
   Screen.call(this, screenConfig);
   this.levels = screenConfig['levels']
   this.animationObjects = [];
@@ -19,9 +19,9 @@ function CoinGhostChallengeScreen(screenConfig) {
   });
 }
 
-CoinGhostChallengeScreen.prototype = new Screen();
+TrainingScreen.prototype = new Screen();
 
-CoinGhostChallengeScreen.prototype.init = function(that) {
+TrainingScreen.prototype.init = function(that) {
   var config = this.screenConfig;
 
   for (var i = 0; i < this.levels.length; i++) {
@@ -32,7 +32,7 @@ CoinGhostChallengeScreen.prototype.init = function(that) {
   }
 }
 
-CoinGhostChallengeScreen.prototype.update = function() {
+TrainingScreen.prototype.update = function() {
   var animationObjects = this.animationObjects;;
 
   for (var i = 0; i < animationObjects.length; i++) {
@@ -73,7 +73,7 @@ CoinGhostChallengeScreen.prototype.update = function() {
   }
 }
 
-CoinGhostChallengeScreen.prototype.render = function() {
+TrainingScreen.prototype.render = function() {
   var animationObjects = this.animationObjects;
   // re-draw background
   // ctx.clearRect(0, 0, 500, 150); // clear entire canvas...
@@ -96,7 +96,7 @@ CoinGhostChallengeScreen.prototype.render = function() {
 }
 
 
-CoinGhostChallengeScreen.prototype.handleKeys = function(evt) {
+TrainingScreen.prototype.handleKeys = function(evt) {
   if (window.debugTarget == undefined) return;
   var spriteIndex = window.debugTarget.spriteIndex_i;
   var debugTarget = window.debugTarget;
@@ -130,17 +130,9 @@ CoinGhostChallengeScreen.prototype.handleKeys = function(evt) {
 
 
 
-CoinGhostChallengeScreen.prototype.setLevel = function(newLevel) {
+TrainingScreen.prototype.setLevel = function(newLevel) {
   this.level = newLevel;
 
   // reset the animation objects
   this.animationObjects = [];
 }
-
-
-
-function TrainingScreen(screenConfig) {
-  CoinGhostChallengeScreen.call(this, screenConfig);
-}
-
-TrainingScreen.prototype = new CoinGhostChallengeScreen();
