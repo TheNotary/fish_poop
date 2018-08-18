@@ -89,23 +89,29 @@ Unit.prototype.update = function() {
             this.x = this.destinationPoint[0];
         }
         else if (this.destinationPoint[0] > this.x) { // if we need to go right
-          this.x = Math.min( ...[ this.x+this.aiMovementAmount, this.destinationPoint[0] ] );
+          this.x = this.x+this.aiMovementAmount;
+          if (this.destinationPoint[0] < this.x) // if we overshot our destination
+            this.x = this.destinationPoint[0];
         }
         else if (this.destinationPoint[1] < this.y) { // if we need to go down
-          this.y = Math.min( ...[ this.y - this.aiMovementAmount, this.destinationPoint[1] ] );
+          this.y = this.y - this.aiMovementAmount
+          if (this.destinationPoint[1] > this.y) // if we overshot our destination
+            this.y = this.destinationPoint[1];
         }
         else if (this.destinationPoint[1] > this.y) { // if we need to go up
-          this.y = Math.min( ...[ this.y + this.aiMovementAmount, this.destinationPoint[1] ] );
+          this.y = this.y + this.aiMovementAmount
+          if (this.destinationPoint[1] < this.y) // if we overshot our destination
+            this.y = this.destinationPoint[1];
+        }
 
-          if (this.y == this.destinationPoint[1]) {
-            this.aiMoving = false;
-          }
+        if (this.x == this.destinationPoint[0] && this.y == this.destinationPoint[1]) {
+          this.aiMoving = false;
         }
 
       // }
     }
 
-    document.getElementById("animationFrameIndex").innerHTML = this.spriteIndex_i
+    // document.getElementById("animationFrameIndex").innerHTML = this.spriteIndex_i
 
     // console.log("UPDATE PHASE:")
     // console.log("(1 + " + this.spriteIndex_i + ") % (" + properFrames.length + ")");
@@ -137,7 +143,7 @@ Unit.prototype.playAssociatedAudio = function(stance) {
 Unit.prototype.goTowards = function(point) {
   this.aiMoving = true;
   this.destinationPoint = point;
-  this.aiMovementAmount = 2;
+  this.aiMovementAmount = 4;
   this.aiMovementSlowness = 1;
 }
 
