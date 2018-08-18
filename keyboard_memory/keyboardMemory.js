@@ -5,7 +5,9 @@
 window.KeyboardMemory = function(debugMode) {
   var that = this; // need to store this variable to help out animations which have their own 'this' value which confuses things
   this.debugMode = debugMode;
+  this.currentScreen = "";
   this.getCurrentScreen = function() { return this.screens[this.currentScreen] };
+  this.setCurrentScreen = function(screen_name) { this.currentScreen = screen_name };
 
   this.levels = [
     {
@@ -28,6 +30,16 @@ window.KeyboardMemory = function(debugMode) {
         //   "name": "title_screen",
         //   "constructor": null
         // },
+        {
+          "name": "world_map_screen",
+          "default": false,
+          "constructor": WorldMapScreen,
+          "canvasId": "canvas",
+          "canvasWidth": 1000,
+          "canvasHeight": 700,
+          "menuId": 'stats',
+          "bgMusicId": 'audBattle'
+        },
         {
           "name": "coin_ghost_challenge_screen",
           "default": true,

@@ -98,8 +98,9 @@ function spawnCoinBox(nCoins) {
 }
 
 
-function spawnBlah() {
-    spawnMario();
+function switch_to_world_map() {
+    game.setCurrentScreen("world_map_screen");
+    // alert('hi')
 }
 
 
