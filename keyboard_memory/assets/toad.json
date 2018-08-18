@@ -1,7 +1,7 @@
 var toad_data = {
     "animations": {
         "standing": {
-            "spriteIndecies": [4],
+            "spriteIndecies": [7],
             "animationCycleSlowness": 0,
             "loop": true
         },
@@ -20,7 +20,7 @@ var toad_data = {
         },
         "walking": {
             "spriteIndecies": [5, 7, 6, 7],
-            "animationCycleSlowness": 12,
+            "animationCycleSlowness": 5,
             "loop": true
         }
     },
@@ -136,7 +136,7 @@ var toad_data = {
             "x":0,
             "y":602,
             "w":16,
-            "h":22
+            "h":21
          },
          "rotated":false,
          "trimmed":false,
@@ -144,11 +144,11 @@ var toad_data = {
             "x":0,
             "y":0,
             "w":16,
-            "h":22
+            "h":21
          },
          "sourceSize":{
             "w":16,
-            "h":22
+            "h":21
          }
       },
       {
@@ -157,7 +157,7 @@ var toad_data = {
             "x":16,
             "y":602,
             "w":16,
-            "h":22
+            "h":21
          },
          "rotated":false,
          "trimmed":false,
@@ -165,11 +165,11 @@ var toad_data = {
             "x":0,
             "y":0,
             "w":16,
-            "h":22
+            "h":21
          },
          "sourceSize":{
             "w":16,
-            "h":22
+            "h":21
          }
       },
       {
@@ -178,7 +178,7 @@ var toad_data = {
             "x":32,
             "y":602,
             "w":16,
-            "h":22
+            "h":21
          },
          "rotated":false,
          "trimmed":false,
@@ -186,11 +186,11 @@ var toad_data = {
             "x":0,
             "y":0,
             "w":16,
-            "h":22
+            "h":21
          },
          "sourceSize":{
             "w":16,
-            "h":22
+            "h":21
          }
       },
       {
