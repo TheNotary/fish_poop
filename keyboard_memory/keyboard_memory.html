@@ -258,6 +258,7 @@ var currentLetter
 var challengeDelay = 20
 
 var gameStatus = 'stopped'
+var gameMode = ''
 var global_v
 
 var currentLevel = 0
@@ -279,7 +280,7 @@ function keyboard_func(e) {
   if (keyCode == 190)
     keyCode = 46
 
-  if ( gameStatus == 'started' && wasPossibleChallegeLetterPressed(keyCode) ) {
+  if ( gameStatus == 'started' && gameMode == 'progression' && wasPossibleChallegeLetterPressed(keyCode) ) {
     var typedLetter = String.fromCharCode(keyCode).toLowerCase()
 
     if (typedLetter == currentLetter) {
@@ -297,7 +298,7 @@ function keyboard_func(e) {
   if (keyCode == 32) {
     e.preventDefault(); // don't let space scroll the screen down
     if (gameStatus == 'stopped') {
-      start_game()
+      start_game('progression')
     }
   }
 }
@@ -320,21 +321,22 @@ function clearMenus() {
 
 function start_game(mode) {
   gameStatus = 'started'
+  gameMode = mode
   clearMenus()
   handleOverlayGameStart()
 
   clear_stats(nCoins)
   reset_game()
 
-  if (mode == undefined) {
+  if (gameMode == "progression") {
     window.game.resetChallenge(nCoins, mode)
 
     setTimeout(challenge_player, challengeDelay)
   }
-  else if (mode == "training") {
+  else if (gameMode == "training") {
     // Change to the training screen
     window.game.switchScreen("training_screen")
-    
+
 
     // Switch to the dojo (not needed)
 
