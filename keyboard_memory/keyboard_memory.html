@@ -372,12 +372,13 @@ function register_a_miss(currentLetter, keyCode) {
 function register_a_hit(currentLetter, keyCode) {
   var hits_register = document.getElementById("hits")
   var newHitCount =  parseInt(hits_register.innerHTML) + 1
+  var part = parseInt( document.getElementById('part').innerHTML )
   hits_register.innerHTML = newHitCount
   if (newHitCount >= window.available_letters.length) {
     var screen = game.getCurrentScreen()
     leveler.advancePart()
 
-    if (screen.part != 1)
+    if (part != 1)
       window.game.sound['win'].play()
     else
       game.sound['victory'].play()
@@ -408,8 +409,9 @@ function set_available_letters() {
   ]
 
   var screen = game.getCurrentScreen()
+  var part = parseInt( document.getElementById('part').innerHTML )
   if (screen.level == 0) {
-    switch (screen.part) {
+    switch (part) {
       case 1:
         window.available_letters = padWithOldLetters({
           "new_letters": [],
@@ -434,7 +436,7 @@ function set_available_letters() {
   // I'd like these to have the prior worked on letters,
   // but for half of the challenges to be of the new set!
   else if (screen.level == 1) {
-    switch (screen.part) {
+    switch (part) {
       case 1:
         window.available_letters = padWithOldLetters({
           "new_letters": level_letters[1],
@@ -456,7 +458,7 @@ function set_available_letters() {
     }
   }
   else if (screen.level == 2) {
-    switch (screen.part) {
+    switch (part) {
       case 1:
         window.available_letters = padWithOldLetters({
           "new_letters": level_letters[2],
@@ -479,6 +481,7 @@ function set_available_letters() {
   }
 
   window.precalculated_challenge_letters = window.available_letters.slice(0);
+  console.log(window.precalculated_challenge_letters);
 }
 
 
@@ -492,21 +495,23 @@ function padWithOldLetters(config) {
 
   var n_old_letters = nCoins - n_new_letters
 
+  var new_letter_clip = []
+  var old_letter_clip = []
+
   var new_letter_stock = []
   var old_letter_stock = []
 
-  // Ensure *ALL* of the new letters are available
-  new_letter_stock = new_letter_stock.concat(new_letters)
-
-  while (new_letter_stock.length < n_new_letters) {
-    new_letter_stock.push(selectRandomElement(new_letters));
+  while (new_letter_clip.length < n_new_letters) {  // g, h
+    if (new_letter_stock.length <= 0) new_letter_stock = shuffle( new_letters.slice(0) )
+    new_letter_clip.push( new_letter_stock.shift() )
   }
 
-  while (old_letter_stock.length < n_old_letters) {
-    old_letter_stock.push(selectRandomElement(home_row));
+  while (old_letter_clip.length < n_old_letters) {  // a, s, d, f, j, k, l, ;
+    if (old_letter_stock.length <= 0) old_letter_stock = shuffle( home_row.slice(0) )
+    old_letter_clip.push( old_letter_stock.shift() )
   }
 
-  return shuffle(new_letter_stock.concat(old_letter_stock))
+  return shuffle(new_letter_clip.concat(old_letter_clip))
 }
 
 
