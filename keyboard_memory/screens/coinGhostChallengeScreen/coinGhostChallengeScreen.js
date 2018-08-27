@@ -1,23 +1,14 @@
 function CoinGhostChallengeScreen(screenConfig) {
+  if (screenConfig === undefined) return;
   Screen.call(this, screenConfig);
-  this.levels = screenConfig['levels']
+  this.levels = screenConfig['levels'];
   this.animationObjects = [];
   this.introFinished = false;
 
   this.level = 0;
-  this.part = 1;
-
-
-  this._heroQueue = []; // int IDs... first on last off
-
-  this.__defineGetter__("heroQueue", function() {
-    return this._heroQueue;
-  });
-  this.__defineSetter__("heroQueue", function(val) {
-    alert('pop');
-    this._heroQueue = val;
-  });
+  this.part = 1; // deprecated
 }
+
 
 CoinGhostChallengeScreen.prototype = new Screen();
 
@@ -136,11 +127,3 @@ CoinGhostChallengeScreen.prototype.setLevel = function(newLevel) {
   // reset the animation objects
   this.animationObjects = [];
 }
-
-
-
-function TrainingScreen(screenConfig) {
-  CoinGhostChallengeScreen.call(this, screenConfig);
-}
-
-TrainingScreen.prototype = new CoinGhostChallengeScreen();
