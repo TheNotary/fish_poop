@@ -295,7 +295,7 @@ function keyboard_func(e) {
     }
   }
 
-  if (keyCode == 32) {
+  if (keyCode == 32) {  // Space bar
     e.preventDefault(); // don't let space scroll the screen down
     if (gameStatus == 'stopped') {
       start_game('progression')
@@ -372,11 +372,10 @@ function register_a_miss(currentLetter, keyCode) {
 function register_a_hit(currentLetter, keyCode) {
   var hits_register = document.getElementById("hits")
   var newHitCount =  parseInt(hits_register.innerHTML) + 1
-  var part = parseInt( document.getElementById('part').innerHTML )
   hits_register.innerHTML = newHitCount
   if (newHitCount >= window.available_letters.length) {
     var screen = game.getCurrentScreen()
-    leveler.advancePart()
+    var part = leveler.advancePart()
 
     if (part != 1)
       window.game.sound['win'].play()

@@ -1,9 +1,14 @@
-// This file houses the logic involved with progressing to the next level.
+////////////////////////////////
+//          Leveler           //
+////////////////////////////////
+//
+// This class/ file houses the logic involved with progressing to the next level.
 // Since it contains a lot of logic, and requires the DOM, I kept this code
 // out of the ghost screen class.
-
-
+//
 function Leveler() {
+  var checker = new LevelEnablementChecker();
+
   this.setLevel = function(val) {
     window.currentLevel = val
     // set background image
@@ -36,6 +41,7 @@ function Leveler() {
     }
 
     document.getElementById('part').innerHTML = part
+    return part
   }
 
   this.advanceLevel = function() {
@@ -43,12 +49,12 @@ function Leveler() {
     var newLevel = level + 1;
     var screen = game.getCurrentScreen()
 
-    if (onFinalLevel(level)) {
+    if (checker.onFinalLevel(level)) {
       alert("you beat all the levels I've had time to program so far!");
-      newLevel = getFirstEnabledLevel()
+      newLevel = checker.getFirstEnabledLevel()
     }
 
-    while (shouldWeSkipLevel(newLevel)) {
+    while (checker.shouldWeSkipLevel(newLevel)) {
       newLevel++
       if ( newLevel >= game.levels.length ) newLevel = 0
     }
@@ -58,21 +64,61 @@ function Leveler() {
     return newLevel;
   }
 
+};
+
+
+
+////////////////////////////////
+//  Level Enablement Checker  //
+////////////////////////////////
+//
+// This class helps ensure that when a level is set, it is valid and enabled
+//
+function LevelEnablementChecker() {
   // If current level is no-longer enabled, set current level to first available level
   // and reset the game...
   this.resetToFirstValidLevelIfLevelInvalidated = function() {
     var level = parseInt( document.getElementById('level').innerHTML )
 
-    if ( shouldWeSkipLevel(window.currentLevel) ) {
-      this.setLevel( getFirstEnabledLevel() )
+    if ( this.shouldWeSkipLevel(window.currentLevel) ) {
+      this.setLevel( this.getFirstEnabledLevel() )
     }
-  }
+  };
 
-  function shouldWeSkipLevel(lvl) {
+  this.shouldWeSkipLevel = function(lvl) {
     if ( atLeastOneLevelIsSelected() &&
          thisLevelIsDisabled(lvl) )
       return true
     return false;
+  };
+
+  this.onFinalLevel = function(currentLvl) {
+    if (currentLvl >= this.getLastEnabledLevel() ) {
+      return true
+    }
+    return false
+  }
+
+  this.getLastEnabledLevel = function() {
+    var max = 0;
+
+    for (var i = 0; i < game.levels.length; i++) {
+      var el = document.getElementById("lvl" + i)
+      if (el.checked)
+        max = i
+    }
+
+    return max
+  }
+
+  this.getFirstEnabledLevel = function() {
+    for (var i = 0; i < game.levels.length; i++) {
+      var el = document.getElementById("lvl" + i)
+      if (el.checked)
+        return i
+    }
+
+    return -1
   }
 
   function atLeastOneLevelIsSelected() {
@@ -91,35 +137,6 @@ function Leveler() {
     if (!el.checked)
       return true
     return false
-  }
-
-  function onFinalLevel(currentLvl) {
-    if (currentLvl >= getLastEnabledLevel() ) {
-      return true
-    }
-    return false
-  }
-
-  function getLastEnabledLevel() {
-    var max = 0;
-
-    for (var i = 0; i < game.levels.length; i++) {
-      var el = document.getElementById("lvl" + i)
-      if (el.checked)
-        max = i
-    }
-
-    return max
-  }
-
-  function getFirstEnabledLevel() {
-    for (var i = 0; i < game.levels.length; i++) {
-      var el = document.getElementById("lvl" + i)
-      if (el.checked)
-        return i
-    }
-
-    return -1
   }
 
 };
