@@ -2,6 +2,20 @@
 // challenge game, such as the callback soup of presenting "Press Start" perhaps...
 
 
+
+function resetGameLogicCoinChallenge(mode) {
+  var screen = window.game.getCurrentScreen();
+  screen.animationObjects = []; // clear animation objects for screen
+
+  set_available_letters();
+  setTimeout(challenge_player, challengeDelay);
+
+  spawnMario();
+  spawnCoinBox(nCoins);
+  spawnGhost();
+}
+
+
 function keypressHook(keyCode) {
 
   if (wasPossibleChallegeLetterPressed(keyCode)) {

@@ -315,34 +315,15 @@ function start_game(mode) {
   clear_challenge()
   clear_stats()
 
-  resetGameLogic(nCoins, mode)
+  reset_game_logic(mode)
 }
 
-function resetGameLogic(nCoins, mode) {
-  var screen = window.game.getCurrentScreen();
-  screen.animationObjects = []; // clear animation objects for screen
-
+function reset_game_logic(mode) {
   if (mode == "progression") {
-
-    set_available_letters()
-    setTimeout(challenge_player, challengeDelay)
-
-    spawnMario();
-    spawnCoinBox(nCoins);
-    spawnGhost();
+    resetGameLogicCoinChallenge(mode)
   }
   else if (mode == "training") {
-    window.game.switchScreen("training_screen")
-
-    window.game.setLevel();
-    var sprite = spawnToad();
-    sprite.setStance("walking");
-
-    // setDebugTarget(sprite);
-    sprite.goTowards([250, 95]);
-
-    // TODO:  Display a message
-
+    resetGameLogicTraining(mode)
   }
 };
 
@@ -353,7 +334,6 @@ function end_game(msg) {
   handleOverlayGameEnd(msg)
   clear_challenge()
 }
-
 
 
 function handleOverlayGameEnd(msg) {
@@ -581,6 +561,7 @@ function toggleDialog() {
 
 <script src="piffyLeveler.js"></script>
 <script src="piffyCoinChallengeMechanics.js"></script>
+<script src="piffyTrainingMechanics.js"></script>
 <script src="keyboardMemory.js"></script>
 <script src="assetLoading.js"></script>
 <script src="screens/worldMapScreen.js"></script>
