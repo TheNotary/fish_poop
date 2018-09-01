@@ -101,25 +101,7 @@ window.KeyboardMemory = function(debugMode) {
       if (this.debugMode) window.debuggingFunctions();
   };
 
-  this.resetChallenge = function(nCoins, mode) {
-    var coinChallengeScreen = this.getCurrentScreen();
-    coinChallengeScreen.animationObjects = [];
-
-    if (mode == undefined || mode == "progression") {
-      spawnMario();
-      spawnCoinBox(nCoins);
-      spawnGhost();
-    }
-    else if (mode == "training") {
-      this.setLevel();
-      var sprite = spawnToad();
-      sprite.setStance("walking");
-
-      // setDebugTarget(sprite);
-      sprite.goTowards([250, 95]);
-    }
-  };
-
+  
   // In the future, this method would initiate the AJAX loading of this data
   // but for now it's just the interface to it
   this.initAssets = function() {
