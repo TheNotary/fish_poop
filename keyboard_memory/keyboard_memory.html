@@ -258,7 +258,7 @@ window.currentLetter = ""
 var challengeDelay = 20
 
 var gameStatus = 'stopped'
-var gameMode = ''
+var gameMode = 'progression'
 
 
 var config = {
@@ -283,7 +283,7 @@ function keyboard_func(e) {
 
   if (keyCode == 32) {  // Space bar
     e.preventDefault(); // don't let space scroll the screen down
-    if (gameStatus == 'stopped') {
+    if (gameStatus == 'stopped' && gameMode == 'progression') {
       start_game('progression')
     }
   }
@@ -300,6 +300,7 @@ function handleEscape(keyCode) {
 
 
 function clearMenus() {
+  handleOverlayGameStart()
   if ( document.getElementById("settings-menu").style.display == "block")
     toggleSettings()
   if ( document.getElementById("dialog-menu").style.display == "block" )
@@ -309,45 +310,50 @@ function clearMenus() {
 function start_game(mode) {
   gameStatus = 'started'
   gameMode = mode
+
   clearMenus()
-  handleOverlayGameStart()
+  clear_challenge()
+  clear_stats()
 
-  clear_stats(nCoins)
-  reset_game()
+  resetGameLogic(nCoins, mode)
+}
 
-  if (gameMode == "progression") {
-    resetChallenge(nCoins, mode)
+function resetGameLogic(nCoins, mode) {
+  var screen = window.game.getCurrentScreen();
+  screen.animationObjects = []; // clear animation objects for screen
 
+  if (mode == "progression") {
+
+    set_available_letters()
     setTimeout(challenge_player, challengeDelay)
+
+    spawnMario();
+    spawnCoinBox(nCoins);
+    spawnGhost();
   }
-  else if (gameMode == "training") {
-    // Change to the training screen
+  else if (mode == "training") {
     window.game.switchScreen("training_screen")
 
+    window.game.setLevel();
+    var sprite = spawnToad();
+    sprite.setStance("walking");
 
-    // Switch to the dojo (not needed)
+    // setDebugTarget(sprite);
+    sprite.goTowards([250, 95]);
 
-    // spawn toad walking to the middle
+    // TODO:  Display a message
 
-    // Display a message
-
-    resetChallenge(nCoins, mode)
   }
-}
+};
 
 
 function end_game(msg) {
-  // reset_game()
   gameStatus = 'stopped'
 
   handleOverlayGameEnd(msg)
   clear_challenge()
 }
 
-function reset_game() {
-  clear_challenge()
-  set_available_letters()
-}
 
 
 function handleOverlayGameEnd(msg) {
@@ -366,10 +372,9 @@ function handleOverlayGameStart() {
   overlay.innerHTML = ""
 }
 
-function clear_stats(nCoins) {
+function clear_stats() {
   document.getElementById("hits").innerHTML = 0
   document.getElementById("misses").innerHTML = 0
-  // document.getElementById("coins-left").innerHTML = nCoins
 }
 
 

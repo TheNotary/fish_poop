@@ -22,24 +22,7 @@ function keypressHook(keyCode) {
 }
 
 
-function resetChallenge(nCoins, mode) {
-  var coinChallengeScreen = window.game.getCurrentScreen();
-  coinChallengeScreen.animationObjects = [];
 
-  if (mode == undefined || mode == "progression") {
-    spawnMario();
-    spawnCoinBox(nCoins);
-    spawnGhost();
-  }
-  else if (mode == "training") {
-    window.game.setLevel();
-    var sprite = spawnToad();
-    sprite.setStance("walking");
-
-    // setDebugTarget(sprite);
-    sprite.goTowards([250, 95]);
-  }
-};
 
 
 function challenge_player() {
