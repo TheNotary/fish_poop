@@ -4,7 +4,7 @@
 
 
 function resetGameLogicCoinChallenge(mode) {
-  var screen = window.game.getCurrentScreen();
+  var screen = window.game.switchScreen("coin_ghost_challenge_screen");
   screen.animationObjects = []; // clear animation objects for screen
 
   set_available_letters();

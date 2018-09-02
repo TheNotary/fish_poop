@@ -7,7 +7,7 @@
 // out of the ghost screen class.
 //
 function Leveler() {
-  var checker = new LevelEnablementChecker();
+  var checker = new LevelEnablementChecker(this);
 
   this.setLevel = function(val) {
     window.currentLevel = val
@@ -45,9 +45,9 @@ function Leveler() {
   }
 
   this.advanceLevel = function() {
-    var level = parseInt( document.getElementById('level').innerHTML )
-    var newLevel = level + 1;
     var screen = game.getCurrentScreen()
+    var level = screen.level;
+    var newLevel = level + 1;
 
     if (checker.onFinalLevel(level)) {
       alert("you beat all the levels I've had time to program so far!");
@@ -64,6 +64,14 @@ function Leveler() {
     return newLevel;
   }
 
+  this.resetToFirstValidLevelIfLevelInvalidated = function() {
+    checker.resetToFirstValidLevelIfLevelInvalidated();
+  }
+
+  this.resetToFirstValidLevel = function() {
+    checker.resetToFirstValidLevel()
+  };
+
 };
 
 
@@ -74,15 +82,19 @@ function Leveler() {
 //
 // This class helps ensure that when a level is set, it is valid and enabled
 //
-function LevelEnablementChecker() {
+function LevelEnablementChecker(leveler) {
   // If current level is no-longer enabled, set current level to first available level
   // and reset the game...
   this.resetToFirstValidLevelIfLevelInvalidated = function() {
-    var level = parseInt( document.getElementById('level').innerHTML )
+    var level = game.getCurrentScreen().level;
 
-    if ( this.shouldWeSkipLevel(window.currentLevel) ) {
-      this.setLevel( this.getFirstEnabledLevel() )
+    if ( this.shouldWeSkipLevel(level) ) {
+      this.resetToFirstValidLevel()
     }
+  };
+
+  this.resetToFirstValidLevel = function() {
+    leveler.setLevel( this.getFirstEnabledLevel() )
   };
 
   this.shouldWeSkipLevel = function(lvl) {

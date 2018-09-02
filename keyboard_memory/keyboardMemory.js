@@ -101,7 +101,7 @@ window.KeyboardMemory = function(debugMode) {
       if (this.debugMode) window.debuggingFunctions();
   };
 
-  
+
   // In the future, this method would initiate the AJAX loading of this data
   // but for now it's just the interface to it
   this.initAssets = function() {
@@ -142,6 +142,7 @@ window.KeyboardMemory = function(debugMode) {
 
   this.switchScreen = function(newScreen) {
     this.currentScreen = newScreen;
+    return this.getCurrentScreen();
   }
 
   this.setLevel = function(val) {
