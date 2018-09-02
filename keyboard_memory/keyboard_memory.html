@@ -425,7 +425,6 @@ function toggleDialog() {
 
     <button onclick="toggleSettings()">Settings</button>
     <button class="debug" onclick="switch_to_world_map()">Switch To World Map Screen</button>
-    <button class="debug" onclick="switch_to_training()">Switch To Training</button>
     <button class="debug" onclick="leveler.changeLevelUp()">Level Up</button>
     <button class="debug" onclick="leveler.changeLevelDown()">Level Down</button>
     <button class="debug" onclick="leveler.advancePart()">Advance Part</button>
@@ -481,11 +480,11 @@ function toggleDialog() {
 
       <div>
         <em>Game Style:</em>
-        <div id="game-style" style="margin-left: 20px; display: none;">
-          <span><input id="gameStyle0" name="gameStyle" type="radio" checked="checked"></input> <label for="gameStyle0">Progress</label></span>
-          <span><input id="gameStyle1" name="gameStyle" type="radio"></input> <label for="gameStyle1">Training</label></span>
-          <span><input id="gameStyle2" name="gameStyle" type="radio"></input> <label for="gameStyle2">Min Reaction Speed</label></span>
-          <span><input id="gameStyle3" name="gameStyle" type="radio"></input> <label for="gameStyle3">Versus</label></span>
+        <div id="game-style" style="margin-left: 20px; ">
+          <button onclick="start_game('progression')">Normal Progression</button>
+          <button onclick="start_game('training')">Training</button>
+          <button class="debug" onclick="alert('not implemented')">Min Reaction Speed</button>
+          <button class="debug" onclick="alert('not implemented')">Versus</button>
         </div>
       </div>
 

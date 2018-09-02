@@ -1,4 +1,3 @@
-
 window.leveler = new Leveler();
 
 debugMode = false;
@@ -6,7 +5,6 @@ debugMode = false;
 window.game = new KeyboardMemory(debugMode);
 
 game.start();
-
 
 
 
