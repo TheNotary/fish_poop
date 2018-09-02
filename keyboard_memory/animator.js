@@ -1,3 +1,4 @@
+window.piffyCoinChallenge = new PiffyCoinChallenge();
 window.leveler = new Leveler();
 
 debugMode = false;

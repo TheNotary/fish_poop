@@ -3,6 +3,11 @@
 
 
 
+function PiffyCoinChallenge() {
+  
+}
+
+
 function resetGameLogicCoinChallenge(mode) {
   var screen = window.game.switchScreen("coin_ghost_challenge_screen");
   screen.animationObjects = []; // clear animation objects for screen
