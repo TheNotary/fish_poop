@@ -152,3 +152,13 @@ function LevelEnablementChecker(leveler) {
   }
 
 };
+
+
+// Export node module.
+if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') )
+{
+  module.exports = {
+    Leveler: Leveler,
+    LevelEnablementChecker: LevelEnablementChecker
+  }
+}
