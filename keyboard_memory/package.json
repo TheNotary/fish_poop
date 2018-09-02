@@ -4,7 +4,7 @@
   "description": "A fun typing game",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine"
+    "test": "node node_modules/jasmine/bin/jasmine"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/TheNotary/fish_poop/issues"
   },
-  "homepage": "https://github.com/TheNotary/fish_poop#readme"
+  "homepage": "https://github.com/TheNotary/fish_poop#readme",
+  "devDependencies": {
+    "jasmine": "^3.2.0"
+  }
 }
