@@ -307,7 +307,7 @@ function clearMenus() {
     toggleDialog()
 }
 
-function start_game(mode) {
+window.start_game = function(mode) {
   gameStatus = 'started'
   gameMode = mode
 
@@ -318,6 +318,13 @@ function start_game(mode) {
   reset_game_logic(mode)
 }
 
+window.end_game = function(msg) {
+  gameStatus = 'stopped'
+
+  handleOverlayGameEnd(msg)
+  clear_challenge()
+};
+
 function reset_game_logic(mode) {
   if (mode == "progression") {
     resetGameLogicCoinChallenge(mode)
@@ -326,15 +333,6 @@ function reset_game_logic(mode) {
     resetGameLogicTraining(mode)
   }
 };
-
-
-function end_game(msg) {
-  gameStatus = 'stopped'
-
-  handleOverlayGameEnd(msg)
-  clear_challenge()
-}
-
 
 function handleOverlayGameEnd(msg) {
   var overlay = document.getElementById('overlay-message')

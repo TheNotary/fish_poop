@@ -6,8 +6,8 @@
 // Since it contains a lot of logic, and requires the DOM, I kept this code
 // out of the ghost screen class.
 //
-function Leveler(associatedScreen, document) {
-  var checker = new LevelEnablementChecker(this, document);
+function Leveler(associatedScreen, window) {
+  var checker = new LevelEnablementChecker(this, window);
   var screen = associatedScreen;
   this.currentLevel = 0;
   this.levels = screen.levels;
@@ -15,10 +15,11 @@ function Leveler(associatedScreen, document) {
   this.setLevel = function(val) {
     // set background image
     screen.setLevel(val)
-    document.getElementById("level").innerHTML = val
+    window.document.getElementById("level").innerHTML = val
     this.currentLevel = val
 
-    end_game("Press Space");
+    window.end_game("Press Space");
+    return val;
   }
 
   this.changeLevelUp = function() {
@@ -34,7 +35,7 @@ function Leveler(associatedScreen, document) {
   }
 
   this.advancePart = function() {
-    var part = parseInt( document.getElementById('part').innerHTML )
+    var part = parseInt( window.document.getElementById('part').innerHTML )
 
     part++;
     if (part > 3) {
@@ -42,13 +43,14 @@ function Leveler(associatedScreen, document) {
       this.advanceLevel();
     }
 
-    document.getElementById('part').innerHTML = part
+    window.document.getElementById('part').innerHTML = part
     return part
   }
 
   this.advanceLevel = function() {
-    var level = screen.level;
+    var level = this.currentLevel;
     var newLevel = level + 1;
+
 
     if (checker.onFinalLevel(level)) {
       alert("you beat all the levels I've had time to program so far!");
@@ -60,9 +62,7 @@ function Leveler(associatedScreen, document) {
       if ( newLevel >= screen.levels.length ) newLevel = 0
     }
 
-    screen.setLevel(newLevel);
-    document.getElementById('level').innerHTML = newLevel
-    return newLevel;
+    return this.setLevel(newLevel);
   }
 
   // If current level is no-longer enabled, set current level to first available level
@@ -87,7 +87,7 @@ function Leveler(associatedScreen, document) {
 //
 // This class helps ensure that when a level is set, it is valid and enabled
 //
-function LevelEnablementChecker(leveler, document) {
+function LevelEnablementChecker(leveler, window) {
 
   this.shouldWeSkipLevel = function(lvl) {
     if ( atLeastOneLevelIsSelected() &&
@@ -106,7 +106,7 @@ function LevelEnablementChecker(leveler, document) {
   this.getLastEnabledLevel = function() {
     var max = 0;
     for (var i = 0; i < leveler.levels.length; i++) {
-      var el = document.getElementById("lvl" + i)
+      var el = window.document.getElementById("lvl" + i)
       if (el.checked)
         max = i
     }
@@ -116,7 +116,7 @@ function LevelEnablementChecker(leveler, document) {
 
   this.getFirstEnabledLevel = function() {
     for (var i = 0; i < leveler.levels.length; i++) {
-      var el = document.getElementById("lvl" + i)
+      var el = window.document.getElementById("lvl" + i)
       if (el.checked)
         return i
     }
@@ -126,7 +126,7 @@ function LevelEnablementChecker(leveler, document) {
 
   function atLeastOneLevelIsSelected() {
     for (var i = 0; i < leveler.levels.length; i++) {
-      var el = document.getElementById("lvl" + i)
+      var el = window.document.getElementById("lvl" + i)
       if (el.checked)
         return true
     }
@@ -135,7 +135,7 @@ function LevelEnablementChecker(leveler, document) {
   }
 
   function thisLevelIsDisabled(lvl) {
-    var el = document.getElementById("lvl" + lvl)
+    var el = window.document.getElementById("lvl" + lvl)
 
     if (!el.checked)
       return true
