@@ -55,7 +55,7 @@ function sprite_right() {
 
 function configureGhostSpeed() {
   window.myGhost.fx_move = {
-    "x": get_current_difficulty()["ghost_speed"],
+    "x": piffyCoinChallenge.get_current_difficulty()["ghost_speed"],
     "y": 0
   };
 }

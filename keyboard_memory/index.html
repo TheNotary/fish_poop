@@ -187,35 +187,9 @@ var home_row = [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';' ]
 var home_row_adv = [ 'g', 'h' ]
 
 
-// DIFFICULTY SECTION
-var difficulty_settings = [
-  {
-    "name": "Starter Kid",
-    "ghost_speed": 1,
-    "penalty_lunge": 40
-  },
-  {
-    "name": "Proper Kid",
-    "ghost_speed": 1.5,
-    "penalty_lunge": 60
-  },
-  {
-    "name": "Hacker Elite",
-    "ghost_speed": 2.9,
-    "penalty_lunge": 80
-  }
-]
 
-var current_difficulty_i = 0
-function get_current_difficulty() {
-  return difficulty_settings[get_difficulty_i()]
-}
 
-function get_difficulty_i() {
-  var radios = document.getElementsByName('difficulty')
-  for (var i = 0, length = radios.length; i < length; i++)
-    if (radios[i].checked) return i;
-}
+
 
 
 // Candidate format only, not really implemented....
@@ -272,7 +246,7 @@ function keyboard_func(e) {
     keyCode = 46
 
   if ( gameStatus == 'started' && gameMode == 'progression' ) {
-    keypressHook(keyCode)
+    piffyCoinChallenge.keypress(keyCode)
   }
 
   if (keyCode == 32) {  // Space bar
@@ -297,8 +271,8 @@ window.start_game = function(mode) {
   gameMode = mode
 
   ui.clearMenus()
-  clear_challenge()
-  clear_stats()
+  piffyCoinChallenge.clear_challenge()
+  piffyCoinChallenge.clear_stats()
 
   reset_game_logic(mode)
 }
@@ -307,13 +281,13 @@ window.end_game = function(msg) {
   gameStatus = 'stopped'
 
   ui.handleOverlayGameEnd(msg)
-  clear_challenge()
+  piffyCoinChallenge.clear_challenge()
 };
 
 
 function reset_game_logic(mode) {
   if (mode == "progression") {
-    resetGameLogicCoinChallenge(mode)
+    piffyCoinChallenge.resetGameLogicCoinChallenge(mode)
   }
   else if (mode == "training") {
     resetGameLogicTraining(mode)

@@ -16,11 +16,11 @@ describe("Leveler", function() {
 
   beforeEach(function() {
     document = new BrowserMock.Document({
-      "lvl0": { checked: true },
-      "lvl1": { checked: true },
-      "lvl2": { checked: true },
+      "lvl0":  { checked: true  },
+      "lvl1":  { checked: true  },
+      "lvl2":  { checked: true  },
       "level": { innerHTML: "0" },
-      "part": { innerHTML: "1" }
+      "part":  { innerHTML: "1" }
     });
     var window = {
       document: document,
