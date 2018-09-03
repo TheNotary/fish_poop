@@ -1,5 +1,5 @@
 if (Screen == undefined)
-  var Screen = require("../../engine/screen.js");  // For tests only, browser ignores this
+  var Screen = require("../engine/screen.js");  // For tests only, browser ignores this
 
 
 function WorldMapScreen(screenConfig) {

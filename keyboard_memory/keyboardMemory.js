@@ -29,8 +29,8 @@ function KeyboardMemory(params, window) {
   var that = this; // need to store this variable to help out animations which have their own 'this' value which confuses things
   this.debugMode = params.debugMode;
   var document = window.document;
-  this.graphics = new window.Graphics();
-  this.sound = new window.Sound();
+  this.graphics = new Graphics();
+  this.sound = new Sound();
   this.currentScreen = "";
   this.getCurrentScreen = function() { return this.screens[this.currentScreen] };
   this.setCurrentScreen = function(screen_name) { this.currentScreen = screen_name };

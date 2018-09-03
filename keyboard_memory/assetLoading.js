@@ -1,6 +1,11 @@
 // Define the assets that get loading into your application here...
 // The methods defined here are invoked in the 'heart' game file...
 
+if (Howl == undefined) {
+  let H = require("./vendor/howler.min.js");
+  var Howl = H.Howl;
+}
+
 // TODO: Make this audio read the actual .json data files the way a real programmer would do things...
 var Sound = function() {
   // specific to effects
@@ -18,7 +23,6 @@ var Sound = function() {
     urls: ["assets/audio/unit/smb_mariodie.wav"],
     volume: 0.10
   });
-
 
   this['audMenuMove'] = new Howl({
     urls: ["assets/audio/misc/menu_move.ogg"],

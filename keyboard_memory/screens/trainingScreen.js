@@ -1,5 +1,5 @@
 if (CoinGhostChallengeScreen == undefined)
-  var CoinGhostChallengeScreen = require("../../engine/coinGhostChallengeScreen.js");  // For tests only, browser ignores this
+  var CoinGhostChallengeScreen = require("./coinGhostChallengeScreen/coinGhostChallengeScreen.js");  // For tests only, browser ignores this
 
 
 function TrainingScreen(screenConfig) {
