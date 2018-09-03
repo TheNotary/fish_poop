@@ -41,6 +41,10 @@ function keypressHook(keyCode) {
 }
 
 
+function wasPossibleChallegeLetterPressed(keyCode) {
+  return (keyCode >= 32 && keyCode <= 126 && keyCode != 91);
+}
+
 
 
 

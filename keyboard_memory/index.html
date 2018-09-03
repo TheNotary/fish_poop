@@ -289,9 +289,6 @@ function keyboard_func(e) {
   }
 }
 
-function wasPossibleChallegeLetterPressed(keyCode) {
-  return (keyCode >= 32 && keyCode <= 126 && keyCode != 91);
-}
 
 function handleEscape(keyCode) {
   if (keyCode == 27)
@@ -318,6 +315,7 @@ window.end_game = function(msg) {
   ui.handleOverlayGameEnd(msg)
   clear_challenge()
 };
+
 
 function reset_game_logic(mode) {
   if (mode == "progression") {
