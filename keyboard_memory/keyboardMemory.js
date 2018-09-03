@@ -1,9 +1,33 @@
 // This file should be the ... 'heart' of the game.... though configuration should happen in index.js...
 //
 //
+if (asGameLoop == undefined)
+  var asGameLoop = require("./engine/gameLoop.js");
 
-window.KeyboardMemory = function(params) {
+// if (Graphics == undefined) {
+//   var AL = require("./assetLoading.js");
+//   var Graphics = AL.Graphics;
+//   var Sound = AL.Sound;
+// }
+
+if (WorldMapScreen == undefined)
+  var WorldMapScreen = require("./screens/worldMapScreen.js");
+
+if (CoinGhostChallengeScreen == undefined)
+  var CoinGhostChallengeScreen = require("./screens/coinGhostChallengeScreen/coinGhostChallengeScreen.js");
+
+if (TrainingScreen == undefined)
+  var TrainingScreen = require("./screens/trainingScreen.js");
+
+
+// if (WorldMapScreen == undefined)
+// if (WorldMapScreen == undefined)
+
+
+
+function KeyboardMemory(params, window) {
   var that = this; // need to store this variable to help out animations which have their own 'this' value which confuses things
+  var document = window.document;
   this.debugMode = params.debugMode;
   this.currentScreen = "";
   this.getCurrentScreen = function() { return this.screens[this.currentScreen] };
@@ -77,6 +101,7 @@ window.KeyboardMemory = function(params) {
 
   this.screens = {};
 
+  console.log("PResident" + new this.Graphics())
   if (this.Graphics != undefined)
     this.graphics = new this.Graphics();
 
@@ -184,7 +209,7 @@ window.KeyboardMemory = function(params) {
 
   this.specifyToHtmlThatAssetsLoaded = function(elId) {
     if (elId == null)
-      if (game.debugMode == true) console.log("Attempted to load image, but no HTML element was specified to indicate it's load status.");
+      if (game.debugMode == true) console.log("Attempted to report completed image load, but no HTML element was specified to indicate it's load status.");
     var el = document.getElementById(elId);
     if (el != null)
       el.innerHTML = "Loaded";
@@ -211,6 +236,10 @@ window.KeyboardMemory = function(params) {
 
 };
 
-
 // Give KeyboardMemory a game loop pipeline via this mixin pattern
 asGameLoop.call(KeyboardMemory.prototype);
+
+// Export node module.
+if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') ) {
+  module.exports = KeyboardMemory;
+}

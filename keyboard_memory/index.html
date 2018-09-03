@@ -496,6 +496,16 @@ window.ui = {
 </div>
 </body>
 
+
+<script>
+
+
+window.require = function(path) {
+  console.log("ERROR:  An object wasn't loaded from the js library path: " + path);
+  console.log("This is likely a problem where a dependency wasn't properly loaded into the browser via <script> tags in the main html file.");
+}
+</script>
+
 <!--  Load required 3rd party libraries -->
 
 <script src="vendor/howler.min.js"></script>

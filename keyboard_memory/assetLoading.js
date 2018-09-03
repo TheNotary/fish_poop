@@ -85,3 +85,12 @@ window.KeyboardMemory.prototype.Graphics = function() {
   };
 
 };
+
+
+// Export node module.
+if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') ) {
+  module.exports = {
+    Graphics: Graphics,
+    Sound: Sound
+  };
+}

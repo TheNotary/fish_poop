@@ -182,7 +182,6 @@ function drawGraphicsDebugInfo(screen) {
 }
 
 
-var thisSpotWasRun = 0;
 var totTimeSpent = 0;
 var timeSpentThisRun = 0;
 var longestRun = 0;
@@ -196,7 +195,7 @@ function processTimeDebugInfo(screen) {
         longestRun = timeSpentThisRun;
     }
 
-    screen.context.fillText("Function Hits: " + thisSpotWasRun, 10, 10);
+    screen.context.fillText("Function Hits: " + game.thisSpotWasRun, 10, 10);
     screen.context.fillText("Total Time Spent: " + totTimeSpent, 10, 20);
     screen.context.fillText("Time Spent This Hit: " + timeSpentThisRun, 10, 30);
     //screen.context.fillText("Longest Run: " + longestRun, 10, 40);
@@ -216,5 +215,5 @@ function debuggingFunctions() {
     // auto skip title screen
     // game.titleScreen.ExitScreen("intro-on_air_ship");
 
-    useArrowKeysToMoveCanvasSprite();
+    // useArrowKeysToMoveCanvasSprite();
 }

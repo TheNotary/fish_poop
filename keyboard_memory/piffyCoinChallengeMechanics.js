@@ -3,6 +3,7 @@
 
 
 function PiffyCoinChallenge(params, window) {
+  var document = window.document;
   var config = params;
   var levelSettings = params['level_settings'];
   this.difficulty_settings = params['difficulty_settings'];
@@ -136,4 +137,10 @@ function PiffyCoinChallenge(params, window) {
     return shuffle(new_letter_clip.concat(old_letter_clip))
   }
 
+}
+
+
+// Export node module.
+if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') ) {
+  module.exports = PiffyCoinChallenge;
 }

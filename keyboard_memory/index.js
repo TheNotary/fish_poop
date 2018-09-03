@@ -69,12 +69,12 @@ difficulty_settings = [
 
 
 
-gameConfig = {
+KMConfig = {
   debugMode: debugMode,
   level_settings: level_settings
 }
 
-window.game = new KeyboardMemory(gameConfig);
+window.game = new KeyboardMemory(KMConfig, window);
 game.start();
 
 

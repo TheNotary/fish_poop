@@ -4,7 +4,7 @@ if (Screen == undefined)
 
 
 function CoinGhostChallengeScreen(screenConfig) {
-  if (screenConfig === undefined) return;
+  if (typeof screenConfig === 'undefined') return;
   Screen.call(this, screenConfig);
   this.levels = screenConfig['levels'];
   this.animationObjects = [];

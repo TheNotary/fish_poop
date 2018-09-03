@@ -1,3 +1,7 @@
+if (Screen == undefined)
+  var Screen = require("../../engine/screen.js");  // For tests only, browser ignores this
+
+
 function WorldMapScreen(screenConfig) {
   Screen.call(this, screenConfig);
   // this.levels = screenConfig['levels']
@@ -63,4 +67,10 @@ WorldMapScreen.prototype.render = function() {
     var obj = animationObjects[i];
     obj.draw(this.context);
   }
+}
+
+
+// Export node module.
+if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') ) {
+  module.exports = WorldMapScreen
 }

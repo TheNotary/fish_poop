@@ -1,9 +1,9 @@
-window.thisSpotWasRun = 0;
-
 // This mixin is applied to the game object (eg InitialFantasy) to give it a
 // game loop pipeline pattern from within initialize_game.js
 var asGameLoop = function() {
+    if (typeof window === 'undefined') return;  // don't do anything here when running from node
     this.tickCount = 0;
+    this.thisSpotWasRun = 0;
     var lastMainEndedAt = 0;
     var gameTime = 0.0;
     var gameFps = 0.0;
@@ -63,7 +63,7 @@ var asGameLoop = function() {
 
         if (bankScore == "none yet" && game.time() > 10) {
             bankScore = avgFps;
-            goldenScore = thisSpotWasRun;
+            goldenScore = this.thisSpotWasRun;
         }
         lastMainEndedAt = Date.now();
     };
@@ -76,7 +76,7 @@ var asGameLoop = function() {
         // return true;
         if (delta >= tickInterval * 4 && lastTick > 0) {
             console.debug("we're an entire tick behind!  We probably aren't finishing drawing fast enough  " + delta + " / " + tickInterval + '   last draw t: ' + lastDrawTime);
-            thisSpotWasRun++;
+            this.thisSpotWasRun++;
         }
         return delta >= tickInterval;
     }
@@ -119,3 +119,10 @@ var asGameLoop = function() {
 
     return this;
 };
+
+
+
+// Export node module.
+if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') ) {
+  module.exports = asGameLoop;
+}
