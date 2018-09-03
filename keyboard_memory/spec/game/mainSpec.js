@@ -12,9 +12,10 @@ var LevelEnablementChecker = PL.LevelEnablementChecker;
 
 describe("Leveler", function() {
   var leveler;
+  var document;
 
   beforeEach(function() {
-    var document = new BrowserMock.Document({
+    document = new BrowserMock.Document({
       "lvl0": { checked: true },
       "lvl1": { checked: true },
       "lvl2": { checked: true },
@@ -41,11 +42,6 @@ describe("Leveler", function() {
     expect(leveler.currentLevel).toBe(1);
   });
 
-  // it("changes to lvl0 when on lvl1 and that lvl is invalidated", function() {
-  //
-  // });
-
-
   it("changes to lvl1 when advance part is called 3 times", function() {
     leveler.advancePart()
     leveler.advancePart()
@@ -54,11 +50,18 @@ describe("Leveler", function() {
     expect(leveler.currentLevel).toBe(1);
   });
 
-
   it("changes to lvl1 when advance level is called", function() {
     leveler.advanceLevel()
+
     expect(leveler.currentLevel).toBe(1);
   });
 
+  it("changes to lvl0 when on lvl1 once lvl1 is invalidated", function() {
+    leveler.setLevel(1)
+
+    document.getElementById("lvl1").checked = false;
+    leveler.resetToFirstValidLevelIfLevelInvalidated()
+    expect(leveler.currentLevel).toBe(0);
+  });
 
 });

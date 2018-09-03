@@ -69,7 +69,7 @@ function Leveler(associatedScreen, window) {
   // and reset the game...
   this.resetToFirstValidLevelIfLevelInvalidated = function() {
     if ( checker.shouldWeSkipLevel(screen.level) ) {
-      checker.resetToFirstValidLevel()
+      this.resetToFirstValidLevel()
     }
   };
 
