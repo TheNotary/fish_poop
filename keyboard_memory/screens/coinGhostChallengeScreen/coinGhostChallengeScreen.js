@@ -1,3 +1,9 @@
+if (Screen == undefined)
+  var Screen = require("../../engine/screen.js");  // For tests only, browser ignores this
+
+// console.log("HIHIHIH: " + Screen)
+
+
 function CoinGhostChallengeScreen(screenConfig) {
   if (screenConfig === undefined) return;
   Screen.call(this, screenConfig);
@@ -120,10 +126,15 @@ CoinGhostChallengeScreen.prototype.handleKeys = function(evt) {
 };
 
 
-
 CoinGhostChallengeScreen.prototype.setLevel = function(newLevel) {
   this.level = newLevel;
 
   // reset the animation objects
   this.animationObjects = [];
+}
+
+
+// Export node module.
+if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') ) {
+  module.exports = CoinGhostChallengeScreen
 }

@@ -6,8 +6,8 @@
 // Since it contains a lot of logic, and requires the DOM, I kept this code
 // out of the ghost screen class.
 //
-function Leveler(associatedScreen) {
-  var checker = new LevelEnablementChecker(this);
+function Leveler(associatedScreen, document) {
+  var checker = new LevelEnablementChecker(this, document);
   var screen = associatedScreen;
   this.currentLevel = 0;
   this.levels = screen.levels;
@@ -87,7 +87,7 @@ function Leveler(associatedScreen) {
 //
 // This class helps ensure that when a level is set, it is valid and enabled
 //
-function LevelEnablementChecker(leveler) {
+function LevelEnablementChecker(leveler, document) {
 
   this.shouldWeSkipLevel = function(lvl) {
     if ( atLeastOneLevelIsSelected() &&
@@ -146,8 +146,7 @@ function LevelEnablementChecker(leveler) {
 
 
 // Export node module.
-if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') )
-{
+if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') ) {
   module.exports = {
     Leveler: Leveler,
     LevelEnablementChecker: LevelEnablementChecker

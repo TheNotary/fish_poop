@@ -46,3 +46,9 @@ Screen.prototype.hide = function(callbackFunc) {
         callbackFunc.call();
     });
 };
+
+
+// Export node module.
+if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') ) {
+  module.exports = Screen
+}

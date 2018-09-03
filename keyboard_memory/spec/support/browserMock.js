@@ -1,7 +1,7 @@
 
 
-function Document() {
-  var elements = {};
+function Document(theElements) {
+  var elements = theElements;
 
   this.getElementById = function(id) {
     return elements[id];
