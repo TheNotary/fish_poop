@@ -2,8 +2,7 @@
 // The methods defined here are invoked in the 'heart' game file...
 
 // TODO: Make this audio read the actual .json data files the way a real programmer would do things...
-window.KeyboardMemory.prototype.Sound = function() {
-
+var Sound = function() {
   // specific to effects
   this['smallJump'] = new Howl({
     urls: ["assets/audio/unit/smb_jump-small.wav"],
@@ -48,7 +47,7 @@ window.KeyboardMemory.prototype.Sound = function() {
 // This object stores all the Image objects for the whole game (ideally).
 // Through this single point we can monitor if we need to keep waiting for the
 // game to load.
-window.KeyboardMemory.prototype.Graphics = function() {
+var Graphics = function() {
   var that = this;
   this.imageCache = {};
   this.loadingImages = []; // log what images aren't loaded in yet...
