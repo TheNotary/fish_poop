@@ -101,7 +101,7 @@ function PiffyCoinChallenge(params, window) {
     var part = parseInt( document.getElementById('part').innerHTML )
     part = part - 1
 
-    window.available_letters = this.padWithOldLetters(levelSettings[level][part]);
+    window.available_letters = this.padWithOldLetters(levelSettings[level].parts[part]);
 
     window.precalculated_challenge_letters = window.available_letters.slice(0);
     console.log(window.precalculated_challenge_letters);
