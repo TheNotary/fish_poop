@@ -2,10 +2,12 @@
 // challenge game, such as the callback soup of presenting "Press Start" perhaps...
 
 
-
-function PiffyCoinChallenge() {
-
+function PiffyCoinChallenge(params) {
+  var config = params
 }
+
+
+
 
 
 function resetGameLogicCoinChallenge(mode) {

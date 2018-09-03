@@ -4,7 +4,11 @@ window.game = new KeyboardMemory(debugMode);
 game.start();
 
 
-window.piffyCoinChallenge = new PiffyCoinChallenge();
+window.piffyCoinChallenge = new PiffyCoinChallenge({
+  challengeElementId: "challenge",
+  missesElementId: "misses",
+  hitsElementId: "hits"
+});
 window.leveler = new Leveler(game.screens['coin_ghost_challenge_screen'], window);
 
 
