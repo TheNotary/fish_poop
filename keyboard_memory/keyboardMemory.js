@@ -20,10 +20,6 @@ if (TrainingScreen == undefined)
   var TrainingScreen = require("./screens/trainingScreen.js");
 
 
-// if (WorldMapScreen == undefined)
-// if (WorldMapScreen == undefined)
-
-
 
 function KeyboardMemory(params, window) {
   var that = this; // need to store this variable to help out animations which have their own 'this' value which confuses things
