@@ -1,10 +1,10 @@
-// This file should be the ... 'heart' of the game....
+// This file should be the ... 'heart' of the game.... though configuration should happen in index.js...
 //
 //
 
-window.KeyboardMemory = function(debugMode) {
+window.KeyboardMemory = function(params) {
   var that = this; // need to store this variable to help out animations which have their own 'this' value which confuses things
-  this.debugMode = debugMode;
+  this.debugMode = params.debugMode;
   this.currentScreen = "";
   this.getCurrentScreen = function() { return this.screens[this.currentScreen] };
   this.setCurrentScreen = function(screen_name) { this.currentScreen = screen_name };
@@ -28,9 +28,7 @@ window.KeyboardMemory = function(debugMode) {
     }
   ];
 
-
   this.configs = {
-    "debugMode": false,
     "screens":
       [
         // {

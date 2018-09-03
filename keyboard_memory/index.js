@@ -70,10 +70,11 @@ difficulty_settings = [
 
 
 gameConfig = {
-  debugMode: debugMode
+  debugMode: debugMode,
+  level_settings: level_settings
 }
 
-window.game = new KeyboardMemory(debugMode);
+window.game = new KeyboardMemory(gameConfig);
 game.start();
 
 
