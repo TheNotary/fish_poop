@@ -4,7 +4,7 @@
 
 
 function PiffyCoinChallenge() {
-  
+
 }
 
 
@@ -54,6 +54,11 @@ function challenge_player() {
 function clear_challenge() {
   var challengeTag = document.getElementById('challenge')
   challengeTag.innerHTML = "&nbsp;"
+}
+
+function clear_stats() {
+  document.getElementById("hits").innerHTML = 0
+  document.getElementById("misses").innerHTML = 0
 }
 
 

@@ -295,23 +295,17 @@ function wasPossibleChallegeLetterPressed(keyCode) {
 
 function handleEscape(keyCode) {
   if (keyCode == 27)
-    clearMenus()
+    ui.clearMenus()
 }
 
 
-function clearMenus() {
-  handleOverlayGameStart()
-  if ( document.getElementById("settings-menu").style.display == "block")
-    toggleSettings()
-  if ( document.getElementById("dialog-menu").style.display == "block" )
-    toggleDialog()
-}
+
 
 window.start_game = function(mode) {
   gameStatus = 'started'
   gameMode = mode
 
-  clearMenus()
+  ui.clearMenus()
   clear_challenge()
   clear_stats()
 
@@ -321,7 +315,7 @@ window.start_game = function(mode) {
 window.end_game = function(msg) {
   gameStatus = 'stopped'
 
-  handleOverlayGameEnd(msg)
+  ui.handleOverlayGameEnd(msg)
   clear_challenge()
 };
 
@@ -334,26 +328,7 @@ function reset_game_logic(mode) {
   }
 };
 
-function handleOverlayGameEnd(msg) {
-  var overlay = document.getElementById('overlay-message')
 
-  overlay.innerHTML = msg
-  setTimeout(function() {
-    overlay.innerHTML = "Press Space"
-  }, 5000)
-  overlay.style.display = "block"
-}
-
-function handleOverlayGameStart() {
-  var overlay = document.getElementById('overlay-message')
-  overlay.style.display = "none"
-  overlay.innerHTML = ""
-}
-
-function clear_stats() {
-  document.getElementById("hits").innerHTML = 0
-  document.getElementById("misses").innerHTML = 0
-}
 
 
 
@@ -368,47 +343,71 @@ function shuffle(array) {
 }
 
 
+window.ui = {
+  clearMenus: function() {
+    this.handleOverlayGameStart()
+    if ( document.getElementById("settings-menu").style.display == "block")
+      this.toggleSettings()
+    if ( document.getElementById("dialog-menu").style.display == "block" )
+      this.toggleDialog()
+  },
+  toggle_about_text: function() {
+    var txt = document.getElementById("about-text").innerHTML
 
-function toggle_about_text() {
-  var txt = document.getElementById("about-text").innerHTML
+    var dm = document.getElementById("dialog-menu")
+    dm.innerHTML = txt
 
-  var dm = document.getElementById("dialog-menu")
-  dm.innerHTML = txt
+    if (dm.style.display == "") {
+      this.clearMenus()
+      dm.style.display = "block"
+    }
+    else {
+      dm.style.display = ""
+    }
+  },
+  toggleSettings: function() {
+    var el = document.getElementById("settings-menu")
 
-  if (dm.style.display == "") {
-    clearMenus()
-    dm.style.display = "block"
+    if (el.style.display == "") {
+      this.clearMenus()
+      el.style.display = "block"
+    }
+    else {
+      el.style.display = ""
+      leveler.resetToFirstValidLevelIfLevelInvalidated()
+      if (window.myGhost != undefined) configureGhostSpeed()
+    }
+  },
+  toggleDialog: function() {
+    var el = document.getElementById("dialog-menu");
+
+    if (el.style.display == "") {
+      this.clearMenus()
+      el.style.display = "block";
+    }
+    else {
+      el.style.display = "";
+    }
+  },
+  handleOverlayGameEnd: function(msg) {
+    var overlay = document.getElementById('overlay-message')
+
+    overlay.innerHTML = msg
+    setTimeout(function() {
+      overlay.innerHTML = "Press Space"
+    }, 5000)
+    overlay.style.display = "block"
+  },
+  handleOverlayGameStart: function() {
+    var overlay = document.getElementById('overlay-message')
+    overlay.style.display = "none"
+    overlay.innerHTML = ""
   }
-  else {
-    dm.style.display = ""
-  }
-}
 
-window.toggleSettings = function() {
-  var el = document.getElementById("settings-menu")
+};
 
-  if (el.style.display == "") {
-    clearMenus()
-    el.style.display = "block"
-  }
-  else {
-    el.style.display = ""
-    leveler.resetToFirstValidLevelIfLevelInvalidated()
-    if (window.myGhost != undefined) configureGhostSpeed()
-  }
-}
 
-function toggleDialog() {
-  var el = document.getElementById("dialog-menu");
 
-  if (el.style.display == "") {
-    clearMenus()
-    el.style.display = "block";
-  }
-  else {
-    el.style.display = "";
-  }
-}
 
 </script>
 
@@ -421,12 +420,12 @@ function toggleDialog() {
 
   <div id="console" class="Aligner-item">
 
-    <button onclick="toggleSettings()">Settings</button>
+    <button onclick="ui.toggleSettings()">Settings</button>
     <button class="debug" onclick="switch_to_world_map()">Switch To World Map Screen</button>
     <button class="debug" onclick="leveler.changeLevelUp()">Level Up</button>
     <button class="debug" onclick="leveler.changeLevelDown()">Level Down</button>
     <button class="debug" onclick="leveler.advancePart()">Advance Part</button>
-    <button onclick="toggle_about_text()">About</button>
+    <button onclick="ui.toggle_about_text()">About</button>
     <div id="about-text">
       <div>
         Press the start button (space) and a letter will appear on the screen.
@@ -435,7 +434,7 @@ function toggleDialog() {
         The ghost will close in on mario for as long as a letter is on the screen.
       </div>
 
-      <button onclick="toggle_about_text()" class="center confirm-btn">DONE</button>
+      <button onclick="ui.toggle_about_text()" class="center confirm-btn">DONE</button>
     </div>
 
   </div>
@@ -474,7 +473,7 @@ function toggleDialog() {
           <li><input id="lvl1" type="checkbox" checked="checked"></input> 2 - I T .</li>
           <li><input id="lvl2" type="checkbox" checked="checked"></input> 2 - O R N</li>
         </ul>
-        <button onclick="leveler.resetToFirstValidLevel(); toggleSettings(); start_game('progression');">Restart from Beginning</button>
+        <button onclick="leveler.resetToFirstValidLevel(); ui.toggleSettings(); start_game('progression');">Restart from Beginning</button>
       </div>
 
       <div>
@@ -487,7 +486,7 @@ function toggleDialog() {
         </div>
       </div>
 
-      <button id="save-settings-btn" onclick="toggleSettings()">Done</button>
+      <button id="save-settings-btn" onclick="ui.toggleSettings()">Done</button>
     </div>
 
     <div id="dialog-menu" class="menu">About</div>
