@@ -8,11 +8,35 @@
 //
 function Leveler(associatedScreen, window) {
   var checker = new LevelEnablementChecker(this, window);
-  var document = window.document
+  var document = window.document;
   var screen = associatedScreen;
   this.currentLevel = 0;
   var part = 0;
   this.levels = screen.levels;
+
+  // Builds the checkboxes for all those levels so you can enable/ disable them.
+  this.buildLevelWhitelistConsole = function() {
+    var consoleHtml = "";
+    consoleHtml += "<em>Enabled Levels:</em>";
+    consoleHtml += "<ul>";
+
+    for (var i = 0; i < this.levels.length; i++) {
+      let lvl = this.levels[i];
+      let displayText = "HAHAHA"
+      consoleHtml += '<li>';
+      consoleHtml += '<input id="lvl' + i + '" type="checkbox" checked="checked">';
+      consoleHtml += '</input>';
+      consoleHtml += ' ' + (i+1) + ' - ' + lvl.desc;
+      consoleHtml += '</li>';
+    }
+
+    consoleHtml += "</ul>";
+    consoleHtml += "<button onclick=\"ui.restartFromBeginningClicked();\">Restart from Beginning</button>"
+
+    document.getElementById("level-whitelist-console").innerHTML = consoleHtml;
+    return consoleHtml
+  };
+  this.buildLevelWhitelistConsole();
 
   this.setLevel = function(val) {
     // set background image

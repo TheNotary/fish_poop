@@ -25,7 +25,8 @@ describe("Leveler", function() {
       "lvl1":  { checked: true  },
       "lvl2":  { checked: true  },
       "level": { innerHTML: "0" },
-      "part":  { innerHTML: "1" }
+      "part":  { innerHTML: "1" },
+      "level-whitelist-console": { innerHTML: "" }
     });
     var window = {
       document: document,
@@ -75,6 +76,12 @@ describe("Leveler", function() {
     leveler.advanceLevel();
 
     expect(leveler.currentLevel).toBe(2);
+  });
+
+  it("sets the level whitelist console correctly with the expected number of characters", function() {
+    let actualHtml = document.getElementById("level-whitelist-console").innerHTML
+
+    expect(actualHtml.length).toBe(362)
   });
 
 });

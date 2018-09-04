@@ -6,6 +6,10 @@
 
 <style>
 
+.debug {
+  display: none;
+}
+
 @font-face {
     font-family: "My Custom Font";
     src: url(assets/fonts/SuperMario256.ttf) format("truetype");
@@ -32,10 +36,6 @@ em {
   max-width: 60%;
 }
 
-.debug {
-  display: none;
-}
-
 .center {
   display: flex;
   margin-left: auto;
@@ -58,6 +58,10 @@ body {
 #console {
   align-self: flex-start;
   /* min-width: 178px; */
+}
+
+#game-style {
+  margin-left: 20px;
 }
 
 #stats {
@@ -138,7 +142,7 @@ body {
 
 #settings-menu {
   display: none;
-
+  height: auto;
 }
 
 .menu {
@@ -377,6 +381,11 @@ window.ui = {
     var overlay = document.getElementById('overlay-message')
     overlay.style.display = "none"
     overlay.innerHTML = ""
+  },
+  restartFromBeginningClicked: function() {
+    leveler.resetToFirstValidLevel();
+    ui.toggleSettings();
+    // start_round('progression');
   }
 
 };
@@ -441,19 +450,16 @@ window.ui = {
 
       </div>
 
-      <div>
+      <div id="level-whitelist-console">
         <em>Enabled Levels:</em>
         <ul>
-          <li><input id="lvl0" type="checkbox" checked="checked"></input> 1 - Home Row (including G + H)</li>
-          <li><input id="lvl1" type="checkbox" checked="checked"></input> 2 - I T .</li>
-          <li><input id="lvl2" type="checkbox" checked="checked"></input> 2 - O R N</li>
+            ... Dynamically Generated ...
         </ul>
-        <button onclick="leveler.resetToFirstValidLevel(); ui.toggleSettings(); start_round('progression');">Restart from Beginning</button>
       </div>
 
       <div>
         <em>Game Style:</em>
-        <div id="game-style" style="margin-left: 20px; ">
+        <div id="game-style">
           <button onclick="end_game(); start_round('progression')">Normal Progression</button>
           <button onclick="start_round('training')">Training</button>
           <button class="debug" onclick="alert('not implemented')">Min Reaction Speed</button>
