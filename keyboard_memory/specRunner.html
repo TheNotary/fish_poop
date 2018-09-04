@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Jasmine Spec Runner</title>
+  </head>
+
+<body onkeydown="keyboard_func(event)">
+
+  <div id="page-wrap" class="Aligner">
+
+    <div id="console" class="Aligner-item">
+
+      <button onclick="ui.toggleSettings()">Settings</button>
+      <button class="debug" onclick="switch_to_world_map()">Switch To World Map Screen</button>
+      <button class="debug" onclick="leveler.advanceLevel()">Level Up</button>
+      <button class="debug" onclick="leveler.changeLevelDown()">Level Down</button>
+      <button class="debug" onclick="leveler.advancePart()">Advance Part</button>
+      <button onclick="ui.toggle_about_text()">About</button>
+      <div id="about-text">
+        <div>
+          Press the start button (space) and a letter will appear on the screen.
+          Type that letter as fast as you can to make the letter dissapear.
+          The faster you are, the better your score!
+          The ghost will close in on mario for as long as a letter is on the screen.
+        </div>
+
+        <button onclick="ui.toggle_about_text()" class="center confirm-btn">DONE</button>
+      </div>
+
+    </div>
+
+    <div id="game" class="Aligner-item">
+      <div id="load-status">
+        <h3>Loading...</h3>
+        <ul>
+          <li>Objects still Loading: <span id="loading-count"></span></li>
+          <li>Mario: <span id="mario-img">loading...</span> </li>
+          <li>Coinbox: <span id="coinbox-img">loading...</span> </li>
+          <li>Ghost: <span id="ghost-img">loading...</span> </li>
+          <li>Level 1 Background: <span id="fields-img">loading...</span> </li>
+        </ul>
+      </div>
+
+      <div id="settings-menu" class="menu">
+        <div>
+          <em>Logged in User:</em> <span>TheNotary</span>
+        </div>
+
+        <div>
+          <em>Difficulty Setting:</em>
+          <div id="game-difficulty" style="margin-left: 20px">
+            <span><input id="difficulty0" name="difficulty" type="radio" checked="checked"></input> <label for="difficulty0">Starter Kid</label></span>
+            <span><input id="difficulty1" name="difficulty" type="radio"></input> <label for="difficulty1">Proper Kid</label></span>
+            <span><input id="difficulty2" name="difficulty" type="radio"></input> <label for="difficulty2">Hacker Elite</label></span>
+          </div>
+
+        </div>
+
+        <div id="level-whitelist-console">
+          <em>Enabled Levels:</em>
+          <ul>
+              ... Dynamically Generated ...
+          </ul>
+        </div>
+
+        <div>
+          <em>Game Style:</em>
+          <div id="game-style">
+            <button onclick="end_game(); start_round('progression')">Normal Progression</button>
+            <button onclick="start_round('training')">Training</button>
+            <button class="debug" onclick="alert('not implemented')">Min Reaction Speed</button>
+            <button class="debug" onclick="alert('not implemented')">Versus</button>
+          </div>
+        </div>
+
+        <button id="save-settings-btn" onclick="ui.toggleSettings()">Done</button>
+      </div>
+
+      <div id="dialog-menu" class="menu">About</div>
+
+      <div id="overlay-message">Loading<span id="loading-dots"></span></div>
+      <h1 id="challenge">&nbsp;</h1>
+      <div id="animation-frame" class="debug">
+        <div>Animation Frame: <span id="animationFrameIndex">1</span></div>
+        <div>Animation Frame in JSON: <span id="animationFrameInJsonFile">1</span></div>
+      </div>
+
+      <canvas id="canvas" width="1000" height="500"></canvas>
+    </div>
+
+    <div id="stats" class="Aligner-item">
+      <!-- <div>Coins Left: <span id="coins-left"></span></div> -->
+      <div>Level <span id="level">0</span> and Part <span id="part">1</span> of 3</div>
+      <div>Misses: <span id="misses">0</div>
+      <div>Hits: <span id="hits">0</span></div>
+    </div>
+
+    <div id="sprite-controls" class="debug">
+      <button onclick="spawnGhost()">Spawn Ghost</button>
+      <button onclick="spawnSprite()">Spawn Blah</button>
+      <button onclick="interaction()">interaction</button>
+    </div>
+
+
+    <audio id="audTitleScreen" class="music">
+      <!-- <source src="/audio/opener/Final_Fantasy_4_Lacrima_OC_ReMix.ogg" type="audio/ogg"></source> -->
+      <!-- <source src="/audio/opener/Final_Fantasy_4_Lacrima_OC_ReMix.mp3" type="audio/mp3"></source> -->
+      Your browser isn't intended for super fun audio time.
+    </audio>
+
+    <audio id="audBattle" class="music">
+      <!-- <source src="/audio/opener/Final_Fantasy_4_Lacrima_OC_ReMix.ogg" type="audio/ogg"></source> -->
+      <!-- <source src="/audio/opener/Final_Fantasy_4_Lacrima_OC_ReMix.mp3" type="audio/mp3"></source> -->
+      Your browser isn't intended for super fun audio time.
+    </audio>
+
+  </div>
+</body>
+
+    <!-- You need to specify package 'jasmine-core' in your Node.js package.json -->
+
+    <link rel="shortcut icon" href="node_modules/jasmine-core/images/jasmine_favicon.png">
+    <link rel="stylesheet" href="node_modules/jasmine-core/lib/jasmine-core/jasmine.css">
+
+    <script src="node_modules/jasmine-core/lib/jasmine-core/jasmine.js"></script>
+    <script src="node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
+    <script src="node_modules/jasmine-core/lib/jasmine-core/boot.js"></script>
+
+    <!-- Source and Spec dependencies -->
+		<script src="vendor/howler.min.js"></script>
+
+    <!-- Source files -->
+		<script src="assets/effects/movable.js"></script>
+		<script src="assets/effects/lootable.js"></script>
+		<script src="assets/effects/explodable.js"></script>
+		<script src="assets/effects/jumpable.js"></script>
+
+		<script src="assets/enemies.json"></script>
+		<script src="assets/mario.json"></script>
+		<script src="assets/toad.json"></script>
+		<script src="assets/coins.json"></script>
+		<script src="assets/coinbox.json"></script>
+
+		<script src="engine/screen.js"></script>
+		<script src="engine/gameLoop.js"></script>
+		<script src="engine/userInput.js"></script>
+		<script src="unit.js"></script>
+		<script src="debugging.js"></script>
+
+		<script src="piffyLeveler.js"></script>
+		<script src="piffyCoinChallengeMechanics.js"></script>
+		<script src="piffyTrainingMechanics.js"></script>
+		<script src="assetLoading.js"></script>
+		<script src="screens/worldMapScreen.js"></script>
+		<script src="screens/coinGhostChallengeScreen/coinGhostChallengeScreen.js"></script>
+		<script src="screens/trainingScreen.js"></script>
+		<script src="keyboardMemory.js"></script>
+
+		<script src="index.js"></script>
+
+    <!-- Spec files -->
+    <script src="spec/integration/integrationSpec.js"></script>
+</html>
