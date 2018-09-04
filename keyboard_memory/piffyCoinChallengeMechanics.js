@@ -19,6 +19,9 @@ function PiffyCoinChallenge(params, window) {
     if (radios[i].checked) return i;
   };
 
+  // When a round is over, we need to reset all the sprites, deleting them, and
+  // replacing them in their starting places.  The challenge letters must also
+  // be recalculated.
   this.resetGameLogicCoinChallenge = function(mode) {
     var screen = window.game.switchScreen("coin_ghost_challenge_screen");
     screen.animationObjects = []; // clear animation objects for screen
@@ -90,7 +93,7 @@ function PiffyCoinChallenge(params, window) {
       window.game.sound['win'].play()
       else
       game.sound['victory'].play()
-      end_game("Great Work!")
+      end_round("Great Work!")
       window.myGhost.destroyMe = true
     }
     window.myMario.setStance("jumping");

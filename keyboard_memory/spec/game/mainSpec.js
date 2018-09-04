@@ -29,7 +29,7 @@ describe("Leveler", function() {
     });
     var window = {
       document: document,
-      end_game: _ => {} };
+      end_round: _ => {} };
 
     var coinScreen = new CoinGhostChallengeScreen();
     coinScreen.levels = cgcConfig.levels
@@ -101,7 +101,7 @@ describe("KeyboardMemory", function() {
     });
     var window = {
       document: document,
-      end_game: _ => {} };
+      end_round: _ => {} };
 
     keyboardMemory = new KeyboardMemory(config, window);
   });

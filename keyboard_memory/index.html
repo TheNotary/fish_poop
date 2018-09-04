@@ -252,7 +252,7 @@ function keyboard_func(e) {
   if (keyCode == 32) {  // Space bar
     e.preventDefault(); // don't let space scroll the screen down
     if (gameStatus == 'stopped' && gameMode == 'progression') {
-      start_game('progression')
+      start_round('progression')
     }
   }
 }
@@ -266,7 +266,7 @@ function handleEscape(keyCode) {
 
 
 
-window.start_game = function(mode) {
+window.start_round = function(mode) {
   gameStatus = 'started'
   gameMode = mode
 
@@ -277,12 +277,21 @@ window.start_game = function(mode) {
   reset_game_logic(mode)
 }
 
-window.end_game = function(msg) {
+window.end_round = function(msg) {
   gameStatus = 'stopped'
 
   ui.handleOverlayGameEnd(msg)
   piffyCoinChallenge.clear_challenge()
 };
+
+
+window.end_game = function(msg) {
+  window.end_round(msg)
+  reset_game_logic(gameMode)
+
+  leveler.resetToFirstValidLevel()
+}
+
 
 
 function reset_game_logic(mode) {
@@ -388,7 +397,7 @@ window.ui = {
 
     <button onclick="ui.toggleSettings()">Settings</button>
     <button class="debug" onclick="switch_to_world_map()">Switch To World Map Screen</button>
-    <button class="debug" onclick="leveler.changeLevelUp()">Level Up</button>
+    <button class="debug" onclick="leveler.advanceLevel()">Level Up</button>
     <button class="debug" onclick="leveler.changeLevelDown()">Level Down</button>
     <button class="debug" onclick="leveler.advancePart()">Advance Part</button>
     <button onclick="ui.toggle_about_text()">About</button>
@@ -439,14 +448,14 @@ window.ui = {
           <li><input id="lvl1" type="checkbox" checked="checked"></input> 2 - I T .</li>
           <li><input id="lvl2" type="checkbox" checked="checked"></input> 2 - O R N</li>
         </ul>
-        <button onclick="leveler.resetToFirstValidLevel(); ui.toggleSettings(); start_game('progression');">Restart from Beginning</button>
+        <button onclick="leveler.resetToFirstValidLevel(); ui.toggleSettings(); start_round('progression');">Restart from Beginning</button>
       </div>
 
       <div>
         <em>Game Style:</em>
         <div id="game-style" style="margin-left: 20px; ">
-          <button onclick="start_game('progression')">Normal Progression</button>
-          <button onclick="start_game('training')">Training</button>
+          <button onclick="end_game(); start_round('progression')">Normal Progression</button>
+          <button onclick="start_round('training')">Training</button>
           <button class="debug" onclick="alert('not implemented')">Min Reaction Speed</button>
           <button class="debug" onclick="alert('not implemented')">Versus</button>
         </div>

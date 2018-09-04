@@ -20,7 +20,7 @@ function Leveler(associatedScreen, window) {
     document.getElementById("level").innerHTML = val
     this.currentLevel = val
 
-    window.end_game("Press Space");
+    window.end_round("Press Space");
     return val;
   }
 

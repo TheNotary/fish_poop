@@ -73,7 +73,6 @@ KMConfig = {
   debugMode: debugMode,
   level_settings: level_settings
 }
-
 window.game = new KeyboardMemory(KMConfig, window);
 game.start();
 

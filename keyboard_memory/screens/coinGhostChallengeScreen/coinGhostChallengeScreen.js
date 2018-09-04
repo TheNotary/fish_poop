@@ -50,13 +50,13 @@ CoinGhostChallengeScreen.prototype.update = function() {
         obj.setStance("floating");
         // alert("I touched mario");
         window.myMario.setStance("dieing");
-        end_game("Game Over");
+        end_round("Game Over");
       }
 
       // Handle if mario has gotten all the coins
       if (window.myCoinBox.fx_loot['treasure'].length <= 0) {
         obj.destroyMe = true;
-        end_game("Great Work!");
+        end_round("Great Work!");
       }
     }
 
