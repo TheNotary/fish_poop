@@ -32,9 +32,9 @@ em {
   max-width: 60%;
 }
 
-/* .debug {
+.debug {
   display: none;
-} */
+}
 
 .center {
   display: flex;
@@ -271,6 +271,7 @@ window.start_round = function(mode) {
   gameMode = mode
 
   ui.clearMenus()
+  ui.handleOverlayGameStart()
   piffyCoinChallenge.clear_challenge()
   piffyCoinChallenge.clear_stats()
 
@@ -320,7 +321,6 @@ function shuffle(array) {
 
 window.ui = {
   clearMenus: function() {
-    this.handleOverlayGameStart()
     if ( document.getElementById("settings-menu").style.display == "block")
       this.toggleSettings()
     if ( document.getElementById("dialog-menu").style.display == "block" )
