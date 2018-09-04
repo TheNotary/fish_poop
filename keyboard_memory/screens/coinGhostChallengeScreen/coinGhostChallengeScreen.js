@@ -11,7 +11,6 @@ function CoinGhostChallengeScreen(screenConfig) {
   this.introFinished = false;
 
   this.level = 0;
-  this.part = 1; // deprecated
 }
 
 
@@ -24,7 +23,7 @@ CoinGhostChallengeScreen.prototype.init = function(that) {
     var lvl = this.levels[i];
 
     // load up the graphics for this level
-    lvl['bgImage'] = that.graphics.loadImage(lvl['background'], that.signalHtmlLoadingBegun, that.signalHtmlGraphicLoadingComplete);
+    lvl.bgImage = that.graphics.loadImage(lvl.background, that.signalHtmlLoadingBegun, that.signalHtmlGraphicLoadingComplete);
   }
 }
 
@@ -76,7 +75,7 @@ CoinGhostChallengeScreen.prototype.render = function() {
   var canvasWidth = this.screenConfig['canvasWidth'] / 2;
   var canvasHeight = this.screenConfig['canvasHeight'] / 2;
   var lvl = this.level;
-  var background = this.levels[lvl]['bgImage'];
+  var background = this.levels[lvl].bgImage;
 
   this.context.drawImage(background,
     20, 40,     // src position

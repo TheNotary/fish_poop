@@ -15,6 +15,11 @@ describe("Leveler", function() {
   var document;
 
   beforeEach(function() {
+    let cgcConfig = {levels: [
+      {parts: [0,1,2]},
+      {parts: [0,1,2]},
+      {parts: [0,1,2]}
+    ]}
     document = new BrowserMock.Document({
       "lvl0":  { checked: true  },
       "lvl1":  { checked: true  },
@@ -27,7 +32,7 @@ describe("Leveler", function() {
       end_game: _ => {} };
 
     var coinScreen = new CoinGhostChallengeScreen();
-    coinScreen.levels = [0,1,2]
+    coinScreen.levels = cgcConfig.levels
     leveler = new Leveler(coinScreen, window);
   });
 
@@ -62,6 +67,14 @@ describe("Leveler", function() {
     document.getElementById("lvl1").checked = false;
     leveler.resetToFirstValidLevelIfLevelInvalidated()
     expect(leveler.currentLevel).toBe(0);
+  });
+
+
+  it("changes to lvl2 when advanced from lvl0 given lvl1 is disabled", function() {
+    document.getElementById("lvl1").checked = false;
+    leveler.advanceLevel();
+
+    expect(leveler.currentLevel).toBe(2);
   });
 
 });

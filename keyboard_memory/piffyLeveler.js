@@ -11,6 +11,7 @@ function Leveler(associatedScreen, window) {
   var document = window.document
   var screen = associatedScreen;
   this.currentLevel = 0;
+  var part = 0;
   this.levels = screen.levels;
 
   this.setLevel = function(val) {
@@ -36,15 +37,14 @@ function Leveler(associatedScreen, window) {
   }
 
   this.advancePart = function() {
-    var part = parseInt( document.getElementById('part').innerHTML )
-
     part++;
-    if (part > 3) {
-      part = 1
+    nParts = screen.levels[this.currentLevel].parts.length;
+    if (part >= nParts) {  // this is shortsighted, limited the number of parts per level to 3
+      part = 0
       this.advanceLevel();
     }
 
-    document.getElementById('part').innerHTML = part
+    document.getElementById('part').innerHTML = part + 1
     return part
   }
 
@@ -108,7 +108,7 @@ function LevelEnablementChecker(leveler, window) {
   this.getLastEnabledLevel = function() {
     var max = 0;
     for (var i = 0; i < leveler.levels.length; i++) {
-      var el = document.getElementById("lvl" + i)
+      var el = document.getElementById('lvl' + i)
       if (el.checked)
         max = i
     }
@@ -118,7 +118,7 @@ function LevelEnablementChecker(leveler, window) {
 
   this.getFirstEnabledLevel = function() {
     for (var i = 0; i < leveler.levels.length; i++) {
-      var el = document.getElementById("lvl" + i)
+      var el = document.getElementById('lvl' + i)
       if (el.checked)
         return i
     }
@@ -128,7 +128,7 @@ function LevelEnablementChecker(leveler, window) {
 
   function atLeastOneLevelIsSelected() {
     for (var i = 0; i < leveler.levels.length; i++) {
-      var el = document.getElementById("lvl" + i)
+      var el = document.getElementById('lvl' + i)
       if (el.checked)
         return true
     }
@@ -137,7 +137,7 @@ function LevelEnablementChecker(leveler, window) {
   }
 
   function thisLevelIsDisabled(lvl) {
-    var el = document.getElementById("lvl" + lvl)
+    var el = document.getElementById('lvl' + lvl)
 
     if (!el.checked)
       return true

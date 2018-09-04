@@ -31,18 +31,7 @@ function KeyboardMemory(params, window) {
   this.getCurrentScreen = function() { return this.screens[this.currentScreen] };
   this.setCurrentScreen = function(screen_name) { this.currentScreen = screen_name };
 
-  this.levels = [
-    {
-      "background": 'assets/backgrounds/fields.png',
-    },
-    {
-      "background": 'assets/backgrounds/sewers.png',
-    },
-    {
-      "background": 'assets/backgrounds/bean_valley.png',
-    }
-  ];
-
+  this.levels = params.level_settings
 
   this.training_level = [
     {

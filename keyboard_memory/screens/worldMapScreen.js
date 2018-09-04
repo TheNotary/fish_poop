@@ -51,9 +51,7 @@ WorldMapScreen.prototype.render = function() {
   var canvasWidth = this.screenConfig['canvasWidth'] / 2;
   var canvasHeight = this.screenConfig['canvasHeight'] / 2;
 
-  var background = game.screens["coin_ghost_challenge_screen"].levels[0]['bgImage']
-  // var lvl = this.level;
-  // var background = this.levels[lvl]['bgImage'];
+  var background = game.screens["coin_ghost_challenge_screen"].levels[0].bgImage
 
 
   this.context.drawImage(background,
