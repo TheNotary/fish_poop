@@ -89,10 +89,10 @@ function PiffyCoinChallenge(params, window) {
       var screen = game.getCurrentScreen()
       var part = leveler.advancePart()
 
-      if (part != 1)
-      window.game.sound['win'].play()
+      if (part != 0)
+        window.game.sound['win'].play()
       else
-      game.sound['victory'].play()
+        game.sound['victory'].play()
       end_round("Great Work!")
       window.myGhost.destroyMe = true
     }
