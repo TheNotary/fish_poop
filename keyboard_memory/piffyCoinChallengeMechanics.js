@@ -1,13 +1,21 @@
 // This file houses any game mechanics logic involved in the ghost coin
 // challenge game, such as the callback soup of presenting "Press Start" perhaps...
 
+var home_row = [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';' ]
 
 function PiffyCoinChallenge(params, window) {
   var document = window.document;
   var config = params;
   var levelSettings = params['level_settings'];
+  var challengeTimoutObj;
   this.difficulty_settings = params['difficulty_settings'];
 
+  var available_letters;
+
+
+  this.get_available_letters = function() {
+    return available_letters;
+  }
 
   this.get_current_difficulty = function() {
     return this.difficulty_settings[this.get_difficulty_i()]
@@ -27,7 +35,7 @@ function PiffyCoinChallenge(params, window) {
     screen.animationObjects = []; // clear animation objects for screen
 
     this.set_available_letters();
-    setTimeout(challenge_player, challengeDelay);
+    challengeTimoutObj = setTimeout(challenge_player, challengeDelay);
 
     spawnMario();
     spawnCoinBox(nCoins);
@@ -42,7 +50,7 @@ function PiffyCoinChallenge(params, window) {
         this.register_a_hit(currentLetter, keyCode)
         this.clear_challenge()
         if (gameStatus != 'stopped') {
-          setTimeout(challenge_player, challengeDelay)
+          challengeTimoutObj = setTimeout(challenge_player, challengeDelay)
         }
       }
       else {
@@ -63,8 +71,9 @@ function PiffyCoinChallenge(params, window) {
   }
 
   this.clear_challenge = function() {
-    var challengeTag = document.getElementById('challenge')
-    challengeTag.innerHTML = "&nbsp;"
+    var challengeTag = document.getElementById('challenge');
+    challengeTag.innerHTML = "&nbsp;";
+    clearTimeout(challengeTimoutObj);
   }
 
   this.clear_stats = function() {
@@ -85,7 +94,7 @@ function PiffyCoinChallenge(params, window) {
     var hits_register = document.getElementById("hits")
     var newHitCount =  parseInt(hits_register.innerHTML) + 1
     hits_register.innerHTML = newHitCount
-    if (newHitCount >= window.available_letters.length) {
+    if (newHitCount >= available_letters.length) {
       var screen = game.getCurrentScreen()
       var part = leveler.advancePart()
 
@@ -105,9 +114,9 @@ function PiffyCoinChallenge(params, window) {
     var part = parseInt( document.getElementById('part').innerHTML )
     part = part - 1
 
-    window.available_letters = this.padWithOldLetters(levelSettings[level].parts[part]);
+    available_letters = this.padWithOldLetters(levelSettings[level].parts[part]);
 
-    window.precalculated_challenge_letters = window.available_letters.slice(0);
+    window.precalculated_challenge_letters = available_letters.slice(0);
     console.log(window.precalculated_challenge_letters);
   };
 

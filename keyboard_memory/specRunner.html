@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Jasmine Spec Runner</title>
+    <link rel="stylesheet" href="style.css">
   </head>
 
 <body onkeydown="keyboard_func(event)">
@@ -127,6 +128,9 @@
     <script src="node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
     <script src="node_modules/jasmine-core/lib/jasmine-core/boot.js"></script>
 
+
+    <script src="piffyHeart.js"></script>
+
     <!-- Source and Spec dependencies -->
 		<script src="vendor/howler.min.js"></script>
 
@@ -158,6 +162,9 @@
 		<script src="keyboardMemory.js"></script>
 
 		<script src="index.js"></script>
+
+    <!-- Spec Helpers -->
+    <script src="spec/support/integrationHelpers.js"></script>
 
     <!-- Spec files -->
     <script src="spec/integration/integrationSpec.js"></script>

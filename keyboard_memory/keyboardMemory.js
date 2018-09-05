@@ -212,9 +212,9 @@ function KeyboardMemory(params, window) {
   this.stopLoadingAnimation = function() {
     clearInterval(window.dotTimer);
     var dots = document.getElementById("loading-dots");
-    dots.innerHTML = "";
+    if (dots !== null)
+      dots.innerHTML = "";
   };
-
 
 };
 
