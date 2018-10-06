@@ -14,6 +14,14 @@ function Leveler(associatedScreen, window) {
   var part = 0;
   this.levels = screen.levels;
 
+  this.getCurrentLevel = function() {
+    return this.currentLevel;
+  }
+
+  this.getCurrentPart = function() {
+    return part;
+  }
+
   // Builds the checkboxes for all those levels so you can enable/ disable them.
   this.buildLevelWhitelistConsole = function() {
     var consoleHtml = "";

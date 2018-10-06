@@ -1,11 +1,9 @@
-var BrowserMock = require("../support/browserMock.js");
+var BrowserMock = require("../../support/browserMock.js");
 
-// var window = new BrowserMock.Window();
+// var Screen = require("../../../engine/screen.js");
+var CoinGhostChallengeScreen = require("../../../screens/coinGhostChallengeScreen/coinGhostChallengeScreen.js");
 
-// var Screen = require("../../engine/screen.js");
-var CoinGhostChallengeScreen = require("../../screens/coinGhostChallengeScreen/coinGhostChallengeScreen.js");
-
-var PL = require("../../piffyLeveler.js");
+var PL = require("../../../piffyLeveler.js");
 var Leveler = PL.Leveler;
 var LevelEnablementChecker = PL.LevelEnablementChecker;
 
@@ -91,7 +89,7 @@ describe("Leveler", function() {
 
 
 
-var KeyboardMemory = require("../../keyboardMemory.js");
+var KeyboardMemory = require("../../../keyboardMemory.js");
 
 describe("KeyboardMemory", function() {
 

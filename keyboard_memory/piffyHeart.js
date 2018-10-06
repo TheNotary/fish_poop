@@ -1,7 +1,4 @@
 // Variables
-var nCoins = 10
-window.currentLetter = ""
-var challengeDelay = 20
 
 var gameStatus = 'stopped'
 var gameMode = 'progression'
@@ -34,8 +31,6 @@ function handleEscape(keyCode) {
   if (keyCode == 27)
     ui.clearMenus()
 }
-
-
 
 
 window.start_round = function(mode) {

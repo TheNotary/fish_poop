@@ -17,7 +17,7 @@ var asLootable = function() {
       for (var i = 0; i < animationObjects.length; i++) {
         var obj = animationObjects[i];
         if ( obj.type == "mario" &&
-            areWeStruck(obj) ) {
+             areWeStruck(obj) ) {
           // alert('i am struck' + (obj.y + obj.animation_y) );
 
           // Handle the Looter!
@@ -30,6 +30,8 @@ var asLootable = function() {
           var treasure = that.fx_loot["treasure"].pop();
           // advertise the loot
           spawnCoin([that.x + 2, that.y + 15]);
+
+          // console.log("This many coins left: " + that.fx_loot["treasure"].length)
 
           // Make the 'struck' animation start...
           that.setStance("struck")

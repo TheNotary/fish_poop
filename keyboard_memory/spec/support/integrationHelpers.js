@@ -1,4 +1,3 @@
-
 var IntegrationHelpers = {
   sendKey: function(keyChar) {
     var keyCode;
@@ -6,6 +5,9 @@ var IntegrationHelpers = {
     switch(keyChar) {
       case "[space]":
         keyCode = 32;
+        break;
+      default:
+        keyCode = keyChar.charCodeAt(0);
         break;
     }
     keyboard_func({ keyCode: keyCode, preventDefault: function(){} });
