@@ -124,7 +124,9 @@ function PiffyCoinChallenge(params, window) {
       window.myGhost.destroyMe = true
     }
     if (window.myMario.stance == "jumping") {
-      console.log("Mario was already jumping so the glitch is encountered")
+      window.game.debug("Mario was already jumping so the glitch is encountered and we shall manually empty the coinbox by one.");
+      myCoinBox.fx_loot["treasure"].pop();
+      spawnCoin([myCoinBox.x + 2, myCoinBox.y + 15]);
     }
     window.myMario.setStance("jumping");
   }

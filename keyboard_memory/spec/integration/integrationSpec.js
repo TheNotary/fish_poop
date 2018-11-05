@@ -13,7 +13,7 @@ describe("Piffy Coin Challenge", function() {
     expect(window.leveler.getCurrentLevel()).toBe(0);
     expect(window.leveler.getCurrentPart()).toBe(0);
 
-    var delayBetweenJumps = 600;
+    var delayBetweenJumps = 300;
     var nJumps = 8
     // console.log(piffyCoinChallenge.get_available_letters())
 

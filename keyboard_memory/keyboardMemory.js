@@ -216,6 +216,10 @@ function KeyboardMemory(params, window) {
       dots.innerHTML = "";
   };
 
+  this.debug = function(msg) {
+    if (window.game.debugMode) console.log(msg);
+  }
+
 };
 
 // Give KeyboardMemory a game loop pipeline via this mixin pattern
