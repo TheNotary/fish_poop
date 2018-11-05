@@ -42,11 +42,12 @@ function PiffyCoinChallenge(params, window) {
     screen.animationObjects = []; // clear animation objects for screen
 
     this.set_available_letters();
-    challengeTimoutObj = this.queueNextChallengeLetter();
 
     spawnMario();
     spawnCoinBox(precalculated_challenge_letters.length);
     spawnGhost();
+
+    challengeTimoutObj = this.queueNextChallengeLetter();
   };
 
   this.queueNextChallengeLetter = function() {
@@ -111,6 +112,7 @@ function PiffyCoinChallenge(params, window) {
     var newHitCount =  parseInt(hits_register.innerHTML) + 1
     hits_register.innerHTML = newHitCount
     if (newHitCount >= available_letters.length) {
+      // console.log("The game-winning hit has been struck.")
       var screen = game.getCurrentScreen()
       var part = leveler.advancePart()
 
@@ -120,6 +122,9 @@ function PiffyCoinChallenge(params, window) {
         game.sound['victory'].play()
       end_round("Great Work!")
       window.myGhost.destroyMe = true
+    }
+    if (window.myMario.stance == "jumping") {
+      console.log("Mario was already jumping so the glitch is encountered")
     }
     window.myMario.setStance("jumping");
   }
@@ -142,7 +147,7 @@ function PiffyCoinChallenge(params, window) {
     var n_new_letters = config['n_new_letters']
 
     if (nCoins < n_new_letters)
-    alert("Failing, impossible condition:  nCoins < n_new_letters... can't fit all the new letters into the array")
+      alert("Failing, impossible condition:  nCoins < n_new_letters... can't fit all the new letters into the array")
 
     var n_old_letters = nCoins - n_new_letters
 

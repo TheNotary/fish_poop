@@ -14,16 +14,19 @@ describe("Piffy Coin Challenge", function() {
     expect(window.leveler.getCurrentPart()).toBe(0);
 
     var delayBetweenJumps = 600;
-    var iJumps = 7
+    var nJumps = 8
+    // console.log(piffyCoinChallenge.get_available_letters())
 
     // for each letter in the available letters array
-    for (var i = 0; i < iJumps; i++) {
+    for (var i = 0; i < nJumps; i++) {
       let z = i
       setTimeout(function() {
         var l = piffyCoinChallenge.get_available_letters()[z]
 
         // Send what should be the corresponding level to the current challenge
         IntegrationHelpers.sendKey(l)
+        // console.log("Jumping for the " + (z+1) + " time to clear " + l)
+        // console.log("There are " + myCoinBox.fx_loot.treasure.length + " coins in the box at the point of this jump.")
       }, delayBetweenJumps * (i+1));
     }
 
@@ -31,8 +34,9 @@ describe("Piffy Coin Challenge", function() {
     setTimeout(function() {
       expect(gameStatus).toBe("stopped");
       expect(myCoinBox.stance).toBe("empty");
+      expect(window.leveler.getCurrentPart()).toBe(1);
       done();
-    }, delayBetweenJumps * (iJumps+2) );
+    }, delayBetweenJumps * (nJumps+2) );
 
   });
 

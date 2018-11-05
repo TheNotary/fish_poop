@@ -28,9 +28,9 @@ var asJumpable = function() {
 
       if (that.animation_y >= 0) {
           that.animation_y = 0;
-          that.setStance("standing");
-          that.fx_jump["direction"] = "up"  // reset
+          that.fx_jump["direction"] = "up"  // reset from jump
           that.fx_jump["jumpPower"] = 10;
+          that.setStance("standing");
       }
 
     }

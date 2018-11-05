@@ -110,6 +110,10 @@ function spawnCoinBox(nCoins) {
     myCoinBox.fx_loot['treasure'].push("coin");
   }
 
+  let countOfCoins = myCoinBox.fx_loot['treasure'].length;
+
+  console.log("Count of coins: " + countOfCoins);
+
   animationObjects.push(myCoinBox);
   return myCoinBox;
 }
