@@ -108,6 +108,10 @@ function Leveler(associatedScreen, window) {
 
   this.resetToFirstValidLevel = function() {
     this.setLevel( checker.getFirstEnabledLevel() )
+
+    // Reset Part
+    part = 0
+    document.getElementById('part').innerHTML = part + 1
   };
 
 };

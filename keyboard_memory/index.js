@@ -92,18 +92,19 @@ KMConfig = {
   debugMode: debugMode,
   level_settings: level_settings
 }
-window.game = new KeyboardMemory(KMConfig, window);
-game.start();
 
+function initGameObject() {
+  window.game = new KeyboardMemory(KMConfig, window);
+  game.start();
 
-
-window.piffyCoinChallenge = new PiffyCoinChallenge({
+  window.piffyCoinChallenge = new PiffyCoinChallenge({
     difficulty_settings: difficulty_settings,
     level_settings: level_settings
   }, window);
-window.leveler = new Leveler(game.screens['coin_ghost_challenge_screen'], window);
+  window.leveler = new Leveler(game.screens['coin_ghost_challenge_screen'], window);
+}
 
-
+initGameObject()
 
 // spawnCoin([0, 50]);
 // spawnSprite();

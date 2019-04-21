@@ -3,9 +3,13 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 describe("Piffy Coin Challenge", function() {
 
   beforeEach(function() {
-    end_game()
+    initGameObject()
   });
 
+  it("It should start fresh on new games initial", function(done) {
+    expect(window.leveler.getCurrentPart()).toBe(0);
+    done();
+  });
 
   it("Leveler defaults to being level 0 part 0 and increments to part 1", function(done) {
     IntegrationHelpers.sendKey("[space]");
@@ -38,6 +42,11 @@ describe("Piffy Coin Challenge", function() {
       done();
     }, delayBetweenJumps * (nJumps+2) );
 
+  });
+
+  it("It should start fresh on new games", function(done) {
+    expect(window.leveler.getCurrentPart()).toBe(0);
+    done();
   });
 
 });
