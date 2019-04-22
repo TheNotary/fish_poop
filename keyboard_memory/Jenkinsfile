@@ -1,0 +1,23 @@
+#!/usr/bin/env groovy
+// @Library(['library']) _
+
+
+pipeline {
+  agent none
+
+  stages {
+
+
+    stage('build') {
+      steps {
+
+        sh '''
+          npm install
+          npm test
+        '''
+      }
+    }
+
+  }
+}
+
