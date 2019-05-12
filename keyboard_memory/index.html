@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Mario Teaches Typing 2.0</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style/login.css">
 </head>
 
 
@@ -11,14 +12,47 @@
 
 <div id="page-wrap" class="Aligner">
 
+
+
+  <div id="id01" class="modal">
+
+    <form class="modal-content animate" action="/action_page.php">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <img src="style/login.jpg" alt="Avatar" class="avatar">
+      </div>
+
+      <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <button class="login" type="submit">Login</button>
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+      </div>
+
+      <div class="container" style="background-color:#f1f1f1">
+        <button class="cancelbtn login" type="button" onclick="document.getElementById('id01').style.display='none'">Cancel</button>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+      </div>
+    </form>
+  </div>
+
+
   <div id="console" class="Aligner-item">
 
-    <button onclick="ui.toggleSettings()">Settings</button>
+    <button class="navbtn" onclick="ui.toggleSettings()">Settings</button>
+    <button class="navbtn" onclick="ui.toggle_about_text()">About</button>
+    <button class="login" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+
     <button class="debug" onclick="switch_to_world_map()">Switch To World Map Screen</button>
     <button class="debug" onclick="leveler.advanceLevel()">Level Up</button>
     <button class="debug" onclick="leveler.changeLevelDown()">Level Down</button>
     <button class="debug" onclick="leveler.advancePart()">Advance Part</button>
-    <button onclick="ui.toggle_about_text()">About</button>
     <div id="about-text">
       <div>
         Press the start button (space) and a letter will appear on the screen.
@@ -116,6 +150,13 @@
     <!-- <source src="/audio/opener/Final_Fantasy_4_Lacrima_OC_ReMix.mp3" type="audio/mp3"></source> -->
     Your browser isn't intended for super fun audio time.
   </audio>
+
+
+
+
+
+
+
 
 </div>
 </body>
