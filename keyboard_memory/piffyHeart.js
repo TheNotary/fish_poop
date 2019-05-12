@@ -90,18 +90,18 @@ window.ui = {
   clearMenus: function() {
     if ( document.getElementById("settings-menu").style.display == "block")
       this.toggleSettings()
-    if ( document.getElementById("dialog-menu").style.display == "block" )
+    if ( document.getElementById("dialog-menu").style.display == "flex" )
       this.toggleDialog()
   },
-  toggle_about_text: function() {
-    var txt = document.getElementById("about-text").innerHTML
+  toggleModelMenu: function(menuElementId) {
+    var txt = document.getElementById(menuElementId).innerHTML
 
     var dm = document.getElementById("dialog-menu")
     dm.innerHTML = txt
 
     if (dm.style.display == "") {
       this.clearMenus()
-      dm.style.display = "block"
+      dm.style.display = "flex"
     }
     else {
       dm.style.display = ""

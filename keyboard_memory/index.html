@@ -46,22 +46,33 @@
   <div id="console" class="Aligner-item">
 
     <button class="navbtn" onclick="ui.toggleSettings()">Settings</button>
-    <button class="navbtn" onclick="ui.toggle_about_text()">About</button>
+    <button class="navbtn" onclick="ui.toggleModelMenu('about-text')">About</button>
     <button class="login" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
 
     <button class="debug" onclick="switch_to_world_map()">Switch To World Map Screen</button>
     <button class="debug" onclick="leveler.advanceLevel()">Level Up</button>
     <button class="debug" onclick="leveler.changeLevelDown()">Level Down</button>
     <button class="debug" onclick="leveler.advancePart()">Advance Part</button>
+
     <div id="about-text">
-      <div>
+      <div class="modal-msg">
         Press the start button (space) and a letter will appear on the screen.
         Type that letter as fast as you can to make the letter dissapear.
         The faster you are, the better your score!
         The ghost will close in on mario for as long as a letter is on the screen.
       </div>
+      <div class="modal-btns">
+        <button onclick="ui.toggleModelMenu('about-text')" class="center">DONE</button>
+      </div>
+    </div>
 
-      <button onclick="ui.toggle_about_text()" class="center confirm-btn">DONE</button>
+    <div id="victory-text">
+      <div class="modal-msg">
+        You beat all the levels I've had time to program so far!
+      </div>
+      <div class="modal-btns">
+        <button onclick="ui.toggleModelMenu('victory-text')" class="center">DONE</button>
+      </div>
     </div>
 
   </div>

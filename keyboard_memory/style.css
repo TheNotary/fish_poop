@@ -61,7 +61,7 @@ body {
   /* min-width: 178px; */
 }
 
-#about-text {
+#about-text, #victory-text {
   display: none;
   min-width: 500px;
   font-family: "My Custom Font", Verdana, Tahoma;
@@ -138,6 +138,7 @@ body {
 }
 
 .menu {
+  flex-direction: column;
   padding: 30px;
   z-index: 9;
   position: absolute;
@@ -149,8 +150,12 @@ body {
   color: #fffc;
 }
 
-.confirm-btn {
-  margin-top: 40px;
+.modal-msg {
+  flex: 1 0 auto;
+}
+
+.modal-btns {
+  flex-shrink: 0;
 }
 
 #settings-menu > div {

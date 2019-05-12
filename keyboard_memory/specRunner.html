@@ -17,16 +17,18 @@
       <button class="debug" onclick="leveler.advanceLevel()">Level Up</button>
       <button class="debug" onclick="leveler.changeLevelDown()">Level Down</button>
       <button class="debug" onclick="leveler.advancePart()">Advance Part</button>
-      <button onclick="ui.toggle_about_text()">About</button>
+      <button onclick="ui.toggleModelMenu('about-text')">About</button>
       <div id="about-text">
-        <div>
+        <div class="modal-msg">
           Press the start button (space) and a letter will appear on the screen.
           Type that letter as fast as you can to make the letter dissapear.
           The faster you are, the better your score!
           The ghost will close in on mario for as long as a letter is on the screen.
         </div>
 
-        <button onclick="ui.toggle_about_text()" class="center confirm-btn">DONE</button>
+        <div class="modal-btns">
+          <button onclick="ui.toggleModelMenu('about-text')" class="center">DONE</button>
+        </div>
       </div>
 
     </div>

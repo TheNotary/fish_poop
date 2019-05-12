@@ -86,7 +86,7 @@ function Leveler(associatedScreen, window) {
 
 
     if (checker.onFinalLevel(level)) {
-      window.alert("you beat all the levels I've had time to program so far!");
+      ui.toggleModelMenu('victory-text')
       newLevel = checker.getFirstEnabledLevel()
     }
 
