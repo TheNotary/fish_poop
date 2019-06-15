@@ -61,7 +61,13 @@ function PiffyCoinChallenge(params, window) {
 
   this.keypress = function(keyCode) {
     if (wasPossibleChallegeLetterPressed(keyCode)) {
-      var typedLetter = String.fromCharCode(keyCode).toLowerCase()
+      var typedLetter
+      if (wasKeyWithCharCode(keyCode)) {
+        typedLetter = String.fromCharCode(keyCode).toLowerCase();
+      }
+      else { // e.g. 16 is shift and can't convert to lowercase CharCode... it must be set to [Shift]
+        typedLetter = this.getNonCharacterKeyLettering(keyCode)
+      }
 
       if (typedLetter == currentLetter) {
         this.register_a_hit(currentLetter, keyCode)
@@ -75,9 +81,29 @@ function PiffyCoinChallenge(params, window) {
       }
     }
 
-    function wasPossibleChallegeLetterPressed(keyCode) {
-      return (keyCode >= 32 && keyCode <= 126 && keyCode != 91);
+  }
+
+  function wasPossibleChallegeLetterPressed(keyCode) {
+    return ((keyCode >= 32 &&
+            keyCode <= 126 &&
+            keyCode != 91) || // Windows meta key
+            keyCode == 16 || // shift key
+            keyCode == 8 ||  // escape key
+            keyCode == 27);  // backspace key
+  }
+
+  function wasKeyWithCharCode(keyCode) {
+    return (keyCode != 16)
+  }
+
+  this.getNonCharacterKeyLettering = function(keyCode) {
+    var letterHash = {
+      "16": "[Shift]",
+      "8": "[Esc]",
+      "27": "[Backspace]"
     }
+    var letter = letterHash[keyCode.toString()]
+    return letter
   }
 
   function challenge_player() {

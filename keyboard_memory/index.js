@@ -1,7 +1,6 @@
 debugMode = true;
 
 
-
 level_settings = [
   { // lvl0
     desc: "Home Row (including G + H)",
@@ -25,7 +24,7 @@ level_settings = [
   ]},
   { // lvl1
     desc: "I T .",
-    background: "assets/backgrounds/sewers.png",
+    background: "assets/backgrounds/fields.png",
     parts: [
     { "new_letters": ['i', 't', '.'],
       "n_new_letters": 3,
@@ -39,7 +38,7 @@ level_settings = [
   ]},
   { // lvl2
     desc: "O R N",
-    background: "assets/backgrounds/bean_valley.png",
+    background: "assets/backgrounds/sewers.png",
     parts: [
     { "new_letters": ['o', 'r', 'n'],
       "n_new_letters": 3,
@@ -52,16 +51,72 @@ level_settings = [
       "nCoins": 10 }
   ]},
   { // lvl3
-    desc: "H E P",
-    background: "assets/backgrounds/bean_valley_top.png",
+    desc: "Q E P",
+    background: "assets/backgrounds/sewers.png",
     parts: [
-    { "new_letters": ['h', 'e', 'p'],
+    { "new_letters": ['q', 'e', 'p'],
       "n_new_letters": 3,
       "nCoins": 6 },
-    { "new_letters": ['h', 'e', 'p'],
+    { "new_letters": ['q', 'e', 'p'],
       "n_new_letters": 5,
       "nCoins": 8 },
-    { "new_letters": ['h', 'e', 'p'],
+    { "new_letters": ['q', 'e', 'p'],
+      "n_new_letters": 7,
+      "nCoins": 10 }
+  ]},
+  { // lvl4
+    desc: "W M C",
+    background: "assets/backgrounds/sewers.png",
+    parts: [
+    { "new_letters": ['w', 'm', 'c'],
+      "n_new_letters": 3,
+      "nCoins": 6 },
+    { "new_letters": ['w', 'm', 'c'],
+      "n_new_letters": 5,
+      "nCoins": 8 },
+    { "new_letters": ['w', 'm', 'c'],
+      "n_new_letters": 7,
+      "nCoins": 10 }
+  ]},
+  { // lvl5
+    desc: "Z Y Shift",
+    background: "assets/backgrounds/bean_valley_top.png",
+    parts: [
+    { "new_letters": ['z', 'y', '[Shift]'],
+      "n_new_letters": 3,
+      "nCoins": 6 },
+    { "new_letters": ['z', 'y', '[Shift]'],
+      "n_new_letters": 5,
+      "nCoins": 8 },
+    { "new_letters": ['z', 'y', '[Shift]'],
+      "n_new_letters": 7,
+      "nCoins": 10 }
+  ]},
+  { // lvl6
+    desc: "U B Escape",
+    background: "assets/backgrounds/bean_valley_top.png",
+    parts: [
+    { "new_letters": ['u', 'b', '[Esc]'],
+      "n_new_letters": 3,
+      "nCoins": 6 },
+    { "new_letters": ['u', 'b', '[Esc]'],
+      "n_new_letters": 5,
+      "nCoins": 8 },
+    { "new_letters": ['u', 'b', '[Esc]'],
+      "n_new_letters": 7,
+      "nCoins": 10 }
+  ]},
+  { // lvl7
+    desc: "V X Backspace",
+    background: "assets/backgrounds/bean_valley_top.png",
+    parts: [
+    { "new_letters": ['v', 'x', '[Backspace]'],
+      "n_new_letters": 3,
+      "nCoins": 6 },
+    { "new_letters": ['v', 'x', '[Backspace]'],
+      "n_new_letters": 5,
+      "nCoins": 8 },
+    { "new_letters": ['v', 'x', '[Backspace]'],
       "n_new_letters": 7,
       "nCoins": 10 }
   ]}
