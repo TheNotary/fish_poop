@@ -66,7 +66,7 @@ var Graphics = function() {
   //   - loadCompleteCallback(imgPath, graphic)
   //   Use this callback to do something when the DL process is complete.
   this.loadImage = function(imgPath, beginLoadingCallback, loadCompleteCallback) {
-    if ( this.imageCache[imgPath] ) return;  // if image has already been cached...
+    if ( this.imageCache[imgPath] ) return this.imageCache[imgPath];  // if image has already been cached...
     if (window.game.debugMode) console.log("Loading image: " + imgPath);
 
     var img = new Image();
