@@ -108,7 +108,7 @@ level_settings = [
   ]},
   { // lvl7
     desc: "V X Backspace",
-    background: "assets/backgrounds/bean_valley_top.png",
+    background: "assets/backgrounds/bowsers_keep.png",
     parts: [
     { "new_letters": ['v', 'x', '[Backspace]'],
       "n_new_letters": 3,
