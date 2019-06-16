@@ -3,6 +3,12 @@
 
 var home_row = [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';' ]
 
+var nonSymbolicletterHash = {
+  "16": "[Shift]",
+  "8": "[Backspace]",
+  "27": "[Esc]"
+}
+
 function PiffyCoinChallenge(params, window) {
   var document = window.document;
   var config = params;
@@ -68,6 +74,7 @@ function PiffyCoinChallenge(params, window) {
       else { // e.g. 16 is shift and can't convert to lowercase CharCode... it must be set to [Shift]
         typedLetter = this.getNonCharacterKeyLettering(keyCode)
       }
+      window.console.log("CurrentLetter: " + currentLetter + "  keyCode: " + keyCode + "  typedLetter: " + typedLetter)
 
       if (typedLetter == currentLetter) {
         this.register_a_hit(currentLetter, keyCode)
@@ -87,22 +94,15 @@ function PiffyCoinChallenge(params, window) {
     return ((keyCode >= 32 &&
             keyCode <= 126 &&
             keyCode != 91) || // Windows meta key
-            keyCode == 16 || // shift key
-            keyCode == 8 ||  // escape key
-            keyCode == 27);  // backspace key
+            nonSymbolicletterHash[keyCode]); // shift, backspace, escape, etc.
   }
 
   function wasKeyWithCharCode(keyCode) {
-    return (keyCode != 16)
+    return nonSymbolicletterHash[keyCode] == null
   }
 
   this.getNonCharacterKeyLettering = function(keyCode) {
-    var letterHash = {
-      "16": "[Shift]",
-      "8": "[Esc]",
-      "27": "[Backspace]"
-    }
-    var letter = letterHash[keyCode.toString()]
+    var letter = nonSymbolicletterHash[keyCode.toString()]
     return letter
   }
 
