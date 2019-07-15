@@ -65,47 +65,6 @@ function PiffyCoinChallenge(params, window) {
       return setTimeout(challenge_player, challengeDelay);
   };
 
-  this.keypress = function(keyCode) {
-    if (wasPossibleChallegeLetterPressed(keyCode)) {
-      var typedLetter
-      if (wasKeyWithCharCode(keyCode)) {
-        typedLetter = String.fromCharCode(keyCode).toLowerCase();
-      }
-      else { // e.g. 16 is shift and can't convert to lowercase CharCode... it must be set to [Shift]
-        typedLetter = this.getNonCharacterKeyLettering(keyCode)
-      }
-      window.console.log("CurrentLetter: " + currentLetter + "  keyCode: " + keyCode + "  typedLetter: " + typedLetter)
-
-      if (typedLetter == currentLetter) {
-        this.register_a_hit(currentLetter, keyCode)
-        this.clear_challenge()
-        if (gameStatus != 'stopped') {
-          challengeTimoutObj = this.queueNextChallengeLetter();
-        }
-      }
-      else {
-        this.register_a_miss(currentLetter, keyCode)
-      }
-    }
-
-  }
-
-  function wasPossibleChallegeLetterPressed(keyCode) {
-    return ((keyCode >= 32 &&
-            keyCode <= 126 &&
-            keyCode != 91) || // Windows meta key
-            nonSymbolicletterHash[keyCode]); // shift, backspace, escape, etc.
-  }
-
-  function wasKeyWithCharCode(keyCode) {
-    return nonSymbolicletterHash[keyCode] == null
-  }
-
-  this.getNonCharacterKeyLettering = function(keyCode) {
-    var letter = nonSymbolicletterHash[keyCode.toString()]
-    return letter
-  }
-
   function challenge_player() {
     var challengeTag = document.getElementById('challenge')
 
@@ -196,6 +155,50 @@ function PiffyCoinChallenge(params, window) {
     }
 
     return shuffle(new_letter_clip.concat(old_letter_clip))
+  }
+
+  /////////////////////////////////////
+  //  piffyCoinChallengeKeyboard.js  //
+  /////////////////////////////////////
+
+  this.keypress = function(keyCode) {
+    if (wasPossibleChallegeLetterPressed(keyCode)) {
+      var typedLetter
+      if (wasKeyWithCharCode(keyCode)) {
+        typedLetter = String.fromCharCode(keyCode).toLowerCase();
+      }
+      else { // e.g. 16 is shift and can't convert to lowercase CharCode... it must be set to [Shift]
+        typedLetter = this.getNonCharacterKeyLettering(keyCode)
+      }
+      window.console.log("CurrentLetter: " + currentLetter + "  keyCode: " + keyCode + "  typedLetter: " + typedLetter)
+
+      if (typedLetter == currentLetter) {
+        this.register_a_hit(currentLetter, keyCode)
+        this.clear_challenge()
+        if (gameStatus != 'stopped') {
+          challengeTimoutObj = this.queueNextChallengeLetter();
+        }
+      }
+      else {
+        this.register_a_miss(currentLetter, keyCode)
+      }
+    }
+  }
+
+  function wasPossibleChallegeLetterPressed(keyCode) {
+    return ((keyCode >= 32 &&
+            keyCode <= 126 &&
+            keyCode != 91) || // Windows meta key
+            nonSymbolicletterHash[keyCode]); // shift, backspace, escape, etc.
+  }
+
+  function wasKeyWithCharCode(keyCode) {
+    return nonSymbolicletterHash[keyCode] == null
+  }
+
+  this.getNonCharacterKeyLettering = function(keyCode) {
+    var letter = nonSymbolicletterHash[keyCode.toString()]
+    return letter
   }
 
 }
