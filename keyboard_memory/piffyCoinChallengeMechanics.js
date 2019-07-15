@@ -1,5 +1,5 @@
 // This file houses any game mechanics logic involved in the ghost coin
-// challenge game, such as the callback soup of presenting "Press Start" perhaps...
+// challenge game, such as the callback soup of presenting "Press Space" perhaps...
 
 var home_row = [ 'a', 's', 'd', 'f', 'j', 'k', 'l', ';' ]
 

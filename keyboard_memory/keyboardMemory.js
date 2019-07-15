@@ -181,7 +181,7 @@ function KeyboardMemory(params, window) {
       document.getElementById("load-status").style.display = "none";
       this.stopLoadingAnimation();
       var overlay = document.getElementById('overlay-message')
-      overlay.innerHTML = "Press Start";
+      overlay.innerHTML = "Press Space";
     }
     else {
       document.getElementById("load-status").style.display = "block";
